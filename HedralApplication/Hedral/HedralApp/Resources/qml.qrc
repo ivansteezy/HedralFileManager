@@ -1,3 +1,6 @@
 <RCC>
-    <qresource prefix="/"/>
+    <qresource prefix="/">
+        <file>img/cancel.png</file>
+        <file>img/inside.png</file>
+    </qresource>
 </RCC>

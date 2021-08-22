@@ -1,53 +1,51 @@
 import QtQuick 2.12
 import QtCharts 2.3
 import QtQuick.Controls 2.2
+import QtQuick.Layouts 1.12
 
 Window {
+    flags: Qt.FramelessWindowHint | Qt.WindowMinimized
     id: window
-    width: 640
-    height: 480
+    width: 350
+    height: 600
     visible: true
     title: qsTr("Hello World")
 
-    Drawer {
-        id: drawer
-        width: 0.66 * window.width
-        height: window.height
-        //dragMargin: 100
+    GridLayout {
+        width: parent.width
 
-        Label {
-            text: "Content goes here!"
-            anchors.centerIn: parent
-        }
-    }
+        Row {
+            width: parent.width
+            Layout.alignment: Qt.AlignRight
+            Layout.topMargin: 5
+            Layout.rightMargin: 5
+            spacing: 3
 
-    ChartView {
-        id: chart
-        title: "Top-5 car brand shares in Finland"
-        anchors.fill: parent
-        legend.alignment: Qt.AlignBottom
-        antialiasing: true
+            Image {
+                width: 20
+                height: 20
+                source: "qrc:/img/inside.png"
+                anchors.leftMargin: 2
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        console.log('Minimize')
+                        window.visibility = Window.Minimized
+                    }
+                }
+            }
 
-        PieSeries {
-            id: pieSeries
-            PieSlice { label: "Volkswagen"; value: 13.5 }
-            PieSlice { label: "Toyota"; value: 10.9 }
-            PieSlice { label: "Ford"; value: 8.6 }
-            PieSlice { label: "Skoda"; value: 8.2 }
-            PieSlice { label: "Volvo"; value: 6.8 }
-        }
-    }
-
-    Component.onCompleted: {
-        othersSlice = pieSeries.append("Others", 52.0);
-        pieSeries.find("Volkswagen").exploded = true;
-    }
-
-    Button {
-        text: "Menu"
-        onClicked: {
-            drawer.open()
-            console.log("Hola")
+            Image {
+                width: 20
+                height: 20
+                source: "qrc:/img/cancel.png"
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        Qt.quit()
+                    }
+                }
+            }
         }
     }
 }
