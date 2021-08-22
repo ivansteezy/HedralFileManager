@@ -1,6 +1,8 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include "../HFMCore/TestCore.h"
+#include <QtWidgets/QApplication>
+#include <QtNetwork>
 
 int main(int argc, char *argv[])
 {
@@ -9,7 +11,24 @@ int main(int argc, char *argv[])
 #endif
 
     printHello();
-    QGuiApplication app(argc, argv);
+
+
+    QApplication app(argc, argv);
+
+    QNetworkRequest req(QUrl("https://to6klngvgk.execute-api.us-east-2.amazonaws.com/dev/posts/ByNumber/%7Bnumber%7D"));
+    req.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+    QNetworkAccessManager nam;
+    QNetworkReply* reply = nam.get(req);
+
+    qDebug() << "Bout to get! \n\n\n\n";
+    QObject::connect(reply, &QNetworkReply::finished, [&]() {
+        QByteArray responseData = reply->readAll();
+        qDebug() << "Got response: !!!!!!!!!!!!!! \n\n\n\n\n" << QJsonDocument::fromJson(responseData);
+        reply->close();
+        reply->deleteLater();
+     });
+
+
 
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/main.qml"));

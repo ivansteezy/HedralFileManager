@@ -1,4 +1,4 @@
-QT += quick
+QT += quick qml widgets core network charts gui
 
 CONFIG += c++17
 
