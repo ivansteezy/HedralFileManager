@@ -1,0 +1,4 @@
+#ifndef COREFOUNDATION_H
+#define COREFOUNDATION_H
+
+#endif // COREFOUNDATION_H
