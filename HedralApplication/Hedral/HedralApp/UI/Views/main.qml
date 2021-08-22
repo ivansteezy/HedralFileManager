@@ -1,11 +1,25 @@
 import QtQuick 2.12
 import QtCharts 2.3
+import QtQuick.Controls 2.2
 
 Window {
+    id: window
     width: 640
     height: 480
     visible: true
     title: qsTr("Hello World")
+
+    Drawer {
+        id: drawer
+        width: 0.66 * window.width
+        height: window.height
+        //dragMargin: 100
+
+        Label {
+            text: "Content goes here!"
+            anchors.centerIn: parent
+        }
+    }
 
     ChartView {
         id: chart
@@ -27,5 +41,13 @@ Window {
     Component.onCompleted: {
         othersSlice = pieSeries.append("Others", 52.0);
         pieSeries.find("Volkswagen").exploded = true;
+    }
+
+    Button {
+        text: "Menu"
+        onClicked: {
+            drawer.open()
+            console.log("Hola")
+        }
     }
 }
