@@ -20,10 +20,10 @@ int main(int argc, char *argv[])
     QNetworkAccessManager nam;
     QNetworkReply* reply = nam.get(req);
 
-    qDebug() << "Bout to get! \n\n\n\n";
+    qDebug() << "Bout to get!";
     QObject::connect(reply, &QNetworkReply::finished, [&]() {
         QByteArray responseData = reply->readAll();
-        qDebug() << "Got response: !!!!!!!!!!!!!! \n\n\n\n\n" << QJsonDocument::fromJson(responseData);
+        qDebug() << "Got response: !!!!!!!!!!!!!!" << QJsonDocument::fromJson(responseData);
         reply->close();
         reply->deleteLater();
      });
@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
 
 
     QQmlApplicationEngine engine;
-    const QUrl url(QStringLiteral("qrc:/main.qml"));
+    const QUrl url(QStringLiteral("../../Hedral/HedralApp/UI/Views/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
         if (!obj && url == objUrl)
