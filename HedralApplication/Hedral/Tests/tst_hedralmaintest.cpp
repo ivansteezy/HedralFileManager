@@ -1,5 +1,5 @@
 #include <QtTest>
-
+#include "../HedralApp/Services/HFMCore/TestCore.h"
 // add necessary includes here
 
 class HedralMainTest : public QObject
@@ -27,7 +27,7 @@ HedralMainTest::~HedralMainTest()
 
 void HedralMainTest::test_case1()
 {
-
+    printHello();
 }
 
 QTEST_APPLESS_MAIN(HedralMainTest)
