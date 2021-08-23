@@ -3,4 +3,7 @@
         <file>img/cancel.png</file>
         <file>img/inside.png</file>
     </qresource>
+    <qresource prefix="/fonts">
+        <file>fonts/fontawesome-webfont.ttf</file>
+    </qresource>
 </RCC>

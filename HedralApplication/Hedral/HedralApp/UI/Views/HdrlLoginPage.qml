@@ -18,10 +18,10 @@ Page {
 
         Text {
             id: icontext
-            text: qsTr("\uf169")
+            text: qsTr("\uf216")
             anchors.centerIn: parent
-            //font.pointSize: 112
-            //font.family: "fontawesome"
+            font.pointSize: 100
+            font.family: "fontawesome"
             color: mainAppColor
         }
     }
@@ -37,19 +37,18 @@ Page {
             Layout.preferredWidth: parent.width - 20
             Layout.alignment: Qt.AlignHCenter
             color: mainTextCOlor
-            // font.pointSize: 14
-            // font.family: "fontawesome"
+            font.pointSize: 14
             leftPadding: 30
             background: Rectangle {
                 implicitWidth: 200
-                implicitHeight: 50
+                implicitHeight: 40
                 radius: implicitHeight / 2
                 color: "transparent"
 
                 Text {
                     text: "\uf007"
-                    // font.pointSize: 14
-                    // font.family: "fontawesome"
+                    font.pointSize: 14
+                    font.family: "fontawesome"
                     color: mainAppColor
                     anchors.left: parent.left
                     anchors.verticalCenter: parent.verticalCenter
@@ -72,19 +71,19 @@ Page {
             Layout.preferredWidth: parent.width - 20
             Layout.alignment: Qt.AlignHCenter
             color: mainTextCOlor
-            // font.pointSize: 14
-            // font.family: "fontawesome"
+            font.pointSize: 14
+            font.family: "fontawesome"
             leftPadding: 30
-            echoMode: TextField.PasswordEchoOnEdit
+            echoMode: TextField.Password
             background: Rectangle {
                 implicitWidth: 200
-                implicitHeight: 50
+                implicitHeight: 40
                 radius: implicitHeight / 2
                 color: "transparent"
                 Text {
                     text: "\uf023"
-                    // font.pointSize: 14
-                    // font.family: "fontawesome"
+                    font.pointSize: 14
+                    font.family: "fontawesome"
                     color: mainAppColor
                     anchors.left: parent.left
                     anchors.verticalCenter: parent.verticalCenter
@@ -102,7 +101,7 @@ Page {
         }
 
         Item {
-            height: 20
+            height: 50
         }
 
         HdrlButton {
@@ -113,7 +112,7 @@ Page {
             baseColor: mainAppColor
             borderColor: mainAppColor
             onClicked: {
-                loginUser(loginUsername.text, loginPassword.text)
+                console.log('Login button clicked!');
             }
         }
 
@@ -124,7 +123,10 @@ Page {
             name: "Sign Up"
             baseColor: "transparent"
             borderColor: mainAppColor
-            onClicked: stackView.push("qrc:/RegisterScreen.qml", {"uname": "arun", "pword": "some"}) //registerClicked()
+            // onClicked: stackView.push("qrc:/RegisterScreen.qml", {"uname": "arun", "pword": "some"}) //registerClicked()
+            onClicked: {
+                console.log('sign up button clicked')
+            }
         }
 
         Text {

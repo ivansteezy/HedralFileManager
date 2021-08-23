@@ -10,6 +10,7 @@ Button {
     property color baseColor
     property color borderColor
 
+    //styles of texts
     contentItem: Text {
         text: control.text
         font: control.font
@@ -20,13 +21,15 @@ Button {
         elide: Text.ElideRight
     }
 
+    // shape of button
     background: Rectangle {
         id: bgrect
         implicitWidth: 100
         implicitHeight: 50
-        color: baseColor //"#6fda9c"
-        opacity: control.down ? 0.7 : 1
+        color: "#9c6af7" //"#6fda9c"
         radius: height/2
         border.color: borderColor
     }
+
+
 }
