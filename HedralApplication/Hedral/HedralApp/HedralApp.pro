@@ -23,4 +23,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
+    UI/Views/CButton.qml \
+    UI/Views/Login.qml \
     UI/Views/main.qml

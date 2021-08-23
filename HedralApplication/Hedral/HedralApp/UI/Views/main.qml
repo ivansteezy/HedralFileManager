@@ -4,12 +4,20 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.12
 
 Window {
+    property color backGroundColor : "#394454"
+    property color mainAppColor: "#6fda9c"
+    property color mainTextCOlor: "#f0f0f0"
+    property color popupBackGroundColor: "#b44"
+    property color popupTextCOlor: "#ffffff"
+
     flags: Qt.FramelessWindowHint | Qt.WindowMinimized
     id: window
     width: 350
     height: 600
     visible: true
     title: qsTr("Hello World")
+
+
 
     GridLayout {
         width: parent.width
@@ -47,5 +55,45 @@ Window {
                 }
             }
         }
+    }
+
+    //Popup to show messages or warnings on the bottom position of the screen
+    Popup {
+        id: popup
+        property alias popMessage: message.text
+        background: Rectangle {
+            //implicitWidth: rootWindow.width
+            implicitHeight: 60
+            color: "#b44"
+        }
+        //y: rootWindow.height
+        modal: true
+        focus: true
+        closePolicy: Popup.CloseOnPressOutside
+
+        Text {
+            id: message
+            anchors.centerIn: parent
+            font.pointSize: 12
+            color: "#ffffff"
+        }
+        onOpened: popupClose.start()
+    }
+
+    // Popup will be closed automatically in 2 seconds after its opened
+    Timer {
+        id: popupClose
+        interval: 1000
+        onTriggered: popup.close()
+    }
+
+    StackView {
+        id: hedarlStackView
+        focus: true
+        anchors.fill: parent
+    }
+
+    Component.onCompleted: {
+        hedarlStackView.push("Login.qml")
     }
 }
