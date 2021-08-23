@@ -24,5 +24,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 DISTFILES += \
     UI/Views/CButton.qml \
-    UI/Views/Login.qml \
+    UI/Views/HdrlLoginPage.qml \
     UI/Views/main.qml

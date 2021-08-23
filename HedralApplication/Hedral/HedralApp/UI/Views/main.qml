@@ -94,6 +94,6 @@ Window {
     }
 
     Component.onCompleted: {
-        hedarlStackView.push("Login.qml")
+        hedarlStackView.push("HdrlLoginPage.qml")
     }
 }
