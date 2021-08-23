@@ -50,11 +50,12 @@ Window {
                 anchors.right: parent.right
                 spacing: 3
 
-                Image {
-                    width: 20
-                    height: 20
-                    source: "qrc:/img/inside.png"
-                    anchors.leftMargin: 2
+                Text {
+                    id: minimize
+                    text: qsTr("\uf2d1")
+                    font.pointSize: 15
+                    font.family: "fontawesome"
+                    color: mainAppColor
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
@@ -64,10 +65,12 @@ Window {
                     }
                 }
 
-                Image {
-                    width: 20
-                    height: 20
-                    source: "qrc:/img/cancel.png"
+                Text {
+                    id: close
+                    text: qsTr("\uf00d")
+                    font.pointSize: 15
+                    font.family: "fontawesome"
+                    color: mainAppColor
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
@@ -83,7 +86,6 @@ Window {
             Layout.preferredWidth  : mainGrid.prefWidth(this)
             Layout.preferredHeight : mainGrid.prefHeight(this)
 
-            //should i put pop up here?
             StackView {
                 id: hedarlStackView
                 focus: true
@@ -94,5 +96,35 @@ Window {
                 hedarlStackView.push("HdrlLoginPage.qml")
             }
         }
+    }
+
+    //Popup to show messages or warnings on the bottom position of the screen
+    Popup {
+        id: popup
+        property alias popMessage: message.text
+        background: Rectangle {
+            //implicitWidth: rootWindow.width
+            implicitHeight: 60
+            color: "#b44"
+        }
+        //y: rootWindow.height
+        modal: true
+        focus: true
+        closePolicy: Popup.CloseOnPressOutside
+
+        Text {
+            id: message
+            anchors.centerIn: parent
+            font.pointSize: 12
+            color: "#ffffff"
+        }
+        onOpened: popupClose.start()
+    }
+
+    // Popup will be closed automatically in 2 seconds after its opened
+    Timer {
+        id: popupClose
+        interval: 2000
+        onTriggered: popup.close()
     }
 }
