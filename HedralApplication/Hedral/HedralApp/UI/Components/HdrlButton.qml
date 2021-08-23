@@ -30,6 +30,4 @@ Button {
         radius: height/2
         border.color: borderColor
     }
-
-
 }
