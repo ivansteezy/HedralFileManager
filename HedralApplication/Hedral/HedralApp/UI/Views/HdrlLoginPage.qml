@@ -123,11 +123,11 @@ Page {
             name: "Sign Up"
             baseColor: "transparent"
             borderColor: mainAppColor
-            // onClicked: stackView.push("qrc:/RegisterScreen.qml", {"uname": "arun", "pword": "some"}) //registerClicked()
             onClicked: {
                 console.log('sign up button clicked')
                 popup.popMessage = "Has presionado el boton de Signup"
                 popup.open()
+                hedarlStackView.push("HdrlSignUpPage.qml")
             }
         }
 

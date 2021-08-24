@@ -26,4 +26,5 @@ DISTFILES += \
     UI/Components/HdrlPopUp.qml \
     UI/Views/CButton.qml \
     UI/Views/HdrlLoginPage.qml \
+    UI/Views/HdrlSignUpPage.qml \
     UI/Views/main.qml

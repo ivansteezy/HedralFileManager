@@ -3,19 +3,19 @@ import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.1
 import QtQml 2.15
 
-////Popup to show messages or warnings on the bottom position of the screen
 //Popup {
 //    id: popup
-//    property alias popMessage: message.text
-//    background: Rectangle {
-//        //implicitWidth: rootWindow.width
-//        implicitHeight: 60
-//        color: "#b44"
-//    }
-//    //y: rootWindow.height
 //    modal: true
 //    focus: true
 //    closePolicy: Popup.CloseOnPressOutside
+
+//    property alias popMessage: message.text
+//    background: Rectangle {
+//        implicitHeight: 60
+//        color: "#b44"
+//    }
+
+//    property alias openPopUp: this.open()
 
 //    Text {
 //        id: message
@@ -24,14 +24,11 @@ import QtQml 2.15
 //        color: "#ffffff"
 //    }
 //    onOpened: popupClose.start()
-//}
 
-//// Popup will be closed automatically in 2 seconds after its opened
-//Timer {
-//    id: popupClose
-//    interval: 1000
-//    onTriggered: popup.close()
+//    Timer {
+//        id: popupClose
+//        interval: 2000
+//        onTriggered: popup.close()
+//    }
 //}
-Item {
-
-}
+ Item {}

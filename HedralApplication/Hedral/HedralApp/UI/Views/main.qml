@@ -14,7 +14,7 @@ Window {
     flags: Qt.FramelessWindowHint | Qt.WindowMinimized
     id: window
     width: 350
-    height: 600
+    height: 650
     visible: true
     title: qsTr("Hello World")
     color: backGroundColor
@@ -98,19 +98,17 @@ Window {
         }
     }
 
-    //Popup to show messages or warnings on the bottom position of the screen
     Popup {
         id: popup
-        property alias popMessage: message.text
-        background: Rectangle {
-            //implicitWidth: rootWindow.width
-            implicitHeight: 60
-            color: "#b44"
-        }
-        //y: rootWindow.height
         modal: true
         focus: true
         closePolicy: Popup.CloseOnPressOutside
+
+        property alias popMessage: message.text
+        background: Rectangle {
+            implicitHeight: 60
+            color: "#b44"
+        }
 
         Text {
             id: message
@@ -121,7 +119,6 @@ Window {
         onOpened: popupClose.start()
     }
 
-    // Popup will be closed automatically in 2 seconds after its opened
     Timer {
         id: popupClose
         interval: 2000
