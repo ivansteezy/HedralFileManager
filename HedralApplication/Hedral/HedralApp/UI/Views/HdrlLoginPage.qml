@@ -31,73 +31,20 @@ Page {
         anchors.top: iconRect.bottom
         spacing: 15
 
-        TextField {
-            id: loginUsername
-            placeholderText: qsTr("User name")
-            Layout.preferredWidth: parent.width - 20
-            Layout.alignment: Qt.AlignHCenter
-            color: mainTextCOlor
-            font.pointSize: 14
-            leftPadding: 30
-            background: Rectangle {
-                implicitWidth: 200
-                implicitHeight: 40
-                radius: implicitHeight / 2
-                color: "transparent"
+        HdrlTextField {
+            fontSize: 14
+            placeHolder: "Nombre"
+            textType: TextField.text
 
-                Text {
-                    text: "\uf007"
-                    font.pointSize: 14
-                    font.family: "fontawesome"
-                    color: mainAppColor
-                    anchors.left: parent.left
-                    anchors.verticalCenter: parent.verticalCenter
-                    leftPadding: 10
-                }
-
-                Rectangle {
-                    width: parent.width - 10
-                    height: 1
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.bottom: parent.bottom
-                    color: mainAppColor
-                }
-            }
+            icon: HdrlIcon { icon: "\uf023" }
         }
 
-        TextField {
-            id: loginPassword
-            placeholderText: qsTr("Password")
-            Layout.preferredWidth: parent.width - 20
-            Layout.alignment: Qt.AlignHCenter
-            color: mainTextCOlor
-            font.pointSize: 14
-            font.family: "fontawesome"
-            leftPadding: 30
-            echoMode: TextField.Password
-            background: Rectangle {
-                implicitWidth: 200
-                implicitHeight: 40
-                radius: implicitHeight / 2
-                color: "transparent"
-                Text {
-                    text: "\uf023"
-                    font.pointSize: 14
-                    font.family: "fontawesome"
-                    color: mainAppColor
-                    anchors.left: parent.left
-                    anchors.verticalCenter: parent.verticalCenter
-                    leftPadding: 10
-                }
+        HdrlTextField {
+            fontSize: 14
+            placeHolder: "Contraseña"
+            textType: TextField.Password
 
-                Rectangle {
-                    width: parent.width - 10
-                    height: 1
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.bottom: parent.bottom
-                    color: mainAppColor
-                }
-            }
+            icon: HdrlIcon { icon: "\uf023" }
         }
 
         Item {

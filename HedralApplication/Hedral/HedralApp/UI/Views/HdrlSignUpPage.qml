@@ -5,6 +5,10 @@ import QtQuick.Layouts 1.12
 import "../Components"
 
 Page {
+
+    property alias emailForm: textFieldEmail.text
+    property alias passwordForm: textFieldPassword.text
+
     id: registerPage
     background: Rectangle {
         color: backGroundColor
@@ -17,178 +21,45 @@ Page {
         anchors.top: iconRect.bottom
         spacing: 15
 
-        TextField {
-            id: nameTextField
-            placeholderText: qsTr("Nombre")
-            Layout.preferredWidth: parent.width - 20
-            Layout.alignment: Qt.AlignHCenter
-            color: mainTextCOlor
-            font.pointSize: 14
-            leftPadding: 30
-            background: Rectangle {
-                implicitWidth: 200
-                implicitHeight: 40
-                radius: implicitHeight / 2
-                color: "transparent"
+        HdrlTextField {
+            fontSize: 14
+            placeHolder: "Nombre"
+            textType: TextField.text
 
-                Text {
-                    text: "\uf007"
-                    font.pointSize: 14
-                    font.family: "fontawesome"
-                    color: mainAppColor
-                    anchors.left: parent.left
-                    anchors.verticalCenter: parent.verticalCenter
-                    leftPadding: 10
-                }
-
-                Rectangle {
-                    width: parent.width - 10
-                    height: 1
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.bottom: parent.bottom
-                    color: mainAppColor
-                }
-            }
+            icon: HdrlIcon { icon: "\uf023" }
         }
 
-        TextField {
-            id: loginemail
-            placeholderText: qsTr("Apellidos")
-            Layout.preferredWidth: parent.width - 20
-            Layout.alignment: Qt.AlignHCenter
-            color: mainTextCOlor
-            font.pointSize: 14
-            font.family: "fontawesome"
-            leftPadding: 30
-            echoMode: TextField.Password
-            background: Rectangle {
-                implicitWidth: 200
-                implicitHeight: 40
-                radius: implicitHeight / 2
-                color: "transparent"
-                Text {
-                    text: "\uf023"
-                    font.pointSize: 14
-                    font.family: "fontawesome"
-                    color: mainAppColor
-                    anchors.left: parent.left
-                    anchors.verticalCenter: parent.verticalCenter
-                    leftPadding: 10
-                }
+        HdrlTextField {
+            fontSize: 14
+            placeHolder: "Apellidos"
+            textType: TextField.text
 
-                Rectangle {
-                    width: parent.width - 10
-                    height: 1
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.bottom: parent.bottom
-                    color: mainAppColor
-                }
-            }
+            icon: HdrlIcon { icon: "\uf023" }
         }
 
-        TextField {
-            id: emailTextField
-            placeholderText: qsTr("Correo electronico")
-            Layout.preferredWidth: parent.width - 20
-            Layout.alignment: Qt.AlignHCenter
-            color: mainTextCOlor
-            font.pointSize: 14
-            font.family: "fontawesome"
-            leftPadding: 30
-            echoMode: TextField.Password
-            background: Rectangle {
-                implicitWidth: 200
-                implicitHeight: 40
-                radius: implicitHeight / 2
-                color: "transparent"
-                Text {
-                    text: "\uf023"
-                    font.pointSize: 14
-                    font.family: "fontawesome"
-                    color: mainAppColor
-                    anchors.left: parent.left
-                    anchors.verticalCenter: parent.verticalCenter
-                    leftPadding: 10
-                }
+        HdrlTextField {
+            id: textFieldEmail
+            fontSize: 14
+            placeHolder: "E-mail"
+            textType: TextField.text
 
-                Rectangle {
-                    width: parent.width - 10
-                    height: 1
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.bottom: parent.bottom
-                    color: mainAppColor
-                }
-            }
+            icon: HdrlIcon { icon: "\uf023" }
         }
 
-        TextField {
-            id: passwordTextField
-            placeholderText: qsTr("Contraseña")
-            Layout.preferredWidth: parent.width - 20
-            Layout.alignment: Qt.AlignHCenter
-            color: mainTextCOlor
-            font.pointSize: 14
-            font.family: "fontawesome"
-            leftPadding: 30
-            echoMode: TextField.Password
-            background: Rectangle {
-                implicitWidth: 200
-                implicitHeight: 40
-                radius: implicitHeight / 2
-                color: "transparent"
-                Text {
-                    text: "\uf023"
-                    font.pointSize: 14
-                    font.family: "fontawesome"
-                    color: mainAppColor
-                    anchors.left: parent.left
-                    anchors.verticalCenter: parent.verticalCenter
-                    leftPadding: 10
-                }
-
-                Rectangle {
-                    width: parent.width - 10
-                    height: 1
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.bottom: parent.bottom
-                    color: mainAppColor
-                }
-            }
+        HdrlTextField {
+            id: textFieldPassword
+            fontSize: 14
+            placeHolder: "Contraseña"
+            textType: TextField.Password
+            icon: HdrlIcon { icon: "\uf023" }
         }
 
-        TextField {
-            id: confirmPasswordTextField
-            placeholderText: qsTr("Confirmar contraseña")
-            Layout.preferredWidth: parent.width - 20
-            Layout.alignment: Qt.AlignHCenter
-            color: mainTextCOlor
-            font.pointSize: 14
-            font.family: "fontawesome"
-            leftPadding: 30
-            echoMode: TextField.Password
-            background: Rectangle {
-                implicitWidth: 200
-                implicitHeight: 40
-                radius: implicitHeight / 2
-                color: "transparent"
-                Text {
-                    text: "\uf023"
-                    font.pointSize: 14
-                    font.family: "fontawesome"
-                    color: mainAppColor
-                    anchors.left: parent.left
-                    anchors.verticalCenter: parent.verticalCenter
-                    leftPadding: 10
-                }
+        HdrlTextField {
+            fontSize: 14
+            placeHolder: "Confirmar contraseña"
+            textType: TextField.Password
 
-                Rectangle {
-                    width: parent.width - 10
-                    height: 1
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.bottom: parent.bottom
-                    color: mainAppColor
-                }
-            }
+            icon: HdrlIcon { icon: "\uf023" }
         }
 
         Item { height: 50 }
@@ -197,21 +68,17 @@ Page {
             height: 50
             Layout.preferredWidth: registerPage.width - 20
             Layout.alignment: Qt.AlignHCenter
-            name: "Sign Up"
+            name: "Registrarte"
             baseColor: "transparent"
             borderColor: mainAppColor
             onClicked: {
-                console.log('sign up button clicked')
-                popup.popMessage = "Has presionado el boton de Signup"
-                popup.open()
-
-                hedarlStackView.push("HdrlSignUpPage.qml")
+                console.log("La contra es: " + passwordForm + "el user es: " + emailForm)
             }
         }
 
         Text {
             id: name
-            text: '<html><style type="text/css"></style><a href="http://google.com">Forgot password?</a></html>' //qsTr("Forgot password?")
+            text: '<html><style type="text/css"></style><a href="http://google.com">Ya tienes una cuenta?</a></html>' //qsTr("Forgot password?")
             linkColor: mainTextCOlor
             Layout.alignment: Qt.AlignHCenter
             font.pointSize: 14

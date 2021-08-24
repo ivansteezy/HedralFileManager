@@ -23,7 +23,9 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
+    UI/Components/HdrlIcon.qml \
     UI/Components/HdrlPopUp.qml \
+    UI/Components/HdrlTextField.qml \
     UI/Views/CButton.qml \
     UI/Views/HdrlLoginPage.qml \
     UI/Views/HdrlSignUpPage.qml \
