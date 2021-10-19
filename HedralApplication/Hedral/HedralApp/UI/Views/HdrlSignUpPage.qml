@@ -84,7 +84,9 @@ Page {
             font.pointSize: 14
             color: mainTextCOlor
             Layout.margins: 10
-            onLinkActivated: forgotPassword()
+            onLinkActivated: {
+                hedarlStackView.pop()
+            }
         }
     }
 }

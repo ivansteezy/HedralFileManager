@@ -59,7 +59,9 @@ Page {
             baseColor: mainAppColor
             borderColor: mainAppColor
             onClicked: {
-                console.log('Login button clicked!');
+                console.log('Login button clicked!')
+
+                hedarlStackView.push("HdrlHomePage.qml")
             }
         }
 
@@ -74,6 +76,7 @@ Page {
                 console.log('sign up button clicked')
                 popup.popMessage = "Has presionado el boton de Signup"
                 popup.open()
+
                 hedarlStackView.push("HdrlSignUpPage.qml")
             }
         }

@@ -10,6 +10,7 @@ Button {
     property color baseColor
     property color borderColor
 
+    flat: true
     //styles of texts
     contentItem: Text {
         text: control.text
