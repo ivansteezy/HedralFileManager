@@ -1,35 +1,67 @@
-import QtQuick 2.7
-import QtQuick.Controls 2.0
-import QtQuick.Layouts 1.12
+import QtQuick 2.3
+import QtQuick.Controls
 
 TextField {
-    id: formTextField
+    id: textField
+    height: 40;
+    width: 175;
 
-    property alias placeHolder: formTextField.placeholderText
-    property alias textType: formTextField.echoMode
-    property alias fontSize: formTextField.font.pixelSize
-    property alias icon: texFieldIcon.sourceComponent
+    Constants {
+        id: constants;
+    }
 
-    placeholderText: qsTr("Lorem")
-    Layout.preferredWidth: parent.width - 20
-    Layout.alignment: Qt.AlignHCenter
-    color: mainTextCOlor
-    font.pointSize: 14
-    font.family: "fontawesome"
-    leftPadding: 30
-    background: Rectangle {
-        implicitWidth: 200
-        implicitHeight: 40
-        radius: implicitHeight / 2
-        color: "transparent"
-        Loader { id: texFieldIcon }
+    // TODO
+    // Change text color on Error and Success
 
-        Rectangle {
-            width: parent.width - 10
-            height: 1
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.bottom: parent.bottom
-            color: mainAppColor
+    property string borderColor: focus ? constants.emerald : constants.silver;
+    property string backgroundColor: disabled ? "#f7f9f9" : "white";
+    property int pointSize: 11;
+    property bool disabled: false;
+    property bool error: false;
+    property bool success: false;
+
+    onDisabledChanged: {
+        if (disabled) {
+            textField.borderColor = "#e1e6e6";
+            textField.textColor = "#e1e6e6";
+        }
+
+        else {
+            textField.textColor = "black";
         }
     }
+
+    onSuccessChanged: {
+        if (success) {
+            textField.textColor = constants.emerald;
+            textField.borderColor = constants.emerald;
+        }
+
+        else {
+            textField.textColor = "black";
+            textField.borderColor = focus ? constants.emerald : constants.silver;
+        }
+    }
+
+    onErrorChanged: {
+        if (error) {
+            textField.textColor = constants.alizarin;
+            textField.borderColor = constants.alizarin;
+        }
+
+        else {
+            textField.textColor = "black";
+            textField.borderColor = focus ? constants.emerald : constants.silver;
+        }
+
+    }
+
+
+    MouseArea {
+        anchors.fill: parent;
+        enabled: textField.disabled;
+    }
+
+    placeholderText: "Input";
+
 }

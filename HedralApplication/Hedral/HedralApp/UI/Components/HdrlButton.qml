@@ -1,34 +1,91 @@
-import QtQuick 2.6
-import QtQuick.Controls 2.0
+import QtQuick 2.3
 
-Button {
-    id: control
-    text: qsTr("Log In")
-    font.pointSize: 16
+Rectangle {
+    id: root;
+    width: 175;
+    height: 40;
+    radius: 4;
 
-    property alias name: control.text
-    property color baseColor
-    property color borderColor
+    property alias flatColors: constants;
+    property alias mouseField: mouseArea;
 
-    flat: true
-    //styles of texts
-    contentItem: Text {
-        text: control.text
-        font: control.font
-        opacity: enabled ? 1.0 : 0.3
-        color: control.down ? "#ffffff" : "#ffffff"
-        horizontalAlignment: Text.AlignHCenter
-        verticalAlignment: Text.AlignVCenter
-        elide: Text.ElideRight
+    Constants {
+        id: constants;
     }
 
-    // shape of button
-    background: Rectangle {
-        id: bgrect
-        implicitWidth: 100
-        implicitHeight: 50
-        color: "#9c6af7" //"#6fda9c"
-        radius: height/2
-        border.color: borderColor
+    MouseArea {
+        id: mouseArea;
+        anchors.fill: parent;
+        property bool clickedButton: false;
+
+        onClicked: {
+            if (clickedButton)
+                clickedButton = false;
+            else
+                clickedButton = true;
+        }
+
+        onPressed: {
+            primaryButton.color = root.pressColor;
+        }
+
+        onReleased: {
+            primaryButton.setTimer = true;
+        }
+
+        hoverEnabled: true;
+        onEntered: primaryButton.color = root.highlightColor;
+        onExited: primaryButton.color = root.color;
+    }
+
+    property string color: constants.turquoise;
+    property string pressColor: constants.greenSea;
+    property string highlightColor: "#48c9b0";
+    property string text: "Primary Button";
+    property string textColor: "white";
+    property int pointSize: 12;
+
+    Rectangle {
+        id: primaryButton;
+        anchors.fill: parent;
+        color: root.color;
+        radius: root.radius;
+
+        Text {
+            id: buttonText;
+            anchors.centerIn: parent;
+            text: root.text;
+            color: root.textColor;
+            font {
+                pointSize: root.pointSize;
+            }
+        }
+
+        Behavior on color {
+            PropertyAnimation {}
+        }
+
+        property bool setTimer: false;
+
+        onSetTimerChanged: {
+            if (setTimer)
+                overlayTimer.restart();
+            else
+                overlayTimer.stop();
+        }
+
+
+
+
+        Timer {
+            id: overlayTimer;
+            interval: 50;
+            onTriggered:  {
+                primaryButton.color = root.color;
+                primaryButton.setTimer = false;
+                if (mouseArea.containsMouse)
+                    primaryButton.color = root.highlightColor;
+            }
+        }
     }
 }

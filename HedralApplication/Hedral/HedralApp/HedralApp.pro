@@ -1,4 +1,4 @@
-QT += quick qml widgets core network charts gui
+QT += quick qml widgets core network charts gui quickcontrols2
 
 CONFIG += c++17
 
@@ -23,6 +23,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
+    UI/Components/Constants.qml \
+    UI/Components/HdrlDropDown.qml \
     UI/Components/HdrlIcon.qml \
     UI/Components/HdrlPopUp.qml \
     UI/Components/HdrlTextField.qml \

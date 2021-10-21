@@ -32,19 +32,12 @@ Page {
         spacing: 15
 
         HdrlTextField {
-            fontSize: 14
-            placeHolder: "Nombre"
-            textType: TextField.text
-
-            icon: HdrlIcon { icon: "\uf023" }
+            success: true
+            text: "Hola"
         }
 
         HdrlTextField {
-            fontSize: 14
-            placeHolder: "Contraseña"
-            textType: TextField.Password
-
-            icon: HdrlIcon { icon: "\uf023" }
+            success: true
         }
 
         Item {
@@ -52,32 +45,21 @@ Page {
         }
 
         HdrlButton {
-            height: 50
-            Layout.preferredWidth: loginPage.width - 20
-            Layout.alignment: Qt.AlignHCenter
-            name: "Log In"
-            baseColor: mainAppColor
-            borderColor: mainAppColor
-            onClicked: {
-                console.log('Login button clicked!')
 
-                hedarlStackView.push("HdrlHomePage.qml")
-            }
         }
 
         HdrlButton {
-            height: 50
-            Layout.preferredWidth: loginPage.width - 20
-            Layout.alignment: Qt.AlignHCenter
-            name: "Sign Up"
-            baseColor: "transparent"
-            borderColor: mainAppColor
-            onClicked: {
-                console.log('sign up button clicked')
-                popup.popMessage = "Has presionado el boton de Signup"
-                popup.open()
+            mouseField.onClicked: {
+                console.log("Hola mundo!");
+            }
+        }
 
-                hedarlStackView.push("HdrlSignUpPage.qml")
+        HdrlDropDown {
+            model: ["First", "Second", "Third"]
+            checkedColor: "#727CF5"
+
+            onCurrentIndexChanged: {
+                console.log("Se selecciono " + model[currentIndex])
             }
         }
 
