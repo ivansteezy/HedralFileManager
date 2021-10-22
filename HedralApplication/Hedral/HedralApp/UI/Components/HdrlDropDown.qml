@@ -4,14 +4,14 @@ import QtQuick.Controls 2.0
 ComboBox {
     id: root
 
-    property color checkedColor: "#1ABC9C"
+    property color checkedColor: Constants.lightPurpleSyro
 
     delegate: ItemDelegate {
         width: root.width
 
         contentItem: Text {
             text: modelData
-            color: root.highlightedIndex === index ? "white" : "black"
+            color: root.highlightedIndex == index ? "white" : "black"
             font.family: "Arial"
             elide: Text.ElideRight
             verticalAlignment: Text.AlignVCenter
@@ -20,7 +20,7 @@ ComboBox {
         background: Rectangle {
              width: parent.width
              height: parent.height
-             color: root.highlightedIndex === index ? root.checkedColor : "#F3F4F5"
+             color: root.highlightedIndex == index ? "#971ADB" : "#F3F4F5"
          }
     }
 
@@ -68,11 +68,10 @@ ComboBox {
     background: Rectangle {
         implicitWidth: 102
         implicitHeight: 41
-        color: root.down ? Qt.darker(root.checkedColor, 1.2) : root.checkedColor
+        color: "#971ADB"
         radius: 5
 
         layer.enabled: root.hovered | root.down
-
     }
 
     popup: Popup {
@@ -96,7 +95,6 @@ ComboBox {
             clip: true
 
             layer.enabled: root.hovered | root.down
-
         }
     }
 }

@@ -38,9 +38,9 @@ Rectangle {
         onExited: primaryButton.color = root.color;
     }
 
-    property string color: constants.turquoise;
-    property string pressColor: constants.greenSea;
-    property string highlightColor: "#48c9b0";
+    property string color: constants.purpleSyro;
+    property string pressColor: constants.lightPurpleSyro;
+    property string highlightColor: constants.lightPurpleSyro;
     property string text: "Primary Button";
     property string textColor: "white";
     property int pointSize: 12;

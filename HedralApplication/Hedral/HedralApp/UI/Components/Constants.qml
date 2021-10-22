@@ -22,6 +22,8 @@ Item {
     readonly property string turquoise: "#1ABC9C";
     readonly property color wetAsphalt   : "#34495e"
     readonly property color wisteria      : "#8e44ad"
+    readonly property color purpleSyro: "#971ADB"
+    readonly property color lightPurpleSyro: "#ad63d6"
 
     // Grays
     readonly property color gray       : concrete
