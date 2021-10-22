@@ -166,7 +166,7 @@ Page {
 
         HdrlButton {
             Layout.alignment: Qt.AlignHCenter
-            text: "Registro"
+            text: "Registrarse"
             mouseField.onClicked: {
                 console.log("Ir a homepage!");
             }
