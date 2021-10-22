@@ -44,7 +44,8 @@ Page {
 
         Label {
             text: "Contraseña"
-            font.pointSize: 20
+            font.pointSize: 18
+            font.letterSpacing: -1
             font.family: hdrlFontBold.name
             font.bold: Font.Bold
         }
@@ -59,14 +60,6 @@ Page {
             }
             verticalAlignment: TextInput.AlignVCenter
         }
-
-        Label {
-            text: "Email"
-            font.pointSize: 20
-            //font.family: hdrlFontRegular.name
-            font.bold: Font.Bold
-        }
-
 
         Item {
             height: 50
