@@ -14,6 +14,7 @@ Page {
         color: backGroundColor
     }
 
+    //Trabajo de churros
     Item { height: 50 }
 
     ColumnLayout {
