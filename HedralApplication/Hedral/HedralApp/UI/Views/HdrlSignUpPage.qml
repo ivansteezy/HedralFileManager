@@ -6,86 +6,189 @@ import "../Components"
 
 Page {
 
-    property alias emailForm: textFieldEmail.text
-    property alias passwordForm: textFieldPassword.text
+    //property alias emailForm: textFieldEmail.text
+    //property alias passwordForm: textFieldPassword.text
+
+    FontLoader {
+        id: hdrlFontRegular
+        source: "../../Resources/fonts/Inter-Regular.ttf"
+    }
+
+    FontLoader {
+        id: hdrlFontBold
+        source: "../../Resources/fonts/Inter-Bold.ttf"
+    }
 
     id: registerPage
     background: Rectangle {
         color: backGroundColor
     }
 
-    Item { height: 50 }
-
     ColumnLayout {
         width: parent.width
-        anchors.top: iconRect.bottom
-        spacing: 15
+        spacing: 5
 
-        HdrlTextField {
-            fontSize: 14
-            placeHolder: "Nombre"
-            textType: TextField.text
-
-            icon: HdrlIcon { icon: "\uf023" }
-        }
-
-        HdrlTextField {
-            fontSize: 14
-            placeHolder: "Apellidos"
-            textType: TextField.text
-
-            icon: HdrlIcon { icon: "\uf023" }
-        }
-
-        HdrlTextField {
-            id: textFieldEmail
-            fontSize: 14
-            placeHolder: "E-mail"
-            textType: TextField.text
-
-            icon: HdrlIcon { icon: "\uf023" }
-        }
-
-        HdrlTextField {
-            id: textFieldPassword
-            fontSize: 14
-            placeHolder: "Contraseña"
-            textType: TextField.Password
-            icon: HdrlIcon { icon: "\uf023" }
-        }
-
-        HdrlTextField {
-            fontSize: 14
-            placeHolder: "Confirmar contraseña"
-            textType: TextField.Password
-
-            icon: HdrlIcon { icon: "\uf023" }
-        }
-
-        Item { height: 50 }
-
-        HdrlButton {
-            height: 50
-            Layout.preferredWidth: registerPage.width - 20
+        Column {
+            width: parent.width
             Layout.alignment: Qt.AlignHCenter
-            name: "Registrarte"
-            baseColor: "transparent"
-            borderColor: mainAppColor
-            onClicked: {
-                console.log("La contra es: " + passwordForm + "el user es: " + emailForm)
+            Label {
+                text: "Email"
+                font.pointSize: 18
+                font.letterSpacing: -1
+                font.family: hdrlFontBold.name
+                font.bold: Font.Bold
+            }
+
+            TextField {
+                width: 320
+                height: 40
+                background: Rectangle {
+                    color: "#EDEFF2"
+                    radius: 10
+                }
+                verticalAlignment: TextInput.AlignVCenter
             }
         }
 
-        Text {
-            id: name
-            text: '<html><style type="text/css"></style><a href="http://google.com">Ya tienes una cuenta?</a></html>' //qsTr("Forgot password?")
-            linkColor: mainTextCOlor
+        Column {
+            width: parent.width
             Layout.alignment: Qt.AlignHCenter
-            font.pointSize: 14
-            color: mainTextCOlor
+            Label {
+                text: "Nombre"
+                font.pointSize: 18
+                font.letterSpacing: -1
+                font.family: hdrlFontBold.name
+                font.bold: Font.Bold
+            }
+
+            TextField {
+                width: 320
+                height: 40
+                background: Rectangle {
+                    color: "#EDEFF2"
+                    radius: 10
+                }
+                verticalAlignment: TextInput.AlignVCenter
+            }
+        }
+
+        Column {
+            width: parent.width
+            Layout.alignment: Qt.AlignHCenter
+            Label {
+                text: "Apellido"
+                font.pointSize: 18
+                font.letterSpacing: -1
+                font.family: hdrlFontBold.name
+                font.bold: Font.Bold
+            }
+
+            TextField {
+                width: 320
+                height: 40
+                background: Rectangle {
+                    color: "#EDEFF2"
+                    radius: 10
+                }
+                verticalAlignment: TextInput.AlignVCenter
+            }
+        }
+
+        Column {
+            width: parent.width
+            Layout.alignment: Qt.AlignHCenter
+            Label {
+                text: "Contraseña"
+                font.pointSize: 18
+                font.letterSpacing: -1
+                font.family: hdrlFontBold.name
+                font.bold: Font.Bold
+            }
+
+            TextField {
+                width: 320
+                height: 40
+                echoMode: TextInput.Password
+                background: Rectangle {
+                    color: "#EDEFF2"
+                    radius: 10
+                }
+                verticalAlignment: TextInput.AlignVCenter
+            }
+        }
+
+        Column {
+            width: parent.width
+            Layout.alignment: Qt.AlignHCenter
+            Label {
+                text: "Confirma contraseña"
+                font.pointSize: 18
+                font.letterSpacing: -1
+                font.family: hdrlFontBold.name
+                font.bold: Font.Bold
+            }
+
+            TextField {
+                width: 320
+                height: 40
+                echoMode: TextInput.Password
+                background: Rectangle {
+                    color: "#EDEFF2"
+                    radius: 10
+                }
+                verticalAlignment: TextInput.AlignVCenter
+            }
+        }
+
+        Column {
+            width: parent.width
+            Layout.alignment: Qt.AlignHCenter
+            Label {
+                text: "Nivel"
+                font.pointSize: 18
+                font.letterSpacing: -1
+                font.family: hdrlFontBold.name
+                font.bold: Font.Bold
+            }
+
+            HdrlDropDown {
+                width: 320
+                height: 40
+                model: ["Nivel 1", "Nivel 2", "Nivel 3"]
+                checkedColor: "#727CF5"
+                onCurrentIndexChanged: {
+                    console.log("Se selecciono " + model[currentIndex])
+                }
+            }
+        }
+
+        Item { height: 10 }
+
+        HdrlButton {
+            Layout.alignment: Qt.AlignHCenter
+            text: "Registrarse"
+            mouseField.onClicked: {
+                console.log("Ir a homepage!");
+            }
+        }
+
+        Item { height: 10 }
+
+        Text {
+            id: isAdminLink
+            text: '¿Ya tienes una cuenta?'
+            linkColor: mainTextCOlor
+            Layout.alignment: Qt.AlignRight
+            font.pointSize: 10
+            font.underline: true
+            color: "#000000"
             Layout.margins: 10
-            onLinkActivated: {
-                hedarlStackView.pop()
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    hedarlStackView.pop()
+                    console.log("Adios mundo")
+                }
             }
         }
     }

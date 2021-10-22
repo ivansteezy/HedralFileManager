@@ -45,4 +45,9 @@ Item {
     // Global textual link color.
     readonly property color link_color       : greenSea
     readonly property color link_hover_color : turquoise
+
+    FontLoader {
+        id: hdrlFontRegular
+        source: "../../Resources/fonts/Inter-Regular.ttf"
+    }
 }

@@ -4,7 +4,7 @@ import QtQuick.Controls 2.0
 ComboBox {
     id: root
 
-    property color checkedColor: Constants.lightPurpleSyro
+    property color checkedColor: "#000000"
 
     delegate: ItemDelegate {
         width: root.width
@@ -43,7 +43,7 @@ ComboBox {
             context.lineTo(width, 0);
             context.lineTo(width / 2, height);
             context.closePath();
-            context.fillStyle = "white"
+            context.fillStyle = "black"
             context.fill();
         }
     }
@@ -61,14 +61,14 @@ ComboBox {
             font.pixelSize: 15
             font.family: "Arial"
             font.weight: Font.Thin
-            color: root.down ? Qt.rgba(255, 255, 255, 0.75) : "white"
+            color: root.down ? Qt.rgba(0, 0, 0, 0.75) : "black"
         }
     }
 
     background: Rectangle {
         implicitWidth: 102
         implicitHeight: 41
-        color: "#971ADB"
+        color: "#EDEFF2"
         radius: 5
 
         layer.enabled: root.hovered | root.down
