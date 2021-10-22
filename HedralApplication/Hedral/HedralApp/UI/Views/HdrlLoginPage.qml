@@ -38,14 +38,14 @@ Page {
 
     ColumnLayout {
         width: parent.width
-        anchors.top: iconRect.bottom
         spacing: 5
 
+        Item { height: 40 }
         Column {
             width: parent.width
             Layout.alignment: Qt.AlignHCenter
             Label {
-                text: "Contraseña"
+                text: "Email"
                 font.pointSize: 18
                 font.letterSpacing: -1
                 font.family: hdrlFontBold.name
@@ -53,10 +53,8 @@ Page {
             }
 
             TextField {
-
                 width: 320
                 height: 40
-                placeholderText: qsTr("Enter name")
                 background: Rectangle {
                     color: "#EDEFF2"
                     radius: 10
@@ -78,10 +76,10 @@ Page {
             }
 
             TextField {
-
                 width: 320
                 height: 40
-                placeholderText: qsTr("Enter name")
+                echoMode: TextInput.Password
+
                 background: Rectangle {
                     color: "#EDEFF2"
                     radius: 10
@@ -90,7 +88,7 @@ Page {
             }
         }
 
-        Item { height: 200 }
+        Item { height: 150 }
         Column {
             width: parent.width
             Layout.alignment: Qt.AlignHCenter
@@ -105,46 +103,54 @@ Page {
             HdrlButton {
                 text: "Registro"
                 mouseField.onClicked: {
+                    hedarlStackView.push("HdrlSignUpPage.qml")
                     console.log("Hola mundo!");
                 }
             }
         }
 
-
-//        HdrlDropDown {
-//            model: ["First", "Second", "Third"]
-//            checkedColor: "#727CF5"
-//            onCurrentIndexChanged: {
-//                console.log("Se selecciono " + model[currentIndex])
-//            }
-//        }
+        Item { height: 100 }
 
         Column {
+            Layout.alignment: Qt.AlignRight
+            spacing: 5
+            rightPadding: 10
 
-        }
+            Text {
+                id: nameLink
+                text: '¿Has olvidado la contraseña?'
+                linkColor: mainTextCOlor
+                Layout.alignment: Qt.AlignHCenter
+                font.pointSize: 10
+                font.underline: true
+                color: "#000000"
+                Layout.margins: 10
+                onLinkActivated: forgotPassword()
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        console.log("Adios mundo")
+                    }
+                }
+            }
 
-        Text {
-            id: nameLink
-            text: '¿Has olvidado la contraseña?'
-            linkColor: mainTextCOlor
-            Layout.alignment: Qt.AlignHCenter
-            font.pointSize: 10
-            font.underline: true
-            color: "#000000"
-            Layout.margins: 10
-            onLinkActivated: forgotPassword()
-        }
-
-        Text {
-            id: isAdminLink
-            text: '¿Es un administrador?'
-            linkColor: mainTextCOlor
-            Layout.alignment: Qt.AlignHCenter
-            font.pointSize: 10
-            font.underline: true
-            color: "#000000"
-            Layout.margins: 10
-            onLinkActivated: forgotPassword()
+            Text {
+                id: isAdminLink
+                text: '¿Es un administrador?'
+                linkColor: mainTextCOlor
+                Layout.alignment: Qt.AlignHCenter
+                font.pointSize: 10
+                font.underline: true
+                color: "#000000"
+                Layout.margins: 10
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        hedarlStackView.push("HdrlSignUpPage.qml")
+                        console.log("Adios mundo")
+                    }
+                }
+            }
         }
     }
 }
