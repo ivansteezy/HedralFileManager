@@ -3,7 +3,26 @@ import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.15
 
+import "../Components"
+
 Page {
+
+    FontLoader {
+        id: hdrlFontRegular
+        source: "../../Resources/fonts/Inter-Regular.ttf"
+    }
+
+    FontLoader {
+        id: hdrlFontBold
+        source: "../../Resources/fonts/Inter-Bold.ttf"
+    }
+
+
+    id: loginPage
+    background: Rectangle {
+        color: backGroundColor
+    }
+
     anchors.fill: parent
     Component.onCompleted: {
         hedralWindow.width = 1000
@@ -13,80 +32,90 @@ Page {
         hedralWindow.y = Screen.height / 2 - hedralWindow.height / 2
     }
 
-    ToolBar {
-        id: overlayHeader
 
-        z: 1
-        width: parent.width
-        parent: Overlay.overlay
 
-        Label {
-            id: label
-            anchors.centerIn: parent
-            text: "Qt Quick Controls"
+    HdrlButton {
+        text: "Ir a las stats"
+        mouseField.onClicked: {
+            hedarlStackView.push("HdrlStatisticsPage.qml")
         }
     }
 
-    Drawer {
-        id: drawer
 
-        y: overlayHeader.height
-        width: window.width / 2
-        height: window.height - overlayHeader.height
+//    ToolBar {
+//        id: overlayHeader
 
-        modal: inPortrait
-        interactive: inPortrait
-        position: inPortrait ? 0 : 1
-        visible: !inPortrait
+//        z: 1
+//        width: parent.width
+//        parent: Overlay.overlay
 
-        ListView {
-            id: listView
-            anchors.fill: parent
-            height: parent.height
+//        Label {
+//            id: label
+//            anchors.centerIn: parent
+//            text: "Qt Quick Controls"
+//        }
+//    }
 
-            headerPositioning: ListView.OverlayHeader
-            header: Pane {
-                id: header
-                z: 2
-                width: parent.width
+//    Drawer {
+//        id: drawer
 
-                contentHeight: logo.height
+//        y: overlayHeader.height
+//        width: window.width / 2
+//        height: window.height - overlayHeader.height
 
-                Image {
-                    id: logo
-                    width: parent.width
-                    fillMode: implicitWidth > width ? Image.PreserveAspectFit : Image.Pad
-                }
+//        modal: inPortrait
+//        interactive: inPortrait
+//        position: inPortrait ? 0 : 1
+//        visible: !inPortrait
 
-                MenuSeparator {
-                    parent: header
-                    width: parent.width
-                    anchors.verticalCenter: parent.bottom
-                    visible: !listView.atYBeginning
-                }
-            }
+//        ListView {
+//            id: listView
+//            anchors.fill: parent
+//            height: parent.height
 
-            footer: ItemDelegate {
-                id: footer
-                text: qsTr("Footer")
-                width: parent.width
+//            headerPositioning: ListView.OverlayHeader
+//            header: Pane {
+//                id: header
+//                z: 2
+//                width: parent.width
 
-                MenuSeparator {
-                    parent: footer
-                    width: parent.width
-                    anchors.verticalCenter: parent.top
-                }
-            }
+//                contentHeight: logo.height
 
-            model: 10
+//                Image {
+//                    id: logo
+//                    width: parent.width
+//                    fillMode: implicitWidth > width ? Image.PreserveAspectFit : Image.Pad
+//                }
 
-            delegate: ItemDelegate {
-                text: qsTr("Title %1").arg(index + 1)
-                width: listView.width
-            }
+//                MenuSeparator {
+//                    parent: header
+//                    width: parent.width
+//                    anchors.verticalCenter: parent.bottom
+//                    visible: !listView.atYBeginning
+//                }
+//            }
 
-            ScrollIndicator.vertical: ScrollIndicator { }
-        }
-    }
+//            footer: ItemDelegate {
+//                id: footer
+//                text: qsTr("Footer")
+//                width: parent.width
+
+//                MenuSeparator {
+//                    parent: footer
+//                    width: parent.width
+//                    anchors.verticalCenter: parent.top
+//                }
+//            }
+
+//            model: 10
+
+//            delegate: ItemDelegate {
+//                text: qsTr("Title %1").arg(index + 1)
+//                width: listView.width
+//            }
+
+//            ScrollIndicator.vertical: ScrollIndicator { }
+//        }
+//    }
 
 }

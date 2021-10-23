@@ -96,7 +96,7 @@ Page {
             HdrlButton {
                 text: "Iniciar Sesion"
                 mouseField.onClicked: {
-                    console.log("Hola mundo!");
+                    hedarlStackView.push("HdrlHomePage.qml")
                 }
             }
 
@@ -104,7 +104,6 @@ Page {
                 text: "Registro"
                 mouseField.onClicked: {
                     hedarlStackView.push("HdrlSignUpPage.qml")
-                    console.log("Hola mundo!");
                 }
             }
         }
