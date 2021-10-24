@@ -32,38 +32,8 @@ Page {
         hedralWindow.y = Screen.height / 2 - hedralWindow.height / 2
     }
 
-//    HdrlButton {
-//        text: "Ir a las stats"
-//        mouseField.onClicked: {
-//            hedarlStackView.push("HdrlStatisticsPage.qml")
-//        }
-//    }
-
-
     Column {
         anchors.fill: parent
-//        Row {
-//            width: parent.width
-//            Layout.alignment: Qt.AlignHCenter
-//            TextField {
-//                //width: parent.width
-//                height: 40
-//                echoMode: TextInput.Password
-
-//                background: Rectangle {
-//                    color: "#EDEFF2"
-//                    radius: 10
-//                }
-//                verticalAlignment: TextInput.AlignVCenter
-//            }
-
-//            HdrlButton {
-//                text: "Buscar"
-//                mouseField.onClicked: {
-//                    console.log("Buscar el archivo!");
-//                }
-//            }
-//        }
         Row {
             width: parent.width
             height: parent.height / 10
@@ -141,7 +111,6 @@ Page {
             Column {
                 width: parent.width / 3
                 Layout.alignment: Qt.AlignHCenter
-                leftPadding: 10
                 Label {
                     text: "Nivel"
                     font.pointSize: 18
@@ -162,87 +131,104 @@ Page {
             }
         }
 
-        Rectangle {
-            color: "pink"
+        ListView {
+            clip: true
             width: parent.width
-            height: parent.height / 1.255
+            height: parent.height / 1.3
+            leftMargin: 10
+            flickableDirection: Flickable.AutoFlickDirection
+            headerPositioning: ListView.OverlayHeader
+
+            header: Row {
+                width: parent.width
+                bottomPadding: 20
+
+                Text {
+                    width: parent.width / 5
+                    text: "Nombre"
+                    font.bold: Font.Bold
+                    font.pointSize: 16
+                }
+
+                Text {
+                    width: parent.width / 5
+                    text: "Fecha"
+                    font.bold: Font.Bold
+                    font.pointSize: 16
+                }
+
+                Text {
+                    width: parent.width / 5
+                    text: "Tipo"
+                    font.bold: Font.Bold
+                    font.pointSize: 16
+                }
+
+                Text {
+                    width: parent.width / 5
+                    text: "Tamaño"
+                    font.bold: Font.Bold
+                    font.pointSize: 16
+                }
+            }
+
+            model: ListModel {
+                ListElement {
+                    fileName: "Reporte de inventario"
+                    date: "12-10-2021"
+                    type: "Texto"
+                    size: "10mb"
+                }
+
+                ListElement {
+                    fileName: "Reporte de inventario"
+                    date: "12-10-2021"
+                    type: "Texto"
+                    size: "10mb"
+                }
+
+                ListElement {
+                    fileName: "Reporte de inventario"
+                    date: "12-10-2021"
+                    type: "Texto"
+                    size: "10mb"
+                }
+            }
+
+            delegate: Row {
+                width: parent.width
+                Text {
+                    width: parent.width / 5
+                    font.pointSize: 16
+                    text: model.fileName
+                }
+                Text {
+                    width: parent.width / 5
+                    font.pointSize: 16
+                    text: model.date
+                }
+                Text {
+                    width: parent.width / 5
+                    font.pointSize: 16
+                    text: model.type
+                }
+                Text {
+                    width: parent.width / 5
+                    font.pointSize: 16
+                    text: model.size
+                }
+            }
+
+            ScrollBar.vertical: ScrollBar {
+                active: true
+            }
+        }
+
+        HdrlButton {
+            text: "Ir a las stats"
+            mouseField.onClicked: {
+                hedarlStackView.push("HdrlStatisticsPage.qml")
+            }
         }
     }
-
-//    ToolBar {
-//        id: overlayHeader
-
-//        z: 1
-//        width: parent.width
-//        parent: Overlay.overlay
-
-//        Label {
-//            id: label
-//            anchors.centerIn: parent
-//            text: "Qt Quick Controls"
-//        }
-//    }
-
-//    Drawer {
-//        id: drawer
-
-//        y: overlayHeader.height
-//        width: window.width / 2
-//        height: window.height - overlayHeader.height
-
-//        modal: inPortrait
-//        interactive: inPortrait
-//        position: inPortrait ? 0 : 1
-//        visible: !inPortrait
-
-//        ListView {
-//            id: listView
-//            anchors.fill: parent
-//            height: parent.height
-
-//            headerPositioning: ListView.OverlayHeader
-//            header: Pane {
-//                id: header
-//                z: 2
-//                width: parent.width
-
-//                contentHeight: logo.height
-
-//                Image {
-//                    id: logo
-//                    width: parent.width
-//                    fillMode: implicitWidth > width ? Image.PreserveAspectFit : Image.Pad
-//                }
-
-//                MenuSeparator {
-//                    parent: header
-//                    width: parent.width
-//                    anchors.verticalCenter: parent.bottom
-//                    visible: !listView.atYBeginning
-//                }
-//            }
-
-//            footer: ItemDelegate {
-//                id: footer
-//                text: qsTr("Footer")
-//                width: parent.width
-
-//                MenuSeparator {
-//                    parent: footer
-//                    width: parent.width
-//                    anchors.verticalCenter: parent.top
-//                }
-//            }
-
-//            model: 10
-
-//            delegate: ItemDelegate {
-//                text: qsTr("Title %1").arg(index + 1)
-//                width: listView.width
-//            }
-
-//            ScrollIndicator.vertical: ScrollIndicator { }
-//        }
-//    }
-
 }
