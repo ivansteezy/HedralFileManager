@@ -20,21 +20,21 @@ Page {
         source: "../../Resources/fonts/Inter-Bold.ttf"
     }
 
-//    Rectangle {
-//        id: iconRect
-//        width: parent.width
-//        height: parent.height / 3
-//        color: backGroundColor
+    //    Rectangle {
+    //        id: iconRect
+    //        width: parent.width
+    //        height: parent.height / 3
+    //        color: backGroundColor
 
-//        Text {
-//            id: icontext
-//            text: qsTr("\uf216")
-//            anchors.centerIn: parent
-//            font.pointSize: 100
-//            font.family: "fontawesome"
-//            color: mainAppColor
-//        }
-//    }
+    //        Text {
+    //            id: icontext
+    //            text: qsTr("\uf216")
+    //            anchors.centerIn: parent
+    //            font.pointSize: 100
+    //            font.family: "fontawesome"
+    //            color: mainAppColor
+    //        }
+    //    }
 
     ColumnLayout {
         width: parent.width

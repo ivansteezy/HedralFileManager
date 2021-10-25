@@ -37,7 +37,7 @@ Page {
             width: parent.width
             Layout.alignment: Qt.AlignHCenter
             Label {
-                text: "Nueva Contraseña"
+                text: "Nueva contraseña"
                 font.pointSize: 18
                 font.letterSpacing: -1
                 font.family: hdrlFontBold.name
@@ -60,7 +60,7 @@ Page {
             width: parent.width
             Layout.alignment: Qt.AlignHCenter
             Label {
-                text: "Confirmar Nueva Contraseña"
+                text: "Confirmar nueva contraseña"
                 font.pointSize: 18
                 font.letterSpacing: -1
                 font.family: hdrlFontBold.name
