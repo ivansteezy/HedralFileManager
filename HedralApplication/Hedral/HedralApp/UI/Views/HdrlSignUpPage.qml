@@ -169,6 +169,7 @@ Page {
             text: "Registrarse"
             mouseField.onClicked: {
                 console.log("Ir a homepage!");
+                hedarlStackView.push("HdrlVerifyAccountPage.qml")
             }
         }
 
