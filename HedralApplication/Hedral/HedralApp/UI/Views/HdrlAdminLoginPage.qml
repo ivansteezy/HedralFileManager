@@ -6,7 +6,6 @@ import "../Components"
 
 Page {
     id: loginPage
-    height: 600
     background: Rectangle {
         color: backGroundColor
     }
@@ -21,27 +20,17 @@ Page {
         source: "../../Resources/fonts/Inter-Bold.ttf"
     }
 
-//    Rectangle {
-//        id: iconRect
-//        width: parent.width
-//        height: parent.height / 3
-//        color: backGroundColor
-
-//        Text {
-//            id: icontext
-//            text: qsTr("\uf216")
-//            anchors.centerIn: parent
-//            font.pointSize: 100
-//            font.family: "fontawesome"
-//            color: mainAppColor
-//        }
-//    }
-
     ColumnLayout {
         width: parent.width
-        height: 600
         spacing: 5
-
+        Label {
+            text: "Bienvenido Administrador!"
+            font.pointSize: 20
+            font.letterSpacing: -1
+            font.family: hdrlFontBold.name
+            font.bold: Font.Bold
+            Layout.alignment: Qt.AlignHCenter
+        }
         Item { height: 40 }
         Column {
             width: parent.width
@@ -98,14 +87,7 @@ Page {
             HdrlButton {
                 text: "Iniciar Sesion"
                 mouseField.onClicked: {
-                    hedarlStackView.push("HdrlHomePage.qml")
-                }
-            }
-
-            HdrlButton {
-                text: "Registro"
-                mouseField.onClicked: {
-                    hedarlStackView.push("HdrlSignUpPage.qml")
+                    console.log("Hola mundo!");
                 }
             }
         }
@@ -115,11 +97,11 @@ Page {
         Column {
             Layout.alignment: Qt.AlignRight
             spacing: 5
-            rightPadding: 20
+            rightPadding: 10
 
             Text {
                 id: nameLink
-                text: '¿Has olvidado la contraseña?'
+                text: '¿Eres un Usuario?'
                 linkColor: mainTextCOlor
                 Layout.alignment: Qt.AlignHCenter
                 font.pointSize: 10
@@ -127,38 +109,14 @@ Page {
                 color: "#000000"
                 Layout.margins: 10
                 onLinkActivated: forgotPassword()
-                bottomPadding: 10
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        console.log("Adios mundo")
+                        hedarlStackView.pop()
                     }
                 }
             }
 
-            Text {
-                id: isAdminLink
-                text: '¿Es un administrador?'
-                linkColor: mainTextCOlor
-                Layout.alignment: Qt.AlignHCenter
-                font.pointSize: 10
-                font.underline: true
-                color: "#000000"
-                Layout.margins: 10
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        hedarlStackView.push("HdrlAdminLoginPage.qml")
-                        console.log("Adios mundo")
-                    }
-                }
-            }
         }
     }
 }
-
-/*##^##
-Designer {
-    D{i:0;formeditorZoom:1.1}
-}
-##^##*/

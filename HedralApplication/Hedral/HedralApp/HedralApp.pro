@@ -29,8 +29,14 @@ DISTFILES += \
     UI/Components/HdrlPopUp.qml \
     UI/Components/HdrlTextField.qml \
     UI/Views/CButton.qml \
+<<<<<<< HEAD
     UI/Views/HdrlExplorerPage.qml \
+=======
+    UI/Views/HdrlAdminLoginPage.qml \
+>>>>>>> main
     UI/Views/HdrlHomePage.qml \
     UI/Views/HdrlLoginPage.qml \
     UI/Views/HdrlSignUpPage.qml \
+    UI/Views/HdrlStatisticsPage.qml \
+    UI/Views/HdrlVerifyAccountPage.qml \
     UI/Views/main.qml
