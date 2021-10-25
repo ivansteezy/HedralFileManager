@@ -39,7 +39,7 @@ Page {
             width: parent.width
             Layout.alignment: Qt.AlignHCenter
             Label {
-                text: "Nombre"
+                text: "Codigo"
                 font.pointSize: 18
                 font.letterSpacing: -1
                 font.family: hdrlFontBold.name
@@ -65,7 +65,7 @@ Page {
             Layout.alignment: Qt.AlignHCenter
             spacing: 10
             HdrlButton {
-                text: "Iniciar Sesion"
+                text: "Verificar"
                 mouseField.onClicked: {
                     console.log("Hola mundo!");
                 }
