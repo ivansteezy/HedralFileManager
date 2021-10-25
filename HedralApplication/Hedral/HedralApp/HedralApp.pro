@@ -36,6 +36,7 @@ DISTFILES += \
 >>>>>>> main
     UI/Views/HdrlHomePage.qml \
     UI/Views/HdrlLoginPage.qml \
+    UI/Views/HdrlRestorePage.qml \
     UI/Views/HdrlSignUpPage.qml \
     UI/Views/HdrlStatisticsPage.qml \
     UI/Views/HdrlVerifyAccountPage.qml \
