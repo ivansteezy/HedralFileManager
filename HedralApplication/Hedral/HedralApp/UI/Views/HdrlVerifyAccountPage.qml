@@ -67,7 +67,7 @@ Page {
             HdrlButton {
                 text: "Verificar"
                 mouseField.onClicked: {
-                    console.log("Hola mundo!");
+                    hedarlStackView.push("HdrlHomePage.qml")
                 }
             }
         }
