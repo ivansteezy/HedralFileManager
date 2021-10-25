@@ -129,6 +129,7 @@ Page {
                     anchors.fill: parent
                     onClicked: {
                         console.log("Adios mundo")
+                        hedarlStackView.push("HdrlRestorePage.qml")
                     }
                 }
             }
