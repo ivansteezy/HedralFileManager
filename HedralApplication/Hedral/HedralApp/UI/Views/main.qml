@@ -16,7 +16,7 @@ Window {
     width: 350
     height: 650
     visible: true
-    title: qsTr("Hello World")
+    title: qsTr("Hedral File Manager")
     color: backGroundColor
 
     FontLoader {

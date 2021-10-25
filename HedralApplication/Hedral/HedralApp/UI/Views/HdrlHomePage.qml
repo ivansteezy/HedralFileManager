@@ -3,90 +3,232 @@ import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.15
 
+import "../Components"
+
 Page {
+
+    FontLoader {
+        id: hdrlFontRegular
+        source: "../../Resources/fonts/Inter-Regular.ttf"
+    }
+
+    FontLoader {
+        id: hdrlFontBold
+        source: "../../Resources/fonts/Inter-Bold.ttf"
+    }
+
+
+    id: loginPage
+    background: Rectangle {
+        color: backGroundColor
+    }
+
     anchors.fill: parent
     Component.onCompleted: {
-        hedralWindow.width = 1000
+        hedralWindow.width = 1200
         hedralWindow.height = 800
 
         hedralWindow.x = Screen.width / 2 - hedralWindow.width / 2
         hedralWindow.y = Screen.height / 2 - hedralWindow.height / 2
     }
 
-    ToolBar {
-        id: overlayHeader
+    Column {
+        anchors.fill: parent
+        Row {
+            width: parent.width
+            height: parent.height / 10
+            spacing: 10
+            leftPadding: 10
 
-        z: 1
-        width: parent.width
-        parent: Overlay.overlay
+            TextField {
+                width: parent.width / 1.2
+                height: 40
+                echoMode: TextInput.Password
 
-        Label {
-            id: label
-            anchors.centerIn: parent
-            text: "Qt Quick Controls"
+                background: Rectangle {
+                    color: "#EDEFF2"
+                    radius: 10
+                }
+                verticalAlignment: TextInput.AlignVCenter
+            }
+
+            HdrlButton {
+                width: parent.width / 7
+                text: "Buscar"
+                mouseField.onClicked: {
+                    console.log("Buscar el archivo!");
+                }
+            }
         }
-    }
 
-    Drawer {
-        id: drawer
+        Row {
+            width: parent.width
+            height: parent.height / 10
+            Column {
+                width: parent.width / 3
+                Layout.alignment: Qt.AlignHCenter
+                leftPadding: 10
+                Label {
+                    text: "Texo"
+                    font.pointSize: 18
+                    font.letterSpacing: -1
+                    font.family: hdrlFontBold.name
+                    font.bold: Font.Bold
+                }
 
-        y: overlayHeader.height
-        width: window.width / 2
-        height: window.height - overlayHeader.height
+                HdrlDropDown {
+                    width: parent.width - 20
+                    height: 40
+                    model: ["Titulo", "Contenido"]
+                    checkedColor: "#727CF5"
+                    onCurrentIndexChanged: {
+                        console.log("Se selecciono " + model[currentIndex])
+                    }
+                }
+            }
+            Column {
+                width: parent.width / 3
+                Layout.alignment: Qt.AlignHCenter
+                leftPadding: 10
+                Label {
+                    text: "Tipo de archivo"
+                    font.pointSize: 18
+                    font.letterSpacing: -1
+                    font.family: hdrlFontBold.name
+                    font.bold: Font.Bold
+                }
 
-        modal: inPortrait
-        interactive: inPortrait
-        position: inPortrait ? 0 : 1
-        visible: !inPortrait
+                HdrlDropDown {
+                    width: parent.width - 20
+                    height: 40
+                    model: ["PDF", "Texto", "Docx"]
+                    checkedColor: "#727CF5"
+                    onCurrentIndexChanged: {
+                        console.log("Se selecciono " + model[currentIndex])
+                    }
+                }
+            }
+            Column {
+                width: parent.width / 3
+                Layout.alignment: Qt.AlignHCenter
+                Label {
+                    text: "Nivel"
+                    font.pointSize: 18
+                    font.letterSpacing: -1
+                    font.family: hdrlFontBold.name
+                    font.bold: Font.Bold
+                }
+
+                HdrlDropDown {
+                    width: parent.width - 20
+                    height: 40
+                    model: ["Nivel 1", "Nivel 2", "Nivel 3"]
+                    checkedColor: "#727CF5"
+                    onCurrentIndexChanged: {
+                        console.log("Se selecciono el nivel" + model[currentIndex])
+                    }
+                }
+            }
+        }
 
         ListView {
-            id: listView
-            anchors.fill: parent
-            height: parent.height
-
+            clip: true
+            width: parent.width
+            height: parent.height / 1.3
+            leftMargin: 10
+            flickableDirection: Flickable.AutoFlickDirection
             headerPositioning: ListView.OverlayHeader
-            header: Pane {
-                id: header
-                z: 2
+
+            header: Row {
                 width: parent.width
+                bottomPadding: 20
 
-                contentHeight: logo.height
-
-                Image {
-                    id: logo
-                    width: parent.width
-                    fillMode: implicitWidth > width ? Image.PreserveAspectFit : Image.Pad
+                Text {
+                    width: parent.width / 5
+                    text: "Nombre"
+                    font.bold: Font.Bold
+                    font.pointSize: 16
                 }
 
-                MenuSeparator {
-                    parent: header
-                    width: parent.width
-                    anchors.verticalCenter: parent.bottom
-                    visible: !listView.atYBeginning
+                Text {
+                    width: parent.width / 5
+                    text: "Fecha"
+                    font.bold: Font.Bold
+                    font.pointSize: 16
+                }
+
+                Text {
+                    width: parent.width / 5
+                    text: "Tipo"
+                    font.bold: Font.Bold
+                    font.pointSize: 16
+                }
+
+                Text {
+                    width: parent.width / 5
+                    text: "Tamaño"
+                    font.bold: Font.Bold
+                    font.pointSize: 16
                 }
             }
 
-            footer: ItemDelegate {
-                id: footer
-                text: qsTr("Footer")
+            model: ListModel {
+                ListElement {
+                    fileName: "Reporte de inventario"
+                    date: "12-10-2021"
+                    type: "Texto"
+                    size: "10mb"
+                }
+
+                ListElement {
+                    fileName: "Reporte de inventario"
+                    date: "12-10-2021"
+                    type: "Texto"
+                    size: "10mb"
+                }
+
+                ListElement {
+                    fileName: "Reporte de inventario"
+                    date: "12-10-2021"
+                    type: "Texto"
+                    size: "10mb"
+                }
+            }
+
+            delegate: Row {
                 width: parent.width
-
-                MenuSeparator {
-                    parent: footer
-                    width: parent.width
-                    anchors.verticalCenter: parent.top
+                Text {
+                    width: parent.width / 5
+                    font.pointSize: 16
+                    text: model.fileName
+                }
+                Text {
+                    width: parent.width / 5
+                    font.pointSize: 16
+                    text: model.date
+                }
+                Text {
+                    width: parent.width / 5
+                    font.pointSize: 16
+                    text: model.type
+                }
+                Text {
+                    width: parent.width / 5
+                    font.pointSize: 16
+                    text: model.size
                 }
             }
 
-            model: 10
-
-            delegate: ItemDelegate {
-                text: qsTr("Title %1").arg(index + 1)
-                width: listView.width
+            ScrollBar.vertical: ScrollBar {
+                active: true
             }
+        }
 
-            ScrollIndicator.vertical: ScrollIndicator { }
+        HdrlButton {
+            text: "Ir a las stats"
+            mouseField.onClicked: {
+                hedarlStackView.push("HdrlStatisticsPage.qml")
+            }
         }
     }
-
 }
