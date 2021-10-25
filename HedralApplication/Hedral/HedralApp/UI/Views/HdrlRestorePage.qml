@@ -20,32 +20,24 @@ Page {
         source: "../../Resources/fonts/Inter-Bold.ttf"
     }
 
-    //    Rectangle {
-    //        id: iconRect
-    //        width: parent.width
-    //        height: parent.height / 3
-    //        color: backGroundColor
-
-    //        Text {
-    //            id: icontext
-    //            text: qsTr("\uf216")
-    //            anchors.centerIn: parent
-    //            font.pointSize: 100
-    //            font.family: "fontawesome"
-    //            color: mainAppColor
-    //        }
-    //    }
-
     ColumnLayout {
         width: parent.width
         spacing: 5
-
+        Label {
+            text: "Ingrese su nueva contraseña y el codigo\nque se enviara despues de presionar\n \"Restablecer\""
+            font.pointSize: 14
+            font.letterSpacing: -1
+            font.family: hdrlFontBold.name
+            font.bold: Font.DemiBold
+            width: parent.width
+            Layout.alignment: Qt.AlignHCenter
+        }
         Item { height: 40 }
         Column {
             width: parent.width
             Layout.alignment: Qt.AlignHCenter
             Label {
-                text: "Email"
+                text: "Nueva contraseña"
                 font.pointSize: 18
                 font.letterSpacing: -1
                 font.family: hdrlFontBold.name
@@ -68,7 +60,7 @@ Page {
             width: parent.width
             Layout.alignment: Qt.AlignHCenter
             Label {
-                text: "Contraseña"
+                text: "Confirmar nueva contraseña"
                 font.pointSize: 18
                 font.letterSpacing: -1
                 font.family: hdrlFontBold.name
@@ -94,20 +86,12 @@ Page {
             Layout.alignment: Qt.AlignHCenter
             spacing: 10
             HdrlButton {
-                text: "Iniciar Sesion"
+                text: "Enviar codigo"
                 mouseField.onClicked: {
-                    hedarlStackView.push("HdrlHomePage.qml")
-                }
-            }
-
-            HdrlButton {
-                text: "Registro"
-                mouseField.onClicked: {
-                    hedarlStackView.push("HdrlSignUpPage.qml")
+                    hedarlStackView.push("HdrlVerifyAccountPage.qml")
                 }
             }
         }
-
         Item { height: 100 }
 
         Column {
@@ -117,7 +101,7 @@ Page {
 
             Text {
                 id: nameLink
-                text: '¿Has olvidado la contraseña?'
+                text: '¿Ya tienes una cuenta?'
                 linkColor: mainTextCOlor
                 Layout.alignment: Qt.AlignHCenter
                 font.pointSize: 10
@@ -128,29 +112,12 @@ Page {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        console.log("Adios mundo")
-                        hedarlStackView.push("HdrlRestorePage.qml")
+                        hedarlStackView.pop()
                     }
                 }
             }
 
-            Text {
-                id: isAdminLink
-                text: '¿Es un administrador?'
-                linkColor: mainTextCOlor
-                Layout.alignment: Qt.AlignHCenter
-                font.pointSize: 10
-                font.underline: true
-                color: "#000000"
-                Layout.margins: 10
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        hedarlStackView.push("HdrlAdminLoginPage.qml")
-                        console.log("Adios mundo")
-                    }
-                }
-            }
         }
     }
 }
+
