@@ -6,6 +6,7 @@ import "../Components"
 
 Page {
     id: loginPage
+    height: 600
     background: Rectangle {
         color: backGroundColor
     }
@@ -38,6 +39,7 @@ Page {
 
     ColumnLayout {
         width: parent.width
+        height: 600
         spacing: 5
 
         Item { height: 40 }
@@ -114,7 +116,7 @@ Page {
         Column {
             Layout.alignment: Qt.AlignRight
             spacing: 5
-            rightPadding: 10
+            rightPadding: 20
 
             Text {
                 id: nameLink
@@ -126,6 +128,7 @@ Page {
                 color: "#000000"
                 Layout.margins: 10
                 onLinkActivated: forgotPassword()
+                bottomPadding: 10
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
@@ -154,3 +157,9 @@ Page {
         }
     }
 }
+
+/*##^##
+Designer {
+    D{i:0;formeditorZoom:1.1}
+}
+##^##*/
