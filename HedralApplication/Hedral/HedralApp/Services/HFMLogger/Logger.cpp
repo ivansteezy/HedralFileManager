@@ -16,25 +16,40 @@ LoggerImpl::~LoggerImpl()
 
 void LoggerImpl::SetFilePath()
 {
-    m_file.setFileName(logFilePath);
+    QDir dir("../../Hedral/");
+    m_file.setFileName(dir.absoluteFilePath("HedralLog.txt"));
 }
 
 void LoggerImpl::WriteError(const QString& message)
 {
-    qDebug() << "ERROR: " << message;
+    if(m_file.open(QIODevice::WriteOnly | QIODevice::Append))
+    {
+        QTextStream out(&m_file);
+        QString logtext = "[" + QDateTime::currentDateTime().toString() + ": HEDRAL ERROR]: " + message + "\n";
+        out << logtext;
+    }
+
+    m_file.close();
 }
 
 void LoggerImpl::WriteWarning(const QString& message)
 {
-    qDebug() << "WARNING: " << message;
+    if(m_file.open(QIODevice::WriteOnly | QIODevice::Append))
+    {
+        QTextStream out(&m_file);
+        QString logtext = "[" + QDateTime::currentDateTime().toString() + ": HEDRAL WARNING]: " + message + "\n";
+        out << logtext;
+    }
+
+    m_file.close();
 }
 
 void LoggerImpl::WriteInfo(const QString& message)
 {
-    if(m_file.open(QIODevice::ReadWrite | QIODevice::Text))
+    if(m_file.open(QIODevice::WriteOnly | QIODevice::Append))
     {
         QTextStream out(&m_file);
-        QString logtext = "[" + QDateTime::currentDateTime().toString() + ": HEDRAL INFO]: " + message;
+        QString logtext = "[" + QDateTime::currentDateTime().toString() + ": HEDRAL INFO]: " + message + "\n";
         out << logtext;
     }
 

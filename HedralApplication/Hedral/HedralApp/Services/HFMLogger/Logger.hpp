@@ -5,6 +5,7 @@
 #include <QFile>
 #include <QString>
 #include <QDateTime>
+#include <QDir>
 
 #include "LoggerBase.hpp"
 
@@ -12,7 +13,9 @@ namespace Hedral
 {
     namespace Log
     {
-        const QString logFilePath = "HedralLog.txt";
+        //const QString logFilePath = "../../Hedral/";
+        //const QString logFileName = "HedralLog.txt";
+
         class LoggerImpl : public QObject, public Core::Implements<ILogger, Hedral::Core::IQtObjectSupport>
         {
             Q_OBJECT;
