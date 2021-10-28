@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
     systemInitializer->Initialize();
 
     auto logger = Hedral::Log::GlobalLogger::Instance();
-    logger->WriteError("ITS WORKING!!");
+    logger->WriteInfo("Initializing logger!");
 
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("../../Hedral/HedralApp/UI/Views/main.qml"));
