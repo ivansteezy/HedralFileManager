@@ -4,6 +4,7 @@
 #include <QtNetwork>
 
 #include "../HFMLogger/Logger.hpp"
+#include "SystemInitializer.hpp"
 
 int main(int argc, char *argv[])
 {
@@ -27,7 +28,10 @@ int main(int argc, char *argv[])
 //        reply->deleteLater();
 //     });
 
-    auto logger = Hedral::Log::Logger::CreateInstance();
+    auto systemInitializer = Hedral::Bootstraping::SystemInitializer::CreateInstance();
+    systemInitializer->Initialize();
+
+    auto logger = Hedral::Log::GlobalLogger::Instance();
     logger->WriteError("ITS WORKING!!");
 
     QQmlApplicationEngine engine;

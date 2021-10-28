@@ -7,6 +7,8 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+        Services/HFMBootstraping/SystemInitializer.cpp \
+        Services/HFMBootstraping/SystemInitializerBase.cpp \
         Services/HFMBootstraping/main.cpp \
         Services/HFMCore/HedralCore.cpp \
         Services/HFMLogger/Logger.cpp \
@@ -42,6 +44,8 @@ DISTFILES += \
     UI/Views/main.qml
 
 HEADERS += \
+    Services/HFMBootstraping/SystemInitializer.hpp \
+    Services/HFMBootstraping/SystemInitializerBase.hpp \
     Services/HFMCore/TestCore.h \
     Services/HFMCore/HedralCore.hpp \
     Services/HFMCore/HedralCoreMacros.hpp \
