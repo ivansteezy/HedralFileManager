@@ -18,8 +18,10 @@ SystemInitializerImpl::~SystemInitializerImpl()
 void SystemInitializerImpl::Initialize()
 {
     m_logger = Hedral::Log::Logger::CreateInstance();
+    m_NetworkManager = Hedral::Network::NetworkManager::CreateInstance();
 
     Hedral::Log::GlobalLogger::SetInstance(m_logger);
+    Hedral::Network::GlobalNetworkManager::SetInstance(m_NetworkManager);
 }
 
 QObject* SystemInitializerImpl::AsQtObject()

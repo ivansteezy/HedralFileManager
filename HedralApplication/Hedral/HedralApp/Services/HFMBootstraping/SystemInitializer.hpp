@@ -2,8 +2,8 @@
 #define SYSTEMINITIALIZER_HPP
 
 #include "SystemInitializerBase.hpp"
-
 #include "../HFMLogger/LoggerBase.hpp"
+#include "../HFMNetworking/NetworkManagerBase.hpp"
 
 namespace Hedral
 {
@@ -24,6 +24,7 @@ namespace Hedral
 
         private:
             Hedral::Core::ComPtr<Hedral::Log::ILogger> m_logger;
+            Hedral::Core::ComPtr<Hedral::Network::INetworkManager> m_NetworkManager;
         };
     }
 }
