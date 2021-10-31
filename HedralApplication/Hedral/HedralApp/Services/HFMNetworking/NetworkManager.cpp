@@ -8,7 +8,7 @@ HEDRAL_IMPLEMENT_CLASSFACTORY(NetworkManager, NetworkManagerImpl, INetworkManage
 
 NetworkManagerImpl::NetworkManagerImpl()
 {
-    x = Hedral::Log::GlobalLogger::Instance();
+
 }
 
 NetworkManagerImpl::~NetworkManagerImpl()
@@ -18,7 +18,7 @@ NetworkManagerImpl::~NetworkManagerImpl()
 
 void NetworkManagerImpl::SetEndPoint()
 {
-    x->WriteInfo("Settin endpoint");
+    Logger->WriteInfo("Settin endpoint");
 }
 void NetworkManagerImpl::MakeRequest(const HTTPRequest& requestType)
 {

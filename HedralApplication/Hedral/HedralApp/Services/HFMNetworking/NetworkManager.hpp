@@ -24,7 +24,8 @@ namespace Hedral
             virtual const QMetaObject* MetaObject() override;
 
         private:
-            Log::ILogger* x;
+             // Log::ILogger* x = Hedral::Log::GlobalLogger::Instance();
+            HEDRAL_DEPENDENCY(Log::ILogger*, Logger, Log, Logger);
         };
     }
 }
