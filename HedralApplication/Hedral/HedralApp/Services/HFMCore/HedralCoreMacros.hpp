@@ -21,4 +21,7 @@ Hedral::Core::ComPtr<I> F::CreateInstance()\
     throw std::bad_exception();\
 }
 
+#define HEDRAL_DEPENDENCY(TYPE, NAME, NAMESPACE, DEPENDENCY) \
+    protected: TYPE NAME = Hedral::NAMESPACE::Global##DEPENDENCY::Instance();
+
 #endif

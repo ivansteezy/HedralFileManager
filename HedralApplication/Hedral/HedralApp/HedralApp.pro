@@ -12,7 +12,9 @@ SOURCES += \
         Services/HFMBootstraping/main.cpp \
         Services/HFMCore/HedralCore.cpp \
         Services/HFMLogger/Logger.cpp \
-        Services/HFMLogger/LoggerBase.cpp
+        Services/HFMLogger/LoggerBase.cpp \
+        Services/HFMNetworking/NetworkManager.cpp \
+        Services/HFMNetworking/NetworkManagerBase.cpp
 
 RESOURCES += Resources/qml.qrc \
 
@@ -50,4 +52,6 @@ HEADERS += \
     Services/HFMCore/HedralCore.hpp \
     Services/HFMCore/HedralCoreMacros.hpp \
     Services/HFMLogger/Logger.hpp \
-    Services/HFMLogger/LoggerBase.hpp
+    Services/HFMLogger/LoggerBase.hpp \
+    Services/HFMNetworking/NetworkManager.hpp \
+    Services/HFMNetworking/NetworkManagerBase.hpp
