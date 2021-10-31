@@ -20,6 +20,7 @@ void NetworkManagerImpl::SetEndPoint()
 {
     Logger->WriteInfo("Settin endpoint");
 }
+
 void NetworkManagerImpl::MakeRequest(const HTTPRequest& requestType)
 {
 

@@ -12,6 +12,8 @@ namespace Hedral
         {
             Q_OBJECT;
 
+            HEDRAL_DEPENDENCY(Log::ILogger*, Logger, Log, Logger);
+
         public:
             NetworkManagerImpl();
             virtual ~NetworkManagerImpl();
@@ -22,10 +24,6 @@ namespace Hedral
 
             virtual QObject* AsQtObject() override;
             virtual const QMetaObject* MetaObject() override;
-
-        private:
-             // Log::ILogger* x = Hedral::Log::GlobalLogger::Instance();
-            HEDRAL_DEPENDENCY(Log::ILogger*, Logger, Log, Logger);
         };
     }
 }
