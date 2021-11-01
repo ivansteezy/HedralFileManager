@@ -225,11 +225,29 @@ Page {
             }
         }
 
+//        HdrlButton {
+//            text: "Ir a las stats"
+//            mouseField.onClicked: {
+//                hedarlStackView.push("HdrlStatisticsPage.qml")
+//            }
+//        }
+
         HdrlButton {
-            text: "Ir a las stats"
+            text: "Open Modal"
             mouseField.onClicked: {
-                hedarlStackView.push("HdrlStatisticsPage.qml")
+                popup.open()
             }
+        }
+
+        Popup {
+            id: popup
+            x: Screen.width / 2 - hedralWindow.width / 2
+            y: Screen.height / 2 - hedralWindow.height / 2
+            width: 500
+            height: 300
+            modal: true
+            focus: true
+            closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
         }
     }
 }
