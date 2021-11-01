@@ -14,7 +14,7 @@ SOURCES += \
         Services/HFMLogger/Logger.cpp \
         Services/HFMLogger/LoggerBase.cpp \
         Services/HFMNetworking/NetworkManager.cpp \
-        Services/HFMNetworking/NetworkManagerBase.cpp
+        Services/HFMNetworking/NetworkingBase.cpp
 
 RESOURCES += Resources/qml.qrc \
 
@@ -55,4 +55,4 @@ HEADERS += \
     Services/HFMLogger/Logger.hpp \
     Services/HFMLogger/LoggerBase.hpp \
     Services/HFMNetworking/NetworkManager.hpp \
-    Services/HFMNetworking/NetworkManagerBase.hpp
+    Services/HFMNetworking/NetworkingBase.hpp

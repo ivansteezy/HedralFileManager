@@ -3,7 +3,7 @@
 
 #include "SystemInitializerBase.hpp"
 #include "../HFMLogger/LoggerBase.hpp"
-#include "../HFMNetworking/NetworkManagerBase.hpp"
+#include "../HFMNetworking/NetworkingBase.hpp"
 
 namespace Hedral
 {

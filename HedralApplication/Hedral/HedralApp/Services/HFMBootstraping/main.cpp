@@ -36,8 +36,8 @@ int main(int argc, char *argv[])
     logger->WriteError("Initializing logger!");
     logger->WriteWarning("Initializing logger!");
 
-    auto netManager = Hedral::Network::GlobalNetworkManager::Instance();
-    netManager->SetEndPoint();
+//    auto netManager = Hedral::Network::GlobalNetworkManager::Instance();
+//    netManager->SetEndPoint();
 
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("../../Hedral/HedralApp/UI/Views/main.qml"));

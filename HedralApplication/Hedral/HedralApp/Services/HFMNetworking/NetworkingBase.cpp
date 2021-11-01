@@ -1,10 +1,11 @@
-#include "NetworkManagerBase.hpp"
+#include "NetworkingBase.hpp"
 
 using namespace Hedral::Network;
 
 HEDRAL_IMPLEMENT_INTERFACE(INetworkManager);
 
 static Hedral::Core::ComPtr<INetworkManager> g_globalNetworkManager;
+static Hedral::Core::ComPtr<IJsonSerializer> g_globalJsonSerializer;
 
 void GlobalNetworkManager::SetInstance(Hedral::Core::ComPtr<INetworkManager> networkManager)
 {
@@ -14,4 +15,15 @@ void GlobalNetworkManager::SetInstance(Hedral::Core::ComPtr<INetworkManager> net
 INetworkManager* GlobalNetworkManager::Instance()
 {
     return g_globalNetworkManager;
+}
+
+
+void GlobalJsonSerializer::SetInstance(Hedral::Core::ComPtr<IJsonSerializer> jsonSerializer)
+{
+    g_globalJsonSerializer = jsonSerializer;
+}
+
+IJsonSerializer* GlobalJsonSerializer::Instance()
+{
+    return g_globalJsonSerializer;
 }
