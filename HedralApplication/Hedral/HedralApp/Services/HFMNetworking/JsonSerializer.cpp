@@ -16,12 +16,12 @@ JsonSerializerImpl::~JsonSerializerImpl()
 
 QJsonDocument JsonSerializerImpl::ByteArrayToJson(const QByteArray& jsonByteArray)
 {
-    return QJsonDocument();
+    return QJsonDocument::fromJson(jsonByteArray);
 }
 
-QVariantMap JsonSerializerImpl::JsonAsMap(const QJsonDocument& jsonDocument)
+QVariant JsonSerializerImpl::JsonAsMap(const QJsonDocument& jsonDocument)
 {
-    return QVariantMap();
+    return jsonDocument.toVariant();
 }
 
 QByteArray JsonSerializerImpl::JsonByteArray(const QJsonDocument& jsonDocument)

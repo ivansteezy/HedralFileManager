@@ -20,7 +20,7 @@ namespace Hedral
             virtual ~JsonSerializerImpl();
 
             virtual QJsonDocument ByteArrayToJson(const QByteArray& jsonByteArray) override;
-            virtual QVariantMap JsonAsMap(const QJsonDocument& jsonDocument) override;
+            virtual QVariant JsonAsMap(const QJsonDocument& jsonDocument) override;
             virtual QByteArray JsonByteArray(const QJsonDocument& jsonDocument) override;
 
             virtual QObject* AsQtObject() override;
