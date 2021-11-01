@@ -17,6 +17,7 @@ namespace Hedral
             Q_OBJECT;
 
             HEDRAL_DEPENDENCY(Log::ILogger*, Logger, Log, Logger);
+            HEDRAL_DEPENDENCY(Network::IJsonSerializer*, JsonSerializer, Network, JsonSerializer);
 
         public:
             NetworkManagerImpl();
@@ -24,6 +25,7 @@ namespace Hedral
 
             virtual void SetEndPoint(const QString& endpoint) override;
             virtual void MakeRequest(const HTTPRequest& requestType) override;
+            virtual QVariantMap GetResponse() override;
 
             virtual QObject* AsQtObject() override;
             virtual const QMetaObject* MetaObject() override;
@@ -32,9 +34,6 @@ namespace Hedral
             void Get();
             void Put();
             void Post();
-
-            //QJsonDocument GetResponseAsJson();
-            //QVariantMap GetResponseAsMap();
 
         private:
             QNetworkAccessManager m_networkAccessManager;

@@ -58,10 +58,10 @@ void NetworkManagerImpl::Post()
 
 }
 
-//QNetworkReply NetworkManagerImpl::GetNetworkReply() const
-//{
-
-//}
+QVariantMap NetworkManagerImpl::GetResponse()
+{
+    return QVariantMap();
+}
 
 QObject* NetworkManagerImpl::AsQtObject()
 {

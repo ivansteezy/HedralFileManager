@@ -24,6 +24,7 @@ namespace Hedral
 
         private:
             Hedral::Core::ComPtr<Hedral::Log::ILogger> m_logger;
+            Hedral::Core::ComPtr<Hedral::Network::IJsonSerializer> m_jsonSerializer;
             Hedral::Core::ComPtr<Hedral::Network::INetworkManager> m_NetworkManager;
         };
     }

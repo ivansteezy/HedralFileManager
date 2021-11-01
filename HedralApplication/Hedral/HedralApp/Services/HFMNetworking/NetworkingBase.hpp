@@ -23,6 +23,7 @@ namespace Hedral
 
             virtual void SetEndPoint(const QString& endpoint) = 0;
             virtual void MakeRequest(const HTTPRequest& requestType) = 0;
+            virtual QVariantMap GetResponse() = 0;
         };
         HEDRAL_DECLARE_CLASSFACTORY(NetworkManager, INetworkManager);
 
