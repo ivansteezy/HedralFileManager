@@ -15,7 +15,9 @@ SOURCES += \
         Services/HFMLogger/LoggerBase.cpp \
         Services/HFMNetworking/JsonSerializer.cpp \
         Services/HFMNetworking/NetworkManager.cpp \
-        Services/HFMNetworking/NetworkingBase.cpp
+        Services/HFMNetworking/NetworkingBase.cpp \
+        Services/HFMStatistics/StatisticsBase.cpp \
+        Services/HFMStatistics/StatisticsManager.cpp
 
 RESOURCES += Resources/qml.qrc \
 
@@ -57,4 +59,6 @@ HEADERS += \
     Services/HFMLogger/LoggerBase.hpp \
     Services/HFMNetworking/JsonSerializer.hpp \
     Services/HFMNetworking/NetworkManager.hpp \
-    Services/HFMNetworking/NetworkingBase.hpp
+    Services/HFMNetworking/NetworkingBase.hpp \
+    Services/HFMStatistics/StatisticsBase.hpp \
+    Services/HFMStatistics/StatisticsManager.hpp

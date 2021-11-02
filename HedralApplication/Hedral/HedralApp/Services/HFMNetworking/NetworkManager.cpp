@@ -2,9 +2,7 @@
 
 using namespace Hedral::Network;
 
-
 HEDRAL_IMPLEMENT_CLASSFACTORY(NetworkManager, NetworkManagerImpl, INetworkManager);
-
 
 NetworkManagerImpl::NetworkManagerImpl() :
     m_endpointPreffix("https://to6klngvgk.execute-api.us-east-2.amazonaws.com"),
@@ -52,26 +50,12 @@ void NetworkManagerImpl::Get()
 
 void NetworkManagerImpl::Put()
 {
-//    QNetworkReply* reply = m_networkAccessManager.put(m_networkRequest);
-//    Logger->WriteInfo("Sending a GET request to: " + m_endpoint);
 
-//    QObject::connect(reply, &QNetworkReply::finished, [=]() {
-//       QByteArray responseData = reply->readAll();
-//       auto json = JsonSerializer->ByteArrayToJson(responseData);
-//       m_response = JsonSerializer->JsonAsMap(json);
-//    });
 }
 
 void NetworkManagerImpl::Post()
 {
-//    QNetworkReply* reply = m_networkAccessManager.get(m_networkRequest);
-//    Logger->WriteInfo("Sending a GET request to: " + m_endpoint);
 
-//    QObject::connect(reply, &QNetworkReply::finished, [=]() {
-//       QByteArray responseData = reply->readAll();
-//       auto json = JsonSerializer->ByteArrayToJson(responseData);
-//       m_response = JsonSerializer->JsonAsMap(json);
-//    });
 }
 
 QVariant NetworkManagerImpl::GetResponse() const

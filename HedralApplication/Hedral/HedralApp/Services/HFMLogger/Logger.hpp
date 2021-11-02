@@ -1,7 +1,6 @@
 #ifndef LOGGER_HPP
 #define LOGGER_HPP
 
-#include <qDebug>
 #include <QFile>
 #include <QString>
 #include <QDateTime>

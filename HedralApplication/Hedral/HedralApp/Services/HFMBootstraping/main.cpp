@@ -15,18 +15,18 @@ int main(int argc, char *argv[])
 
     QApplication app(argc, argv);
 
-//    QNetworkRequest req(QUrl("https://to6klngvgk.execute-api.us-east-2.amazonaws.com/dev/posts/ByNumber/%7Bnumber%7D"));
-//    req.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-//    QNetworkAccessManager nam;
-//    QNetworkReply* reply = nam.get(req);
+    QNetworkRequest req(QUrl("https://to6klngvgk.execute-api.us-east-2.amazonaws.com/dev/posts/ByNumber/%7Bnumber%7D"));
+    req.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+    QNetworkAccessManager nam;
+    QNetworkReply* reply = nam.get(req);
 
-//    qDebug() << "Bout to get!";
-//    QObject::connect(reply, &QNetworkReply::finished, [&]() {
-//        QByteArray responseData = reply->readAll();
-//        qDebug() << "Got response: !!!!!!!!!!!!!!" << QJsonDocument::fromJson(responseData);
-//        reply->close();
-//        reply->deleteLater();
-//     });
+    qDebug() << "Bout to get!";
+    QObject::connect(reply, &QNetworkReply::finished, [&]() {
+        QByteArray responseData = reply->readAll();
+        qDebug() << "Got response: !!!!!!!!!!!!!!" << QJsonDocument::fromJson(responseData);
+        reply->close();
+        reply->deleteLater();
+     });
 
     auto systemInitializer = Hedral::Bootstraping::SystemInitializer::CreateInstance();
     systemInitializer->Initialize();
