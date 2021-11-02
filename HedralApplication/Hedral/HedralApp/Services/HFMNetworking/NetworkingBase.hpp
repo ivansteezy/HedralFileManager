@@ -21,16 +21,33 @@ namespace Hedral
         {
             HEDRAL_DECLARE_INTERFACE(INetworkManager, "INetworkManager")
 
-            virtual void SetEndPoint() = 0;
+            virtual void SetEndPoint(const QString& endpoint) = 0;
             virtual void MakeRequest(const HTTPRequest& requestType) = 0;
-            // virtual QNetworkReply GetNetworkReply() const = 0;
+            virtual QVariant GetResponse() const = 0;
         };
         HEDRAL_DECLARE_CLASSFACTORY(NetworkManager, INetworkManager);
+
+
+        struct IJsonSerializer : Hedral::Core::IContract
+        {
+            HEDRAL_DECLARE_INTERFACE(IJsonSerializer, "IJsonSerializer")
+            virtual QJsonDocument ByteArrayToJson(const QByteArray& jsonByteArray) = 0;
+            virtual QVariant JsonAsMap(const QJsonDocument& jsonDocument) = 0;
+            virtual QByteArray JsonByteArray(const QJsonDocument& jsonDocument) = 0;
+
+        };
+        HEDRAL_DECLARE_CLASSFACTORY(JsonSerializer, IJsonSerializer);
 
         struct GlobalNetworkManager
         {
             static void SetInstance(Hedral::Core::ComPtr<INetworkManager> networkManager);
             static INetworkManager* Instance();
+        };
+
+        struct GlobalJsonSerializer
+        {
+            static void SetInstance(Hedral::Core::ComPtr<IJsonSerializer> jsonSerializer);
+            static IJsonSerializer* Instance();
         };
     }
 }

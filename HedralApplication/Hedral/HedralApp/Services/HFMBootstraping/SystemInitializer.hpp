@@ -3,7 +3,7 @@
 
 #include "SystemInitializerBase.hpp"
 #include "../HFMLogger/LoggerBase.hpp"
-#include "../HFMNetworking/NetworkManagerBase.hpp"
+#include "../HFMNetworking/NetworkingBase.hpp"
 
 namespace Hedral
 {
@@ -24,6 +24,7 @@ namespace Hedral
 
         private:
             Hedral::Core::ComPtr<Hedral::Log::ILogger> m_logger;
+            Hedral::Core::ComPtr<Hedral::Network::IJsonSerializer> m_jsonSerializer;
             Hedral::Core::ComPtr<Hedral::Network::INetworkManager> m_NetworkManager;
         };
     }
