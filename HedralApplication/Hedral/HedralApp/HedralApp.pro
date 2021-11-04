@@ -17,7 +17,8 @@ SOURCES += \
         Services/HFMNetworking/NetworkManager.cpp \
         Services/HFMNetworking/NetworkingBase.cpp \
         Services/HFMStatistics/StatisticsBase.cpp \
-        Services/HFMStatistics/StatisticsManager.cpp
+        Services/HFMStatistics/StatisticsManager.cpp \
+        UI/ViewModels/LoginViewModel.cpp
 
 RESOURCES += Resources/qml.qrc \
 
@@ -61,4 +62,5 @@ HEADERS += \
     Services/HFMNetworking/NetworkManager.hpp \
     Services/HFMNetworking/NetworkingBase.hpp \
     Services/HFMStatistics/StatisticsBase.hpp \
-    Services/HFMStatistics/StatisticsManager.hpp
+    Services/HFMStatistics/StatisticsManager.hpp \
+    UI/ViewModels/LoginViewModel.hpp
