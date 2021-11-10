@@ -21,6 +21,11 @@ void AdminLoginViewModel::Email(const QString& email)
     }
 }
 
+void AdminLoginViewModel::Login()
+{
+    qDebug() << "Boton clickeado";
+}
+
 [[nodiscard]]
 QString AdminLoginViewModel::Password() const
 {

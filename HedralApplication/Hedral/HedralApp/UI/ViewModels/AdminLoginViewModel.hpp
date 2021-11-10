@@ -3,6 +3,9 @@
 
 #include <QObject>
 #include <QString>
+#include <qDebug>
+
+#include <QtNetwork>
 
 namespace Hedral
 {
@@ -18,6 +21,7 @@ namespace Hedral
         public:
             explicit AdminLoginViewModel(QObject* parent = nullptr);
 
+            Q_INVOKABLE void Login();
         public:
             [[nodiscard]]
             QString Email() const;

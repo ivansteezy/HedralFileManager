@@ -1,10 +1,13 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QtWidgets/QApplication>
+#include <QQmlContext>
 #include <QtNetwork>
 
 #include "../HFMLogger/Logger.hpp"
 #include "SystemInitializer.hpp"
+
+#include "../../UI/ViewModels/AdminLoginViewModel.hpp"
 
 int main(int argc, char *argv[])
 {
@@ -42,6 +45,11 @@ int main(int argc, char *argv[])
     auto res = netManager->GetResponse();
 
     QQmlApplicationEngine engine;
+
+    //register viewmodels
+    Hedral::UI::AdminLoginViewModel loginViewModel;
+    engine.rootContext()->setContextProperty("loginViewModel", &loginViewModel);
+
     const QUrl url(QStringLiteral("../../Hedral/HedralApp/UI/Views/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {

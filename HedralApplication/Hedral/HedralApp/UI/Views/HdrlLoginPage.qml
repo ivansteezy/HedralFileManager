@@ -96,7 +96,8 @@ Page {
             HdrlButton {
                 text: "Iniciar Sesion"
                 mouseField.onClicked: {
-                    hedarlStackView.push("HdrlHomePage.qml")
+                    // hedarlStackView.push("HdrlHomePage.qml")
+                    loginViewModel.Login();
                 }
             }
 
@@ -152,5 +153,10 @@ Page {
                 }
             }
         }
+    }
+
+    Connections {
+        target: loginViewModel
+
     }
 }
