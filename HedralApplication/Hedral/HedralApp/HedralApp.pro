@@ -18,7 +18,9 @@ SOURCES += \
         Services/HFMNetworking/NetworkingBase.cpp \
         Services/HFMStatistics/StatisticsBase.cpp \
         Services/HFMStatistics/StatisticsManager.cpp \
-        UI/ViewModels/LoginViewModel.cpp
+        UI/ViewModels/LoginViewModel.cpp \
+        UI/ViewModels/RestorePasswordViewModel.cpp \
+        UI/ViewModels/SignUpViewModel.cpp
 
 RESOURCES += Resources/qml.qrc \
 
@@ -63,4 +65,6 @@ HEADERS += \
     Services/HFMNetworking/NetworkingBase.hpp \
     Services/HFMStatistics/StatisticsBase.hpp \
     Services/HFMStatistics/StatisticsManager.hpp \
-    UI/ViewModels/LoginViewModel.hpp
+    UI/ViewModels/LoginViewModel.hpp \
+    UI/ViewModels/RestorePasswordViewModel.hpp \
+    UI/ViewModels/SignUpViewModel.hpp
