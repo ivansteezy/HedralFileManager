@@ -4,11 +4,12 @@ using namespace Hedral::Network;
 
 HEDRAL_IMPLEMENT_CLASSFACTORY(NetworkManager, NetworkManagerImpl, INetworkManager);
 
-NetworkManagerImpl::NetworkManagerImpl() :
+NetworkManagerImpl::NetworkManagerImpl(QObject *parent) :
+    QObject(parent),
     m_endpointPreffix("https://to6klngvgk.execute-api.us-east-2.amazonaws.com"),
     m_endpoint("")
 {
-
+    m_networkAccessManager = new QNetworkAccessManager(this);
 }
 
 NetworkManagerImpl::~NetworkManagerImpl()
@@ -22,30 +23,32 @@ void NetworkManagerImpl::SetEndPoint(const QString& endpoint)
     m_endpoint = m_endpointPreffix + endpoint;
 }
 
-void NetworkManagerImpl::MakeRequest(const HTTPRequest& requestType)
+void NetworkManagerImpl::ReplyFinished(QNetworkReply* reply)
 {
-    QUrl url(m_endpoint);
-    m_networkRequest.setUrl(url);
-    m_networkRequest.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+    qDebug("replyFinished");
+    QByteArray responseData = reply->readAll();
+    qDebug() << "Response: " << QJsonDocument::fromJson(responseData);
+}
 
-    switch (requestType)
-    {
-        case HTTPRequest::Get:  Get();  break;
-        case HTTPRequest::Post: Put();  break;
-        case HTTPRequest::Put:  Post(); break;
-    }
+void NetworkManagerImpl::SlotError(QNetworkReply::NetworkError error)
+{
+    qDebug("slotError");
+}
+
+void NetworkManagerImpl::MakeRequest()
+{
+    connect(m_networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(ReplyFinished(QNetworkReply*)));
+
+    QNetworkRequest request;
+    request.setUrl(QUrl("https://to6klngvgk.execute-api.us-east-2.amazonaws.com/dev/posts/ByNumber/%7Bnumber%7D"));
+
+    QNetworkReply *reply = m_networkAccessManager->get(request);
+    connect(reply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(SlotError(QNetworkReply::NetworkError)));
 }
 
 void NetworkManagerImpl::Get()
 {
-    QNetworkReply* reply = m_networkAccessManager.get(m_networkRequest);
-    Logger->WriteInfo("Sending a GET request to: " + m_endpoint);
 
-    QObject::connect(reply, &QNetworkReply::finished, [=]() {
-       QByteArray responseData = reply->readAll();
-       auto json = JsonSerializer->ByteArrayToJson(responseData);
-       m_response = JsonSerializer->JsonAsMap(json);
-    });
 }
 
 void NetworkManagerImpl::Put()

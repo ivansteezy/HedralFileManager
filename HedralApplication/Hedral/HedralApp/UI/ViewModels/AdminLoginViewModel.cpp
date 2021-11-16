@@ -1,7 +1,7 @@
 #include "AdminLoginViewModel.hpp"
 using namespace Hedral::UI;
 
-AdminLoginViewModel::AdminLoginViewModel(QObject* parent)
+AdminLoginViewModel::AdminLoginViewModel(QObject* parent) : QObject(parent)
 {
 
 }
@@ -23,7 +23,9 @@ void AdminLoginViewModel::Email(const QString& email)
 
 void AdminLoginViewModel::Login()
 {
-    qDebug() << "Boton clickeado";
+    qDebug() << "Haciendo peticion...";
+    auto a = Hedral::Network::GlobalNetworkManager::Instance();
+    a->MakeRequest();
 }
 
 [[nodiscard]]

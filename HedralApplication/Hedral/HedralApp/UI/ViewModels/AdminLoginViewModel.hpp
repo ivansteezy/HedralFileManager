@@ -7,6 +7,8 @@
 
 #include <QtNetwork>
 
+#include "../../Services/HFMNetworking/NetworkingBase.hpp"
+
 namespace Hedral
 {
     namespace UI

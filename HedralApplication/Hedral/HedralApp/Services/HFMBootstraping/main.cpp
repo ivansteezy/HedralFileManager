@@ -18,31 +18,14 @@ int main(int argc, char *argv[])
 
     QApplication app(argc, argv);
 
-    QNetworkRequest req(QUrl("https://to6klngvgk.execute-api.us-east-2.amazonaws.com/dev/posts/ByNumber/%7Bnumber%7D"));
-    req.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-    QNetworkAccessManager nam;
-    QNetworkReply* reply = nam.get(req);
-
-    qDebug() << "Bout to get!";
-    QObject::connect(reply, &QNetworkReply::finished, [&]() {
-        QByteArray responseData = reply->readAll();
-        qDebug() << "Got response: !!!!!!!!!!!!!!" << QJsonDocument::fromJson(responseData);
-        reply->close();
-        reply->deleteLater();
-     });
-
     auto systemInitializer = Hedral::Bootstraping::SystemInitializer::CreateInstance();
     systemInitializer->Initialize();
 
+    //Test logger
     auto logger = Hedral::Log::GlobalLogger::Instance();
     logger->WriteInfo("Initializing logger!");
     logger->WriteError("Initializing logger!");
     logger->WriteWarning("Initializing logger!");
-
-    auto netManager = Hedral::Network::GlobalNetworkManager::Instance();
-    netManager->SetEndPoint("/dev/posts/ByNumber/%7Bnumber%7D");
-    netManager->MakeRequest(Hedral::Network::HTTPRequest::Get);
-    auto res = netManager->GetResponse();
 
     QQmlApplicationEngine engine;
 
