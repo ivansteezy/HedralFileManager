@@ -39,3 +39,5 @@ compile_commands.json
 
 
 HedralApplication/Hedral/HedralLog.txt
+
+node_modules/

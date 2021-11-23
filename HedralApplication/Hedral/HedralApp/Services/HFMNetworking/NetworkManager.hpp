@@ -29,11 +29,17 @@ namespace Hedral
             virtual ~NetworkManagerImpl();
 
             virtual void SetEndPoint(const QString& endpoint) override;
-            virtual void MakeRequest() override;
+            virtual bool Get() override;
+            virtual bool Put() override;
+            virtual bool Post() override;
             virtual QVariant GetResponse() const override;
 
             virtual QObject* AsQtObject() override;
             virtual const QMetaObject* MetaObject() override;
+
+        private:
+            void SetResponse(const QByteArray& response);
+            void SerializeResponse();
 
         public slots:
             void ReplyFinished(QNetworkReply* reply);
@@ -41,16 +47,11 @@ namespace Hedral
 
         signals:
 
-        public:
-            void Get();
-            void Put();
-            void Post();
-
         private:
             QNetworkAccessManager* m_networkAccessManager;
-            QNetworkRequest m_networkRequest;
             QString m_endpointPreffix;
-            QVariant m_response;
+            QByteArray m_response;
+            QVariant m_responseMap;
             QString m_endpoint;
         };
     }

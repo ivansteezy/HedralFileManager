@@ -25,9 +25,14 @@ void NetworkManagerImpl::SetEndPoint(const QString& endpoint)
 
 void NetworkManagerImpl::ReplyFinished(QNetworkReply* reply)
 {
-    qDebug("replyFinished");
     QByteArray responseData = reply->readAll();
-    qDebug() << "Response: " << QJsonDocument::fromJson(responseData);
+    auto json = QJsonDocument::fromJson(responseData);
+
+    qDebug() << "Response as string: " << QJsonDocument::fromJson(responseData);
+
+    qDebug() << "value of the key body: " << json.toVariant();
+    SetResponse(responseData);
+    SerializeResponse();
 }
 
 void NetworkManagerImpl::SlotError(QNetworkReply::NetworkError error)
@@ -35,7 +40,7 @@ void NetworkManagerImpl::SlotError(QNetworkReply::NetworkError error)
     qDebug("slotError");
 }
 
-void NetworkManagerImpl::MakeRequest()
+bool NetworkManagerImpl::Get()
 {
     connect(m_networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(ReplyFinished(QNetworkReply*)));
 
@@ -43,27 +48,34 @@ void NetworkManagerImpl::MakeRequest()
     request.setUrl(QUrl("https://to6klngvgk.execute-api.us-east-2.amazonaws.com/dev/posts/ByNumber/%7Bnumber%7D"));
 
     QNetworkReply *reply = m_networkAccessManager->get(request);
-    connect(reply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(SlotError(QNetworkReply::NetworkError)));
+    // connect(reply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(SlotError(QNetworkReply::NetworkError)));
+    return true;
 }
 
-void NetworkManagerImpl::Get()
+bool NetworkManagerImpl::Put()
 {
-
+    return false;
 }
 
-void NetworkManagerImpl::Put()
+bool NetworkManagerImpl::Post()
 {
-
+    return false;
 }
 
-void NetworkManagerImpl::Post()
+void NetworkManagerImpl::SetResponse(const QByteArray& response)
 {
+    m_response = response;
+}
 
+void NetworkManagerImpl::SerializeResponse()
+{
+    auto json = JsonSerializer->ByteArrayToJson(m_response);
+    m_responseMap = JsonSerializer->JsonAsMap(json);
 }
 
 QVariant NetworkManagerImpl::GetResponse() const
 {
-    return m_response;
+    return m_responseMap;
 }
 
 QObject* NetworkManagerImpl::AsQtObject()
