@@ -4,15 +4,19 @@ using namespace Hedral::UI;
 
 LoginViewModel::LoginViewModel(QObject* parent)
 {
-
+    InitializeManager();
 }
 
+void LoginViewModel::InitializeManager()
+{
+    m_hedralManager = new Network::NetworkManagerImpl();
+}
 void LoginViewModel::LogIn()
 {
-    auto a = new Network::NetworkManagerImpl();
-    connect(a, SIGNAL(ResponseArrived(QByteArray)), this, SLOT(UpdateResponse(QByteArray)));
+    // auto a = new Network::NetworkManagerImpl();
+    connect(m_hedralManager, SIGNAL(ResponseArrived(QByteArray)), this, SLOT(UpdateResponse(QByteArray)));
     qDebug() << "Haciendo peticion...";
-    a->Get();
+    m_hedralManager->Get();
 }
 
 bool LoginViewModel::VerifyData()

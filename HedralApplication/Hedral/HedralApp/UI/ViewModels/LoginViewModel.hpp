@@ -40,6 +40,9 @@ namespace Hedral
             QByteArray Response() const;
             void Response(const QByteArray& response);
 
+        private:
+            void InitializeManager();
+
         signals:
             void EmailChanged();
             void PasswordChanged();
@@ -52,7 +55,7 @@ namespace Hedral
             QString m_email;
             QString m_password;
             QByteArray m_response;
-
+            Network::NetworkManagerImpl* m_hedralManager;
             bool m_isCorrectlyLogged;
         };
     }
