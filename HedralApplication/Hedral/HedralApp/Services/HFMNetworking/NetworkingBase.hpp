@@ -21,8 +21,8 @@ namespace Hedral
         {
             HEDRAL_DECLARE_INTERFACE(INetworkManager, "INetworkManager")
 
+            virtual QByteArray GetResponse() const = 0;
             virtual void SetEndPoint(const QString& endpoint) = 0;
-            virtual QVariant GetResponse() const = 0;
             virtual bool Post() = 0;
             virtual bool Get() = 0;
             virtual bool Put() = 0;

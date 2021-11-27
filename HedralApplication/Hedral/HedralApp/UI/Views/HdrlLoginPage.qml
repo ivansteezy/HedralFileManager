@@ -97,7 +97,7 @@ Page {
                 text: "Iniciar Sesion"
                 mouseField.onClicked: {
                     // hedarlStackView.push("HdrlHomePage.qml")
-                    loginViewModel.Login();
+                    loginViewModel.LogIn();
                 }
             }
 

@@ -7,7 +7,7 @@
 #include "../HFMLogger/Logger.hpp"
 #include "SystemInitializer.hpp"
 
-#include "../../UI/ViewModels/AdminLoginViewModel.hpp"
+#include "../../UI/ViewModels/LoginViewModel.hpp"
 
 int main(int argc, char *argv[])
 {
@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
 
     //register viewmodels
-    Hedral::UI::AdminLoginViewModel loginViewModel;
+    Hedral::UI::LoginViewModel loginViewModel;
     engine.rootContext()->setContextProperty("loginViewModel", &loginViewModel);
 
     const QUrl url(QStringLiteral("../../Hedral/HedralApp/UI/Views/main.qml"));

@@ -23,12 +23,7 @@ void AdminLoginViewModel::Email(const QString& email)
 
 void AdminLoginViewModel::Login()
 {
-    auto a = Hedral::Network::GlobalNetworkManager::Instance();
-    qDebug() << "Haciendo peticion...";
-    a->Get();
 
-    qDebug() << "print as map";
-    qDebug() << a->GetResponse();
 }
 
 [[nodiscard]]

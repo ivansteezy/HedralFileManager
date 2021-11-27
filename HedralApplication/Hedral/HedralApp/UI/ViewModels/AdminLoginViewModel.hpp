@@ -20,6 +20,8 @@ namespace Hedral
             Q_PROPERTY(QString email READ Email WRITE Email NOTIFY EmailChanged);
             Q_PROPERTY(QString password READ Password WRITE Password NOTIFY PasswordChanged);
 
+            HEDRAL_DEPENDENCY(Network::INetworkManager*, NetworkManager, Network, NetworkManager);
+
         public:
             explicit AdminLoginViewModel(QObject* parent = nullptr);
 

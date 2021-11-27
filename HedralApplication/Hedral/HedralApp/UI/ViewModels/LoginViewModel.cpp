@@ -9,7 +9,11 @@ LoginViewModel::LoginViewModel(QObject* parent)
 
 void LoginViewModel::LogIn()
 {
+    qDebug() << "Haciendo peticion...";
+    NetworkManager->Get();
 
+    qDebug() << "print as map";
+    qDebug() << NetworkManager->GetResponse();
 }
 
 bool LoginViewModel::VerifyData()
@@ -44,5 +48,19 @@ void LoginViewModel::Password(const QString& password)
     {
         m_password = password;
         emit PasswordChanged();
+    }
+}
+
+QByteArray LoginViewModel::Response() const
+{
+    return m_response;
+}
+
+void LoginViewModel::Response(const QByteArray &response)
+{
+    if(response != m_response)
+    {
+        m_response = response;
+        emit ResponseChanged();
     }
 }

@@ -3,6 +3,9 @@
 
 #include <QObject>
 #include <QString>
+#include <QByteArray>
+
+#include "../../Services/HFMNetworking/NetworkingBase.hpp"
 
 namespace Hedral
 {
@@ -14,6 +17,9 @@ namespace Hedral
 
             Q_PROPERTY(QString email READ Email WRITE Email NOTIFY EmailChanged);
             Q_PROPERTY(QString password READ Password WRITE Password NOTIFY PasswordChanged);
+            Q_PROPERTY(QByteArray response READ Response WRITE Response NOTIFY ResponseChanged);
+
+            HEDRAL_DEPENDENCY(Network::INetworkManager*, NetworkManager, Network, NetworkManager);
 
         public:
             explicit LoginViewModel(QObject* parent = nullptr);
@@ -30,15 +36,21 @@ namespace Hedral
             QString Password() const;
             void Password(const QString& email);
 
+            [[nodiscard]]
+            QByteArray Response() const;
+            void Response(const QByteArray& response);
+
         signals:
             void EmailChanged();
             void PasswordChanged();
+            void ResponseChanged();
 
         public slots:
 
         private:
             QString m_email;
             QString m_password;
+            QByteArray m_response;
 
             bool m_isCorrectlyLogged;
         };

@@ -32,10 +32,11 @@ namespace Hedral
             virtual bool Get() override;
             virtual bool Put() override;
             virtual bool Post() override;
-            virtual QVariant GetResponse() const override;
 
             virtual QObject* AsQtObject() override;
             virtual const QMetaObject* MetaObject() override;
+
+            virtual QByteArray GetResponse() const override;
 
         private:
             void SetResponse(const QByteArray& response);
