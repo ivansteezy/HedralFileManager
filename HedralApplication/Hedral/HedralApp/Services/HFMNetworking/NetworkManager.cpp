@@ -29,11 +29,9 @@ void NetworkManagerImpl::ReplyFinished(QNetworkReply* reply)
     m_response = responseData;
 
     emit ResponseArrived(m_response);
-    // auto json = QJsonDocument::fromJson(responseData);
 
     QVariant statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
     qDebug() << "Status code: " << statusCode;
-    qDebug() << "Response as QJsonDocument: " << QJsonDocument::fromJson(responseData);
 
     SetResponse(responseData);
 }
@@ -51,7 +49,8 @@ bool NetworkManagerImpl::Get()
     request.setUrl(QUrl("https://q3pc77iipi.execute-api.us-east-2.amazonaws.com/dev/Files/hedral-level3"));
 
     QNetworkReply *reply = m_networkAccessManager->get(request);
-    // connect(reply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(SlotError(QNetworkReply::NetworkError)));
+    // connect(reply, SIGNAL(SlotError(QNetworkReply::NetworkError)), this, SLOT(SlotError(QNetworkReply::NetworkError)));
+
     return true;
 }
 
@@ -73,8 +72,7 @@ void NetworkManagerImpl::SetResponse(const QByteArray& response)
 
 void NetworkManagerImpl::SerializeResponse()
 {
-//    auto json = JsonSerializer->ByteArrayToJson(m_response);
-//    m_responseMap = JsonSerializer->JsonAsMap(json);
+
 }
 
 QByteArray NetworkManagerImpl::GetResponse() const

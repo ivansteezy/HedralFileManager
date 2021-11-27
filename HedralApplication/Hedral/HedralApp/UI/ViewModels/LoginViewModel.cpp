@@ -11,12 +11,8 @@ void LoginViewModel::LogIn()
 {
     auto a = new Network::NetworkManagerImpl();
     connect(a, SIGNAL(ResponseArrived(QByteArray)), this, SLOT(UpdateResponse(QByteArray)));
-
     qDebug() << "Haciendo peticion...";
     a->Get();
-
-    qDebug() << "print as map";
-    qDebug() << a->GetResponse();
 }
 
 bool LoginViewModel::VerifyData()
