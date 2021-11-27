@@ -5,7 +5,7 @@
 #include <QString>
 #include <QByteArray>
 
-#include "../../Services/HFMNetworking/NetworkingBase.hpp"
+#include "../../Services/HFMNetworking/NetworkManager.hpp"
 
 namespace Hedral
 {
@@ -46,6 +46,7 @@ namespace Hedral
             void ResponseChanged();
 
         public slots:
+            void UpdateResponse(QByteArray response);
 
         private:
             QString m_email;

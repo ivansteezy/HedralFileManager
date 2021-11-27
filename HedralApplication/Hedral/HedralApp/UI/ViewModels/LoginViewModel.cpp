@@ -9,11 +9,14 @@ LoginViewModel::LoginViewModel(QObject* parent)
 
 void LoginViewModel::LogIn()
 {
+    auto a = new Network::NetworkManagerImpl();
+    connect(a, SIGNAL(ResponseArrived(QByteArray)), this, SLOT(UpdateResponse(QByteArray)));
+
     qDebug() << "Haciendo peticion...";
-    NetworkManager->Get();
+    a->Get();
 
     qDebug() << "print as map";
-    qDebug() << NetworkManager->GetResponse();
+    qDebug() << a->GetResponse();
 }
 
 bool LoginViewModel::VerifyData()
@@ -63,4 +66,10 @@ void LoginViewModel::Response(const QByteArray &response)
         m_response = response;
         emit ResponseChanged();
     }
+}
+
+void LoginViewModel::UpdateResponse(QByteArray response)
+{
+    qDebug() << "ha llegado! " << response;
+    Response(response);
 }

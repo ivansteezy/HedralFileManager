@@ -27,6 +27,8 @@ void NetworkManagerImpl::ReplyFinished(QNetworkReply* reply)
 {
     QByteArray responseData = reply->readAll();
     m_response = responseData;
+
+    emit ResponseArrived(m_response);
     // auto json = QJsonDocument::fromJson(responseData);
 
     QVariant statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
@@ -66,6 +68,7 @@ bool NetworkManagerImpl::Post()
 void NetworkManagerImpl::SetResponse(const QByteArray& response)
 {
     m_response = response;
+    emit ResponseArrived(response);
 }
 
 void NetworkManagerImpl::SerializeResponse()

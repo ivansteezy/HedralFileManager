@@ -47,6 +47,7 @@ namespace Hedral
             void SlotError(QNetworkReply::NetworkError error);
 
         signals:
+            void ResponseArrived(QByteArray response);
 
         private:
             QNetworkAccessManager* m_networkAccessManager;
