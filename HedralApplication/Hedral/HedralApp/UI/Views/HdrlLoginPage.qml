@@ -157,14 +157,20 @@ Page {
         }
     }
 
+    function qmlUpdateObject( data ){
+        var obj = JSON.parse(data)
+        console.log(obj);
+    }
+
     Connections {
         target: loginViewModel
 
         onResponseChanged: {
-           dataJson = loginViewModel.response;
+            var jsonString = JSON.stringify(JSON.parse(loginViewModel.response)); //json as string
+            var jsonObject = JSON.parse(jsonString);
 
-
-           console.log("el response es: ");
+            var size = jsonObject.Contents[0].Key
+            console.log(size)
         }
     }
 }

@@ -28,12 +28,10 @@ void NetworkManagerImpl::ReplyFinished(QNetworkReply* reply)
     QByteArray responseData = reply->readAll();
     m_response = responseData;
 
-    emit ResponseArrived(m_response);
-
     QVariant statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
     qDebug() << "Status code: " << statusCode;
-
     SetResponse(responseData);
+    emit ResponseArrived(m_response);
 }
 
 void NetworkManagerImpl::SlotError(QNetworkReply::NetworkError error)
