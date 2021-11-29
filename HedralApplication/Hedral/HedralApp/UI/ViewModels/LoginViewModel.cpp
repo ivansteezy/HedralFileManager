@@ -11,11 +11,12 @@ void LoginViewModel::InitializeManager()
 {
     m_hedralManager = new Network::NetworkManagerImpl();
 }
+
 void LoginViewModel::LogIn()
 {
     // auto a = new Network::NetworkManagerImpl();
     connect(m_hedralManager, SIGNAL(ResponseArrived(QByteArray)), this, SLOT(UpdateResponse(QByteArray)));
-    qDebug() << "Haciendo peticion...";
+    // qDebug() << "Haciendo peticion...";
     m_hedralManager->Get();
 }
 
@@ -70,6 +71,6 @@ void LoginViewModel::Response(const QByteArray &response)
 
 void LoginViewModel::UpdateResponse(QByteArray response)
 {
-    qDebug() << "ha llegado! " << response;
+    // qDebug() << "ha llegado! " << response;
     Response(response);
 }

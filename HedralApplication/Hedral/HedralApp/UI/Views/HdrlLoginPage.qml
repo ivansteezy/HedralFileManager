@@ -20,6 +20,8 @@ Page {
         source: "../../Resources/fonts/Inter-Bold.ttf"
     }
 
+    property var dataJson;
+
     //    Rectangle {
     //        id: iconRect
     //        width: parent.width
@@ -158,5 +160,11 @@ Page {
     Connections {
         target: loginViewModel
 
+        onResponseChanged: {
+           dataJson = loginViewModel.response;
+
+
+           console.log("el response es: ");
+        }
     }
 }
