@@ -157,11 +157,6 @@ Page {
         }
     }
 
-    function qmlUpdateObject( data ){
-        var obj = JSON.parse(data)
-        console.log(obj);
-    }
-
     Connections {
         target: loginViewModel
 
