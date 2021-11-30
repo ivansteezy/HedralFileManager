@@ -4,6 +4,11 @@
 #include <QUrl>
 #include <QtNetwork>
 #include <QJsonDocument>
+#include <QObject>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QNetworkRequest>
+#include <QJsonDocument>
 
 #include "NetworkingBase.hpp"
 #include "../HFMLogger/LoggerBase.hpp"
@@ -20,26 +25,35 @@ namespace Hedral
             HEDRAL_DEPENDENCY(Network::IJsonSerializer*, JsonSerializer, Network, JsonSerializer);
 
         public:
-            NetworkManagerImpl();
+            explicit NetworkManagerImpl(QObject* parent = 0);
             virtual ~NetworkManagerImpl();
 
             virtual void SetEndPoint(const QString& endpoint) override;
-            virtual void MakeRequest(const HTTPRequest& requestType) override;
-            virtual QVariant GetResponse() const override;
+            virtual bool Get() override;
+            virtual bool Put() override;
+            virtual bool Post() override;
 
             virtual QObject* AsQtObject() override;
             virtual const QMetaObject* MetaObject() override;
 
-        public:
-            void Get();
-            void Put();
-            void Post();
+            virtual QByteArray GetResponse() const override;
 
         private:
-            QNetworkAccessManager m_networkAccessManager;
-            QNetworkRequest m_networkRequest;
+            void SetResponse(const QByteArray& response);
+            void SerializeResponse();
+
+        public slots:
+            void ReplyFinished(QNetworkReply* reply);
+            void SlotError(QNetworkReply::NetworkError error);
+
+        signals:
+            void ResponseArrived(QByteArray response);
+
+        private:
+            QNetworkAccessManager* m_networkAccessManager;
             QString m_endpointPreffix;
-            QVariant m_response;
+            QByteArray m_response;
+            QVariant m_responseMap;
             QString m_endpoint;
         };
     }

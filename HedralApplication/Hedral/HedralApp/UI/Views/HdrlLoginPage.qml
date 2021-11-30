@@ -20,6 +20,8 @@ Page {
         source: "../../Resources/fonts/Inter-Bold.ttf"
     }
 
+    property var dataJson;
+
     //    Rectangle {
     //        id: iconRect
     //        width: parent.width
@@ -96,7 +98,8 @@ Page {
             HdrlButton {
                 text: "Iniciar Sesion"
                 mouseField.onClicked: {
-                    hedarlStackView.push("HdrlHomePage.qml")
+                    // hedarlStackView.push("HdrlHomePage.qml")
+                    loginViewModel.LogIn();
                 }
             }
 
@@ -151,6 +154,23 @@ Page {
                     }
                 }
             }
+        }
+    }
+
+    function qmlUpdateObject( data ){
+        var obj = JSON.parse(data)
+        console.log(obj);
+    }
+
+    Connections {
+        target: loginViewModel
+
+        onResponseChanged: {
+            var jsonString = JSON.stringify(JSON.parse(loginViewModel.response)); //json as string
+            var jsonObject = JSON.parse(jsonString);
+
+            var size = jsonObject.Contents[0].Key
+            console.log(size)
         }
     }
 }

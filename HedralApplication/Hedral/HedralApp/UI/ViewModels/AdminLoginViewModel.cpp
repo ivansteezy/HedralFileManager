@@ -1,7 +1,7 @@
 #include "AdminLoginViewModel.hpp"
 using namespace Hedral::UI;
 
-AdminLoginViewModel::AdminLoginViewModel(QObject* parent)
+AdminLoginViewModel::AdminLoginViewModel(QObject* parent) : QObject(parent)
 {
 
 }
@@ -19,6 +19,11 @@ void AdminLoginViewModel::Email(const QString& email)
         m_email = email;
         emit EmailChanged();
     }
+}
+
+void AdminLoginViewModel::Login()
+{
+
 }
 
 [[nodiscard]]

@@ -4,11 +4,12 @@ using namespace Hedral::Network;
 
 HEDRAL_IMPLEMENT_CLASSFACTORY(NetworkManager, NetworkManagerImpl, INetworkManager);
 
-NetworkManagerImpl::NetworkManagerImpl() :
-    m_endpointPreffix("https://to6klngvgk.execute-api.us-east-2.amazonaws.com"),
+NetworkManagerImpl::NetworkManagerImpl(QObject *parent) :
+    QObject(parent),
+    m_endpointPreffix("https://q3pc77iipi.execute-api.us-east-2.amazonaws.com/dev/Files/hedral-level3"),
     m_endpoint("")
 {
-
+    m_networkAccessManager = new QNetworkAccessManager(this);
 }
 
 NetworkManagerImpl::~NetworkManagerImpl()
@@ -22,43 +23,57 @@ void NetworkManagerImpl::SetEndPoint(const QString& endpoint)
     m_endpoint = m_endpointPreffix + endpoint;
 }
 
-void NetworkManagerImpl::MakeRequest(const HTTPRequest& requestType)
+void NetworkManagerImpl::ReplyFinished(QNetworkReply* reply)
 {
-    QUrl url(m_endpoint);
-    m_networkRequest.setUrl(url);
-    m_networkRequest.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+    QByteArray responseData = reply->readAll();
+    m_response = responseData;
 
-    switch (requestType)
-    {
-        case HTTPRequest::Get:  Get();  break;
-        case HTTPRequest::Post: Put();  break;
-        case HTTPRequest::Put:  Post(); break;
-    }
+    QVariant statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
+    qDebug() << "Status code: " << statusCode;
+    SetResponse(responseData);
+    emit ResponseArrived(m_response);
 }
 
-void NetworkManagerImpl::Get()
+void NetworkManagerImpl::SlotError(QNetworkReply::NetworkError error)
 {
-    QNetworkReply* reply = m_networkAccessManager.get(m_networkRequest);
-    Logger->WriteInfo("Sending a GET request to: " + m_endpoint);
-
-    QObject::connect(reply, &QNetworkReply::finished, [=]() {
-       QByteArray responseData = reply->readAll();
-       auto json = JsonSerializer->ByteArrayToJson(responseData);
-       m_response = JsonSerializer->JsonAsMap(json);
-    });
+    qDebug("slotError");
 }
 
-void NetworkManagerImpl::Put()
+bool NetworkManagerImpl::Get()
+{
+    connect(m_networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(ReplyFinished(QNetworkReply*)));
+
+    QNetworkRequest request;
+    request.setUrl(QUrl("https://q3pc77iipi.execute-api.us-east-2.amazonaws.com/dev/Files/hedral-level3"));
+
+    QNetworkReply *reply = m_networkAccessManager->get(request);
+    // connect(reply, SIGNAL(SlotError(QNetworkReply::NetworkError)), this, SLOT(SlotError(QNetworkReply::NetworkError)));
+
+    return true;
+}
+
+bool NetworkManagerImpl::Put()
+{
+    return false;
+}
+
+bool NetworkManagerImpl::Post()
+{
+    return false;
+}
+
+void NetworkManagerImpl::SetResponse(const QByteArray& response)
+{
+    m_response = response;
+    emit ResponseArrived(response);
+}
+
+void NetworkManagerImpl::SerializeResponse()
 {
 
 }
 
-void NetworkManagerImpl::Post()
-{
-
-}
-
-QVariant NetworkManagerImpl::GetResponse() const
+QByteArray NetworkManagerImpl::GetResponse() const
 {
     return m_response;
 }

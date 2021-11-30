@@ -3,6 +3,11 @@
 
 #include <QObject>
 #include <QString>
+#include <qDebug>
+
+#include <QtNetwork>
+
+#include "../../Services/HFMNetworking/NetworkingBase.hpp"
 
 namespace Hedral
 {
@@ -15,9 +20,12 @@ namespace Hedral
             Q_PROPERTY(QString email READ Email WRITE Email NOTIFY EmailChanged);
             Q_PROPERTY(QString password READ Password WRITE Password NOTIFY PasswordChanged);
 
+            HEDRAL_DEPENDENCY(Network::INetworkManager*, NetworkManager, Network, NetworkManager);
+
         public:
             explicit AdminLoginViewModel(QObject* parent = nullptr);
 
+            Q_INVOKABLE void Login();
         public:
             [[nodiscard]]
             QString Email() const;
