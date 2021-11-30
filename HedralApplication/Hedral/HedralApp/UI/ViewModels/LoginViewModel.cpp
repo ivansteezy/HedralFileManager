@@ -14,9 +14,7 @@ void LoginViewModel::InitializeManager()
 
 void LoginViewModel::LogIn()
 {
-    // auto a = new Network::NetworkManagerImpl();
     connect(m_hedralManager, SIGNAL(ResponseArrived(QByteArray)), this, SLOT(UpdateResponse(QByteArray)));
-    // qDebug() << "Haciendo peticion...";
     m_hedralManager->Get();
 }
 
@@ -69,8 +67,21 @@ void LoginViewModel::Response(const QByteArray &response)
     }
 }
 
+int LoginViewModel::StatusCode() const
+{
+    return m_statusCode;
+}
+
+void LoginViewModel::StatusCode(const int &statusCode)
+{
+    if(statusCode != m_statusCode)
+    {
+        m_statusCode = statusCode;
+        emit StatusCodeChanged();
+    }
+}
+
 void LoginViewModel::UpdateResponse(QByteArray response)
 {
-    // qDebug() << "ha llegado! " << response;
     Response(response);
 }

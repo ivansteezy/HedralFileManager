@@ -83,3 +83,31 @@ void SignUpViewModel::Level(const QString& level)
         emit LevelChanged();
     }
 }
+
+QByteArray SignUpViewModel::Response() const
+{
+    return m_response;
+}
+
+void SignUpViewModel::Response(const QByteArray &response)
+{
+    if(response != m_response)
+    {
+        m_response = response;
+        emit ResponseChanged();
+    }
+}
+
+int SignUpViewModel::StatusCode() const
+{
+    return m_statusCode;
+}
+
+void SignUpViewModel::StatusCode(const int &statusCode)
+{
+    if(statusCode != m_statusCode)
+    {
+        m_statusCode = statusCode;
+        emit StatusCodeChanged();
+    }
+}

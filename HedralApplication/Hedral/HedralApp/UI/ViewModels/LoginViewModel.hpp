@@ -18,6 +18,7 @@ namespace Hedral
             Q_PROPERTY(QString email READ Email WRITE Email NOTIFY EmailChanged);
             Q_PROPERTY(QString password READ Password WRITE Password NOTIFY PasswordChanged);
             Q_PROPERTY(QByteArray response READ Response WRITE Response NOTIFY ResponseChanged);
+            Q_PROPERTY(int statusCode READ StatusCode WRITE StatusCode NOTIFY StatusCodeChanged);
 
             HEDRAL_DEPENDENCY(Network::INetworkManager*, NetworkManager, Network, NetworkManager);
 
@@ -40,6 +41,10 @@ namespace Hedral
             QByteArray Response() const;
             void Response(const QByteArray& response);
 
+            [[nodiscard]]
+            int StatusCode() const;
+            void StatusCode(const int& statusCode);
+
         private:
             void InitializeManager();
 
@@ -47,6 +52,7 @@ namespace Hedral
             void EmailChanged();
             void PasswordChanged();
             void ResponseChanged();
+            void StatusCodeChanged();
 
         public slots:
             void UpdateResponse(QByteArray response);
@@ -55,6 +61,7 @@ namespace Hedral
             QString m_email;
             QString m_password;
             QByteArray m_response;
+            int m_statusCode;
             Network::NetworkManagerImpl* m_hedralManager;
             bool m_isCorrectlyLogged;
         };

@@ -29,7 +29,7 @@ void NetworkManagerImpl::ReplyFinished(QNetworkReply* reply)
     m_response = responseData;
 
     QVariant statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
-    qDebug() << "Status code: " << statusCode;
+    qDebug() << "Status code: " << statusCode.toInt();
     SetResponse(responseData);
     emit ResponseArrived(m_response);
 }
