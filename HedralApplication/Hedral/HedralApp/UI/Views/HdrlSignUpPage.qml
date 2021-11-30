@@ -173,8 +173,8 @@ Page {
                 model: ["Nivel 1", "Nivel 2", "Nivel 3"]
                 checkedColor: "#727CF5"
                 onCurrentIndexChanged: {
-                    console.log("Se selecciono " + model[currentIndex])
-                    signUpViewModel.level = model[currentIndex];
+                    const level = model[currentIndex];
+                    signUpViewModel.level = level.substr(level.length - 1);
                 }
             }
         }
@@ -185,7 +185,6 @@ Page {
             Layout.alignment: Qt.AlignHCenter
             text: "Registrarse"
             mouseField.onClicked: {
-                // console.log("Ir a homepage!");
                 // hedarlStackView.push("HdrlVerifyAccountPage.qml")
                 signUpViewModel.SignUp();
             }

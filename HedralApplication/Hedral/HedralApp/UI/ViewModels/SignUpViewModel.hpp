@@ -63,6 +63,9 @@ namespace Hedral
             int StatusCode() const;
             void StatusCode(const int& statusCode);
 
+        private:
+            QString BuildEndpoint();
+
         signals:
             void NameChanged();
             void LastNameChanged();

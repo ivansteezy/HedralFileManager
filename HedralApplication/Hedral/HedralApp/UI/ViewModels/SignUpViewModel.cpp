@@ -14,6 +14,8 @@ void SignUpViewModel::SignUp()
     qDebug() << "Level: " << m_level;
     qDebug() << "Password: " << m_password;
     qDebug() << "Confirm Password: " << m_confirmPassword;
+
+    auto endpoint = BuildEndpoint();
 }
 
 [[nodiscard]]
@@ -21,7 +23,6 @@ QString SignUpViewModel::Name() const
 {
     return m_name;
 }
-
 
 void SignUpViewModel::Name(const QString& name)
 {
@@ -132,4 +133,17 @@ void SignUpViewModel::StatusCode(const int &statusCode)
         m_statusCode = statusCode;
         emit StatusCodeChanged();
     }
+}
+
+QString SignUpViewModel::BuildEndpoint()
+{
+    QString endpoint = QString("https://q3pc77iipi.execute-api.us-east-2.amazonaws.com/dev/SignUp/proxy?email=%1&password=%2&name=%3&familyName=%4&level=%5")
+            .arg(Email())
+            .arg(Password())
+            .arg(Name())
+            .arg(LastName())
+            .arg(Level());
+
+    qDebug() << endpoint;
+    return endpoint;
 }
