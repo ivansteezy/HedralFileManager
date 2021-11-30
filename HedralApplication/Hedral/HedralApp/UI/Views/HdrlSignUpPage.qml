@@ -46,6 +46,10 @@ Page {
                     color: "#EDEFF2"
                     radius: 10
                 }
+                onTextChanged: {
+                    signUpViewModel.email = text;
+                }
+
                 verticalAlignment: TextInput.AlignVCenter
             }
         }
@@ -68,6 +72,9 @@ Page {
                     color: "#EDEFF2"
                     radius: 10
                 }
+                onTextChanged: {
+                    signUpViewModel.name = text;
+                }
                 verticalAlignment: TextInput.AlignVCenter
             }
         }
@@ -89,6 +96,9 @@ Page {
                 background: Rectangle {
                     color: "#EDEFF2"
                     radius: 10
+                }
+                onTextChanged: {
+                    signUpViewModel.lastName = text;
                 }
                 verticalAlignment: TextInput.AlignVCenter
             }
@@ -113,6 +123,9 @@ Page {
                     color: "#EDEFF2"
                     radius: 10
                 }
+                onTextChanged: {
+                    signUpViewModel.password = text;
+                }
                 verticalAlignment: TextInput.AlignVCenter
             }
         }
@@ -136,6 +149,9 @@ Page {
                     color: "#EDEFF2"
                     radius: 10
                 }
+                onTextChanged: {
+                    signUpViewModel.confirmPassword = text;
+                }
                 verticalAlignment: TextInput.AlignVCenter
             }
         }
@@ -158,6 +174,7 @@ Page {
                 checkedColor: "#727CF5"
                 onCurrentIndexChanged: {
                     console.log("Se selecciono " + model[currentIndex])
+                    signUpViewModel.level = model[currentIndex];
                 }
             }
         }
@@ -168,8 +185,9 @@ Page {
             Layout.alignment: Qt.AlignHCenter
             text: "Registrarse"
             mouseField.onClicked: {
-                console.log("Ir a homepage!");
-                hedarlStackView.push("HdrlVerifyAccountPage.qml")
+                // console.log("Ir a homepage!");
+                // hedarlStackView.push("HdrlVerifyAccountPage.qml")
+                signUpViewModel.SignUp();
             }
         }
 
@@ -192,5 +210,10 @@ Page {
                 }
             }
         }
+    }
+
+    Connections {
+        target: signUpViewModel
+
     }
 }

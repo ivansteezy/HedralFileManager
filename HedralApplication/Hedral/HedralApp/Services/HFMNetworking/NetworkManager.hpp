@@ -37,9 +37,11 @@ namespace Hedral
             virtual const QMetaObject* MetaObject() override;
 
             virtual QByteArray GetResponse() const override;
+            virtual int GetStatusCode() const override;
 
         private:
             void SetResponse(const QByteArray& response);
+            void SetStatusCode(const int& statusCode);
             void SerializeResponse();
 
         public slots:
@@ -55,6 +57,7 @@ namespace Hedral
             QByteArray m_response;
             QVariant m_responseMap;
             QString m_endpoint;
+            int m_statusCode;
         };
     }
 }

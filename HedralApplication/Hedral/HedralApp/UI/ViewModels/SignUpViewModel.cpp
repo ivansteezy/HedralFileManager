@@ -1,11 +1,19 @@
 #include "SignUpViewModel.hpp"
 using namespace Hedral::UI;
 
-
-
 SignUpViewModel::SignUpViewModel(QObject* parent)
 {
 
+}
+
+void SignUpViewModel::SignUp()
+{
+    qDebug() << "Email: " << m_email;
+    qDebug() << "Name: " << m_name;
+    qDebug() << "Last name: " << m_lastName;
+    qDebug() << "Level: " << m_level;
+    qDebug() << "Password: " << m_password;
+    qDebug() << "Confirm Password: " << m_confirmPassword;
 }
 
 [[nodiscard]]
@@ -66,6 +74,20 @@ void SignUpViewModel::ConfirmPassword(const QString& confirmPassword)
     {
         m_confirmPassword = confirmPassword;
         emit ConfirmPasswordChanged();
+    }
+}
+
+QString SignUpViewModel::Email() const
+{
+    return m_email;
+}
+
+void SignUpViewModel::Email(const QString &email)
+{
+    if(email != m_email)
+    {
+        m_email = email;
+        emit EmailChanged();
     }
 }
 

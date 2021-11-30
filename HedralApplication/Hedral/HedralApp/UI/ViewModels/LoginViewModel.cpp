@@ -14,8 +14,10 @@ void LoginViewModel::InitializeManager()
 
 void LoginViewModel::LogIn()
 {
-    connect(m_hedralManager, SIGNAL(ResponseArrived(QByteArray)), this, SLOT(UpdateResponse(QByteArray)));
-    m_hedralManager->Get();
+    //connect(m_hedralManager, SIGNAL(ResponseArrived(QByteArray)), this, SLOT(UpdateResponse(QByteArray)));
+    //m_hedralManager->SetEndPoint("https://q3pc77iipi.execute-api.us-east-2.amazonaws.com/dev/Files/hedral-level3");
+    //m_hedralManager->Get();
+    //StatusCode(m_hedralManager->GetStatusCode());
 }
 
 bool LoginViewModel::VerifyData()
