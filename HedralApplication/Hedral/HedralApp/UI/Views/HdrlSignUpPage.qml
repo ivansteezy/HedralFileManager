@@ -185,7 +185,8 @@ Page {
             Layout.alignment: Qt.AlignHCenter
             text: "Registrarse"
             mouseField.onClicked: {
-                signUpViewModel.SignUp();
+                // signUpViewModel.SignUp();
+                hedarlStackView.push("HdrlVerifyAccountPage.qml", {user: signUpViewModel.email})
             }
         }
 
@@ -213,10 +214,10 @@ Page {
     Connections {
         target: signUpViewModel
 
-        onStatusCodeChanged: {
-            if(signUpViewModel.statusCode === 200) {
-                hedarlStackView.push("HdrlVerifyAccountPage.qml")
-            }
-        }
+//        onStatusCodeChanged: {
+//            if(signUpViewModel.statusCode === 200) {
+//                hedarlStackView.push("HdrlVerifyAccountPage.qml", {user: signUpViewModel.email})
+//            }
+//        }
     }
 }

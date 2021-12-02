@@ -6,6 +6,11 @@ VerifyAccountViewModel::VerifyAccountViewModel(QObject* parent)
 
 }
 
+void VerifyAccountViewModel::VerifyAccount()
+{
+    auto endpoint = BuildEndpoint();
+}
+
 [[nodiscard]]
 QString VerifyAccountViewModel::VerificationCode() const
 {
@@ -47,4 +52,35 @@ void VerifyAccountViewModel::StatusCode(const int &statusCode)
         m_statusCode = statusCode;
         emit StatusCodeChanged();
     }
+}
+
+QString VerifyAccountViewModel::User() const
+{
+    return m_user;
+}
+
+void VerifyAccountViewModel::User(const QString &user)
+{
+    if(user != m_user)
+    {
+        m_user = user;
+        emit UserChanged();
+    }
+}
+
+QString VerifyAccountViewModel::BuildEndpoint()
+{
+    QString user = User().mid(0, User().indexOf("@"));
+    QString code = VerificationCode();
+    QString endpoint = QString("https://q3pc77iipi.execute-api.us-east-2.amazonaws.com/dev/SignUp/VerifyAccount?code=%1&user=%2")
+            .arg(code)
+            .arg(user);
+
+    qDebug() << "El endpoint es: " << endpoint;
+    return endpoint;
+}
+
+void VerifyAccountViewModel::UpdateResponse(QByteArray response)
+{
+
 }

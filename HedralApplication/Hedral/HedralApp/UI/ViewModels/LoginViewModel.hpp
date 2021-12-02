@@ -5,6 +5,7 @@
 #include <QString>
 #include <QByteArray>
 
+
 #include "../../Services/HFMNetworking/NetworkManager.hpp"
 
 namespace Hedral

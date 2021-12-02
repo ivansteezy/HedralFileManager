@@ -9,6 +9,7 @@
 
 #include "../../UI/ViewModels/LoginViewModel.hpp"
 #include "../../UI/ViewModels/SignUpViewModel.hpp"
+#include "../../UI/ViewModels/VerifyAccountViewModel.hpp"
 
 int main(int argc, char *argv[])
 {
@@ -34,6 +35,9 @@ int main(int argc, char *argv[])
 
     Hedral::UI::SignUpViewModel signUpViewModel;
     engine.rootContext()->setContextProperty("signUpViewModel", &signUpViewModel);
+
+    Hedral::UI::VerifyAccountViewModel verifyAccountViewModel;
+    engine.rootContext()->setContextProperty("verifyAccountViewModel", &verifyAccountViewModel);
 
     const QUrl url(QStringLiteral("../../Hedral/HedralApp/UI/Views/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

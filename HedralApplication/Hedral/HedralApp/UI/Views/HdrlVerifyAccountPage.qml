@@ -10,6 +10,8 @@ Page {
         color: backGroundColor
     }
 
+    property string user: ""
+
     FontLoader {
         id: hdrlFontRegular
         source: "../../Resources/fonts/Inter-Regular.ttf"
@@ -18,6 +20,10 @@ Page {
     FontLoader {
         id: hdrlFontBold
         source: "../../Resources/fonts/Inter-Bold.ttf"
+    }
+
+    Component.onCompleted: {
+        verifyAccountViewModel.user = user;
     }
 
     ColumnLayout {
@@ -55,6 +61,11 @@ Page {
                     color: "#EDEFF2"
                     radius: 10
                 }
+
+                onTextChanged: {
+                    verifyAccountViewModel.verificationCode = text
+                }
+
                 verticalAlignment: TextInput.AlignVCenter
             }
         }
@@ -67,7 +78,8 @@ Page {
             HdrlButton {
                 text: "Verificar"
                 mouseField.onClicked: {
-                    hedarlStackView.push("HdrlHomePage.qml")
+                    // hedarlStackView.push("HdrlHomePage.qml")
+                    verifyAccountViewModel.VerifyAccount()
                 }
             }
         }
@@ -96,7 +108,10 @@ Page {
                     }
                 }
             }
-
         }
+    }
+
+    Connections {
+        target: verifyAccountViewModel
     }
 }

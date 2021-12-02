@@ -9,6 +9,7 @@ SignUpViewModel::SignUpViewModel(QObject* parent)
 void SignUpViewModel::SignUp()
 {
     connect(m_hedralManager, SIGNAL(ResponseArrived(QByteArray)), this, SLOT(UpdateResponse(QByteArray)));
+    // SetSessionData(m_email, m_password, m_level);
 
     qDebug() << "Email: " << m_email;
     qDebug() << "Name: " << m_name;

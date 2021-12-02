@@ -68,6 +68,7 @@ HEADERS += \
     Services/HFMStatistics/StatisticsBase.hpp \
     Services/HFMStatistics/StatisticsManager.hpp \
     UI/ViewModels/AdminLoginViewModel.hpp \
+    UI/ViewModels/Foundation.hpp \
     UI/ViewModels/LoginViewModel.hpp \
     UI/ViewModels/RestorePasswordViewModel.hpp \
     UI/ViewModels/SignUpViewModel.hpp \
