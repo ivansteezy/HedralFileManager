@@ -77,6 +77,7 @@ namespace Hedral
             void EmailChanged();
 
         public slots:
+            void UpdateResponse(QByteArray response);
 
         private:
             QString m_name;

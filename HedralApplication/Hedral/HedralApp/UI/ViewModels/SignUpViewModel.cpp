@@ -8,6 +8,8 @@ SignUpViewModel::SignUpViewModel(QObject* parent)
 
 void SignUpViewModel::SignUp()
 {
+    connect(m_hedralManager, SIGNAL(ResponseArrived(QByteArray)), this, SLOT(UpdateResponse(QByteArray)));
+
     qDebug() << "Email: " << m_email;
     qDebug() << "Name: " << m_name;
     qDebug() << "Last name: " << m_lastName;
@@ -19,6 +21,7 @@ void SignUpViewModel::SignUp()
 
     m_hedralManager->SetEndPoint(endpoint);
     m_hedralManager->Post();
+    // StatusCode(m_hedralManager->GetStatusCode());
 }
 
 [[nodiscard]]
@@ -149,4 +152,10 @@ QString SignUpViewModel::BuildEndpoint()
 
     qDebug() << endpoint;
     return endpoint;
+}
+
+void SignUpViewModel::UpdateResponse(QByteArray response)
+{
+    StatusCode(m_hedralManager->GetStatusCode());
+    Response(response);
 }
