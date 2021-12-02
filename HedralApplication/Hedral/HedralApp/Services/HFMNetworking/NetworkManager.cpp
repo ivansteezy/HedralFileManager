@@ -6,7 +6,7 @@ HEDRAL_IMPLEMENT_CLASSFACTORY(NetworkManager, NetworkManagerImpl, INetworkManage
 
 NetworkManagerImpl::NetworkManagerImpl(QObject *parent) :
     QObject(parent),
-    m_endpointPreffix("https://q3pc77iipi.execute-api.us-east-2.amazonaws.com/dev/Files/hedral-level3"),
+    m_endpointPreffix(""),
     m_endpoint("")
 {
     m_networkAccessManager = new QNetworkAccessManager(this);
@@ -29,7 +29,9 @@ void NetworkManagerImpl::ReplyFinished(QNetworkReply* reply)
     m_response = responseData;
 
     QVariant statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
-    qDebug() << "Status code: " << statusCode;
+    qDebug() << "Status code: " << statusCode.toInt();
+
+    SetStatusCode(statusCode.toInt());
     SetResponse(responseData);
     emit ResponseArrived(m_response);
 }
@@ -44,7 +46,7 @@ bool NetworkManagerImpl::Get()
     connect(m_networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(ReplyFinished(QNetworkReply*)));
 
     QNetworkRequest request;
-    request.setUrl(QUrl("https://q3pc77iipi.execute-api.us-east-2.amazonaws.com/dev/Files/hedral-level3"));
+    request.setUrl(QUrl(m_endpoint));
 
     QNetworkReply *reply = m_networkAccessManager->get(request);
     // connect(reply, SIGNAL(SlotError(QNetworkReply::NetworkError)), this, SLOT(SlotError(QNetworkReply::NetworkError)));
@@ -59,13 +61,24 @@ bool NetworkManagerImpl::Put()
 
 bool NetworkManagerImpl::Post()
 {
-    return false;
+    connect(m_networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(ReplyFinished(QNetworkReply*)));
+
+    QNetworkRequest request;
+    request.setUrl(QUrl(m_endpoint));
+
+    QNetworkReply *reply = m_networkAccessManager->post(request, QByteArray());
+    return true;
 }
 
 void NetworkManagerImpl::SetResponse(const QByteArray& response)
 {
     m_response = response;
     emit ResponseArrived(response);
+}
+
+void NetworkManagerImpl::SetStatusCode(const int& statusCode)
+{
+    m_statusCode = statusCode;
 }
 
 void NetworkManagerImpl::SerializeResponse()
@@ -76,6 +89,11 @@ void NetworkManagerImpl::SerializeResponse()
 QByteArray NetworkManagerImpl::GetResponse() const
 {
     return m_response;
+}
+
+int NetworkManagerImpl::GetStatusCode() const
+{
+    return m_statusCode;
 }
 
 QObject* NetworkManagerImpl::AsQtObject()

@@ -8,14 +8,13 @@
 #include "SystemInitializer.hpp"
 
 #include "../../UI/ViewModels/LoginViewModel.hpp"
+#include "../../UI/ViewModels/SignUpViewModel.hpp"
 
 int main(int argc, char *argv[])
 {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
-
-
     QApplication app(argc, argv);
 
     auto systemInitializer = Hedral::Bootstraping::SystemInitializer::CreateInstance();
@@ -32,6 +31,9 @@ int main(int argc, char *argv[])
     //register viewmodels
     Hedral::UI::LoginViewModel loginViewModel;
     engine.rootContext()->setContextProperty("loginViewModel", &loginViewModel);
+
+    Hedral::UI::SignUpViewModel signUpViewModel;
+    engine.rootContext()->setContextProperty("signUpViewModel", &signUpViewModel);
 
     const QUrl url(QStringLiteral("../../Hedral/HedralApp/UI/Views/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

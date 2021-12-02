@@ -14,10 +14,10 @@ void LoginViewModel::InitializeManager()
 
 void LoginViewModel::LogIn()
 {
-    // auto a = new Network::NetworkManagerImpl();
-    connect(m_hedralManager, SIGNAL(ResponseArrived(QByteArray)), this, SLOT(UpdateResponse(QByteArray)));
-    // qDebug() << "Haciendo peticion...";
-    m_hedralManager->Get();
+    //connect(m_hedralManager, SIGNAL(ResponseArrived(QByteArray)), this, SLOT(UpdateResponse(QByteArray)));
+    //m_hedralManager->SetEndPoint("https://q3pc77iipi.execute-api.us-east-2.amazonaws.com/dev/Files/hedral-level3");
+    //m_hedralManager->Get();
+    //StatusCode(m_hedralManager->GetStatusCode());
 }
 
 bool LoginViewModel::VerifyData()
@@ -69,8 +69,21 @@ void LoginViewModel::Response(const QByteArray &response)
     }
 }
 
+int LoginViewModel::StatusCode() const
+{
+    return m_statusCode;
+}
+
+void LoginViewModel::StatusCode(const int &statusCode)
+{
+    if(statusCode != m_statusCode)
+    {
+        m_statusCode = statusCode;
+        emit StatusCodeChanged();
+    }
+}
+
 void LoginViewModel::UpdateResponse(QByteArray response)
 {
-    // qDebug() << "ha llegado! " << response;
     Response(response);
 }

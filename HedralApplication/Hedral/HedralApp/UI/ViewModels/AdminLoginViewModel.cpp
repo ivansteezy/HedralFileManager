@@ -40,3 +40,31 @@ void AdminLoginViewModel::Password(const QString& password)
         emit PasswordChanged();
     }
 }
+
+QByteArray AdminLoginViewModel::Response() const
+{
+    return m_response;
+}
+
+void AdminLoginViewModel::Response(const QByteArray &response)
+{
+    if(response != m_response)
+    {
+        m_response = response;
+        emit ResponseChanged();
+    }
+}
+
+int AdminLoginViewModel::StatusCode() const
+{
+    return m_statusCode;
+}
+
+void AdminLoginViewModel::StatusCode(const int &statusCode)
+{
+    if(statusCode != m_statusCode)
+    {
+        m_statusCode = statusCode;
+        emit StatusCodeChanged();
+    }
+}

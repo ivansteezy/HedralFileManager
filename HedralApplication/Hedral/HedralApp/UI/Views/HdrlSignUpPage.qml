@@ -46,6 +46,10 @@ Page {
                     color: "#EDEFF2"
                     radius: 10
                 }
+                onTextChanged: {
+                    signUpViewModel.email = text;
+                }
+
                 verticalAlignment: TextInput.AlignVCenter
             }
         }
@@ -68,6 +72,9 @@ Page {
                     color: "#EDEFF2"
                     radius: 10
                 }
+                onTextChanged: {
+                    signUpViewModel.name = text;
+                }
                 verticalAlignment: TextInput.AlignVCenter
             }
         }
@@ -89,6 +96,9 @@ Page {
                 background: Rectangle {
                     color: "#EDEFF2"
                     radius: 10
+                }
+                onTextChanged: {
+                    signUpViewModel.lastName = text;
                 }
                 verticalAlignment: TextInput.AlignVCenter
             }
@@ -113,6 +123,9 @@ Page {
                     color: "#EDEFF2"
                     radius: 10
                 }
+                onTextChanged: {
+                    signUpViewModel.password = text;
+                }
                 verticalAlignment: TextInput.AlignVCenter
             }
         }
@@ -136,6 +149,9 @@ Page {
                     color: "#EDEFF2"
                     radius: 10
                 }
+                onTextChanged: {
+                    signUpViewModel.confirmPassword = text;
+                }
                 verticalAlignment: TextInput.AlignVCenter
             }
         }
@@ -157,7 +173,8 @@ Page {
                 model: ["Nivel 1", "Nivel 2", "Nivel 3"]
                 checkedColor: "#727CF5"
                 onCurrentIndexChanged: {
-                    console.log("Se selecciono " + model[currentIndex])
+                    const level = model[currentIndex];
+                    signUpViewModel.level = level.substr(level.length - 1);
                 }
             }
         }
@@ -168,8 +185,7 @@ Page {
             Layout.alignment: Qt.AlignHCenter
             text: "Registrarse"
             mouseField.onClicked: {
-                console.log("Ir a homepage!");
-                hedarlStackView.push("HdrlVerifyAccountPage.qml")
+                signUpViewModel.SignUp();
             }
         }
 
@@ -190,6 +206,16 @@ Page {
                     hedarlStackView.pop()
                     console.log("Adios mundo")
                 }
+            }
+        }
+    }
+
+    Connections {
+        target: signUpViewModel
+
+        onStatusCodeChanged: {
+            if(signUpViewModel.statusCode === 200) {
+                hedarlStackView.push("HdrlVerifyAccountPage.qml")
             }
         }
     }

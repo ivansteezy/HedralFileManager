@@ -1,11 +1,27 @@
 #include "SignUpViewModel.hpp"
 using namespace Hedral::UI;
 
-
-
 SignUpViewModel::SignUpViewModel(QObject* parent)
 {
+    m_hedralManager = new Network::NetworkManagerImpl();
+}
 
+void SignUpViewModel::SignUp()
+{
+    connect(m_hedralManager, SIGNAL(ResponseArrived(QByteArray)), this, SLOT(UpdateResponse(QByteArray)));
+
+    qDebug() << "Email: " << m_email;
+    qDebug() << "Name: " << m_name;
+    qDebug() << "Last name: " << m_lastName;
+    qDebug() << "Level: " << m_level;
+    qDebug() << "Password: " << m_password;
+    qDebug() << "Confirm Password: " << m_confirmPassword;
+
+    auto endpoint = BuildEndpoint();
+
+    m_hedralManager->SetEndPoint(endpoint);
+    m_hedralManager->Post();
+    // StatusCode(m_hedralManager->GetStatusCode());
 }
 
 [[nodiscard]]
@@ -13,7 +29,6 @@ QString SignUpViewModel::Name() const
 {
     return m_name;
 }
-
 
 void SignUpViewModel::Name(const QString& name)
 {
@@ -69,6 +84,20 @@ void SignUpViewModel::ConfirmPassword(const QString& confirmPassword)
     }
 }
 
+QString SignUpViewModel::Email() const
+{
+    return m_email;
+}
+
+void SignUpViewModel::Email(const QString &email)
+{
+    if(email != m_email)
+    {
+        m_email = email;
+        emit EmailChanged();
+    }
+}
+
 [[nodiscard]]
 QString SignUpViewModel::Level() const
 {
@@ -82,4 +111,51 @@ void SignUpViewModel::Level(const QString& level)
         m_level = level;
         emit LevelChanged();
     }
+}
+
+QByteArray SignUpViewModel::Response() const
+{
+    return m_response;
+}
+
+void SignUpViewModel::Response(const QByteArray &response)
+{
+    if(response != m_response)
+    {
+        m_response = response;
+        emit ResponseChanged();
+    }
+}
+
+int SignUpViewModel::StatusCode() const
+{
+    return m_statusCode;
+}
+
+void SignUpViewModel::StatusCode(const int &statusCode)
+{
+    if(statusCode != m_statusCode)
+    {
+        m_statusCode = statusCode;
+        emit StatusCodeChanged();
+    }
+}
+
+QString SignUpViewModel::BuildEndpoint()
+{
+    QString endpoint = QString("https://q3pc77iipi.execute-api.us-east-2.amazonaws.com/dev/SignUp/proxy?email=%1&password=%2&name=%3&familyName=%4&level=%5")
+            .arg(Email())
+            .arg(Password())
+            .arg(Name())
+            .arg(LastName())
+            .arg(Level());
+
+    qDebug() << endpoint;
+    return endpoint;
+}
+
+void SignUpViewModel::UpdateResponse(QByteArray response)
+{
+    StatusCode(m_hedralManager->GetStatusCode());
+    Response(response);
 }
