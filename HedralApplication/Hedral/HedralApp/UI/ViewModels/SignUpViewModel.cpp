@@ -3,7 +3,7 @@ using namespace Hedral::UI;
 
 SignUpViewModel::SignUpViewModel(QObject* parent)
 {
-
+    m_hedralManager = new Network::NetworkManagerImpl();
 }
 
 void SignUpViewModel::SignUp()
@@ -16,6 +16,9 @@ void SignUpViewModel::SignUp()
     qDebug() << "Confirm Password: " << m_confirmPassword;
 
     auto endpoint = BuildEndpoint();
+
+    m_hedralManager->SetEndPoint(endpoint);
+    m_hedralManager->Post();
 }
 
 [[nodiscard]]

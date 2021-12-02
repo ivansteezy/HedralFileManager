@@ -61,7 +61,13 @@ bool NetworkManagerImpl::Put()
 
 bool NetworkManagerImpl::Post()
 {
-    return false;
+    connect(m_networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(ReplyFinished(QNetworkReply*)));
+
+    QNetworkRequest request;
+    request.setUrl(QUrl(m_endpoint));
+
+    QNetworkReply *reply = m_networkAccessManager->post(request, QByteArray());
+    return true;
 }
 
 void NetworkManagerImpl::SetResponse(const QByteArray& response)

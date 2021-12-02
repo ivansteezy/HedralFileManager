@@ -86,7 +86,7 @@ namespace Hedral
             int m_statusCode;
             QByteArray m_response;
             QString m_confirmPassword;
-            // Network::NetworkManagerImpl* m_hedralManager;
+            Network::NetworkManagerImpl* m_hedralManager;
             QString m_level;
         };
     }
