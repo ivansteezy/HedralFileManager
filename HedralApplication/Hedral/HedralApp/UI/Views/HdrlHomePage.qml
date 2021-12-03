@@ -11,6 +11,7 @@ Page {
     property string email: ""
     property string name: ""
     property string level: ""
+    property var levels: []
 
     FontLoader {
         id: hdrlFontRegular
@@ -29,12 +30,23 @@ Page {
 
     anchors.fill: parent
 
+
+    function generateLevels() {
+        switch(level) {
+            case "1": levels = ["Nivel 1"];                       break;
+            case "2": levels = ["Nivel 1", "Nivel 2"];            break;
+            case "3": levels = ["Nivel 1", "Nivel 2", "Nivel 3"]; break;
+        }
+    }
+
     Component.onCompleted: {
         hedralWindow.width = 1200
         hedralWindow.height = 800
 
         hedralWindow.x = Screen.width / 2 - hedralWindow.width / 2
         hedralWindow.y = Screen.height / 2 - hedralWindow.height / 2
+
+        this.generateLevels()
     }
 
     HdrlSideMenu {
@@ -96,6 +108,7 @@ Page {
                     }
                 }
             }
+
             Column {
                 width: parent.width / 3
                 Layout.alignment: Qt.AlignHCenter
@@ -118,6 +131,7 @@ Page {
                     }
                 }
             }
+
             Column {
                 width: parent.width / 3
                 Layout.alignment: Qt.AlignHCenter
@@ -132,7 +146,7 @@ Page {
                 HdrlDropDown {
                     width: parent.width - 20
                     height: 40
-                    model: ["Nivel 1", "Nivel 2", "Nivel 3"]
+                    model: levels
                     checkedColor: "#727CF5"
                     onCurrentIndexChanged: {
                         console.log("Se selecciono el nivel" + model[currentIndex])
