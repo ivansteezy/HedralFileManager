@@ -8,6 +8,10 @@ import "../Components"
 
 Page {
 
+    property string email: ""
+    property string name: ""
+    property string level: ""
+
     FontLoader {
         id: hdrlFontRegular
         source: "../../Resources/fonts/Inter-Regular.ttf"
@@ -24,6 +28,7 @@ Page {
     }
 
     anchors.fill: parent
+
     Component.onCompleted: {
         hedralWindow.width = 1200
         hedralWindow.height = 800
@@ -32,7 +37,11 @@ Page {
         hedralWindow.y = Screen.height / 2 - hedralWindow.height / 2
     }
 
-    HdrlSideMenu { }
+    HdrlSideMenu {
+        displayEmail: email
+        displayName:  name
+        displayLevel:  level
+    }
 
     Column {
         anchors.fill: parent
@@ -344,5 +353,10 @@ Page {
                 console.log("Cancelado");
             }
         }
+    }
+
+    Connections {
+        // target: homeViewModel
+
     }
 }

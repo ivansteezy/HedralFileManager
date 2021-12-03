@@ -12,13 +12,17 @@ Drawer {
         color: "#971ADB"
     }
 
+    property alias displayName: nameLabel.text
+    property alias displayEmail: emailLabel.text
+    property alias displayLevel: levelLabel.text
+
     ColumnLayout {
         width: parent.width
         height: parent.height
         Label {
+            id: nameLabel
             Layout.alignment: Qt.AlignLeft
             anchors.top: parent.top
-            text: "Ivan Ayala"
             font.pointSize: 18
             font.letterSpacing: -1
             font.family: hdrlFontBold.name
@@ -29,8 +33,8 @@ Drawer {
 
 
         Label {
+            id: emailLabel
             Layout.alignment: Qt.AlignLeft
-            text: "network.9961@gmail.com"
             font.pointSize: 14
             font.letterSpacing: -1
             font.family: hdrlFontRegular.name
@@ -40,8 +44,8 @@ Drawer {
         }
 
         Label {
+            id: levelLabel
             Layout.alignment: Qt.AlignLeft
-            text: "Nivel 3"
             font.pointSize: 14
             font.letterSpacing: -1
             font.family: hdrlFontRegular.name

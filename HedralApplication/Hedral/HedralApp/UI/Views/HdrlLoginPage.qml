@@ -105,8 +105,8 @@ Page {
             HdrlButton {
                 text: "Iniciar Sesion"
                 mouseField.onClicked: {
-                    // hedarlStackView.push("HdrlHomePage.qml")
-                    loginViewModel.LogIn();
+                    hedarlStackView.push("HdrlHomePage.qml", {name: "Ivan Ayala", email: "network.9961@gmail.com", level: "3"})
+                    // loginViewModel.LogIn(); uncomment this for the real functionality
                 }
             }
 
