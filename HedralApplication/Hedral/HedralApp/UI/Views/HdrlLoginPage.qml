@@ -61,6 +61,10 @@ Page {
                     color: "#EDEFF2"
                     radius: 10
                 }
+                onTextChanged: {
+                    loginViewModel.email = text
+                }
+
                 verticalAlignment: TextInput.AlignVCenter
             }
         }
@@ -85,6 +89,9 @@ Page {
                 background: Rectangle {
                     color: "#EDEFF2"
                     radius: 10
+                }
+                onTextChanged: {
+                    loginViewModel.password = text
                 }
                 verticalAlignment: TextInput.AlignVCenter
             }
@@ -160,12 +167,22 @@ Page {
     Connections {
         target: loginViewModel
 
-        onResponseChanged: {
-            var jsonString = JSON.stringify(JSON.parse(loginViewModel.response)); //json as string
-            var jsonObject = JSON.parse(jsonString);
-
-            var size = jsonObject.Contents[0].Key
-            console.log(size)
+        onStatusCodeChanged: {
+            if(loginViewModel.statusCode === 200) {
+                hedarlStackView.push("HdrlHomePage.qml")
+            }
+            else {
+                console.log("Error with the code!!!")
+            }
         }
+
+//        onResponseChanged: {
+//            code working on collections (for displaying files)
+//            var jsonString = JSON.stringify(JSON.parse(loginViewModel.response)); //json as string
+//            var jsonObject = JSON.parse(jsonString);
+
+//            var size = jsonObject.Contents[0].Key
+//            console.log(size)
+//        }
     }
 }

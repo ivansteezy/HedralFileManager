@@ -13,6 +13,8 @@
 #include "NetworkingBase.hpp"
 #include "../HFMLogger/LoggerBase.hpp"
 
+#include "ReplyTimeOut.hpp"
+
 namespace Hedral
 {
     namespace Network
@@ -47,6 +49,8 @@ namespace Hedral
         public slots:
             void ReplyFinished(QNetworkReply* reply);
             void SlotError(QNetworkReply::NetworkError error);
+            void Progress(qint64 sent, qint64 total);
+            void TimeOut();
 
         signals:
             void ResponseArrived(QByteArray response);

@@ -65,9 +65,11 @@ HEADERS += \
     Services/HFMNetworking/JsonSerializer.hpp \
     Services/HFMNetworking/NetworkManager.hpp \
     Services/HFMNetworking/NetworkingBase.hpp \
+    Services/HFMNetworking/ReplyTimeOut.hpp \
     Services/HFMStatistics/StatisticsBase.hpp \
     Services/HFMStatistics/StatisticsManager.hpp \
     UI/ViewModels/AdminLoginViewModel.hpp \
+    UI/ViewModels/Foundation.hpp \
     UI/ViewModels/LoginViewModel.hpp \
     UI/ViewModels/RestorePasswordViewModel.hpp \
     UI/ViewModels/SignUpViewModel.hpp \

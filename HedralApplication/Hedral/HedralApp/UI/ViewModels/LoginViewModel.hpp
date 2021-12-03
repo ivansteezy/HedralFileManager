@@ -5,6 +5,7 @@
 #include <QString>
 #include <QByteArray>
 
+
 #include "../../Services/HFMNetworking/NetworkManager.hpp"
 
 namespace Hedral
@@ -47,6 +48,7 @@ namespace Hedral
 
         private:
             void InitializeManager();
+            QString BuildEndpoint();
 
         signals:
             void EmailChanged();

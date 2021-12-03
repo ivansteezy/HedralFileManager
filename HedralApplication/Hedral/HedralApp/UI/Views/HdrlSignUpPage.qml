@@ -5,10 +5,6 @@ import QtQuick.Layouts 1.12
 import "../Components"
 
 Page {
-
-    //property alias emailForm: textFieldEmail.text
-    //property alias passwordForm: textFieldPassword.text
-
     FontLoader {
         id: hdrlFontRegular
         source: "../../Resources/fonts/Inter-Regular.ttf"
@@ -215,7 +211,10 @@ Page {
 
         onStatusCodeChanged: {
             if(signUpViewModel.statusCode === 200) {
-                hedarlStackView.push("HdrlVerifyAccountPage.qml")
+                hedarlStackView.push("HdrlVerifyAccountPage.qml", {user: signUpViewModel.email})
+            }
+            else {
+                console.log('Error creating your account')
             }
         }
     }

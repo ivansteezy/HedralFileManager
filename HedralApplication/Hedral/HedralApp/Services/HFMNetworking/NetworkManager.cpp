@@ -41,6 +41,17 @@ void NetworkManagerImpl::SlotError(QNetworkReply::NetworkError error)
     qDebug("slotError");
 }
 
+void NetworkManagerImpl::Progress(qint64 sent, qint64 total)
+{
+    qDebug() << "Enviados " << sent;
+    qDebug() << "Total " << total;
+}
+
+void NetworkManagerImpl::TimeOut()
+{
+    qDebug() << "Timer finishes";
+}
+
 bool NetworkManagerImpl::Get()
 {
     connect(m_networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(ReplyFinished(QNetworkReply*)));
@@ -61,11 +72,11 @@ bool NetworkManagerImpl::Put()
 
 bool NetworkManagerImpl::Post()
 {
-    connect(m_networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(ReplyFinished(QNetworkReply*)));
-
     QNetworkRequest request;
     request.setUrl(QUrl(m_endpoint));
-
+    qDebug() << "Making post...";
+    qDebug() << m_endpoint;
+    connect(m_networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(ReplyFinished(QNetworkReply*)));
     QNetworkReply *reply = m_networkAccessManager->post(request, QByteArray());
     return true;
 }
