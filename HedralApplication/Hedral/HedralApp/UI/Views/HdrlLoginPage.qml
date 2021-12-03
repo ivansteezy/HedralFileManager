@@ -61,6 +61,10 @@ Page {
                     color: "#EDEFF2"
                     radius: 10
                 }
+                onTextChanged: {
+                    loginViewModel.email = text
+                }
+
                 verticalAlignment: TextInput.AlignVCenter
             }
         }
@@ -85,6 +89,9 @@ Page {
                 background: Rectangle {
                     color: "#EDEFF2"
                     radius: 10
+                }
+                onTextChanged: {
+                    loginViewModel.password = text
                 }
                 verticalAlignment: TextInput.AlignVCenter
             }
@@ -160,7 +167,7 @@ Page {
     Connections {
         target: loginViewModel
 
-        onStatusCodeChange: {
+        onStatusCodeChanged: {
             if(loginViewModel.statusCode === 200) {
                 hedarlStackView.push("HdrlHomePage.qml")
             }
