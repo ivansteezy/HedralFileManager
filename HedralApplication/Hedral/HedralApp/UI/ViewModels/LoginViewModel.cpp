@@ -12,12 +12,22 @@ void LoginViewModel::InitializeManager()
     m_hedralManager = new Network::NetworkManagerImpl();
 }
 
+QString LoginViewModel::BuildEndpoint()
+{
+    QString endpoint = QString("https://q3pc77iipi.execute-api.us-east-2.amazonaws.com/dev/Login/Credentials?email=%1&password=%2")
+            .arg(Email())
+            .arg(Password());
+
+    return endpoint;
+}
+
 void LoginViewModel::LogIn()
 {
-    //connect(m_hedralManager, SIGNAL(ResponseArrived(QByteArray)), this, SLOT(UpdateResponse(QByteArray)));
-    //m_hedralManager->SetEndPoint("https://q3pc77iipi.execute-api.us-east-2.amazonaws.com/dev/Files/hedral-level3");
-    //m_hedralManager->Get();
-    //StatusCode(m_hedralManager->GetStatusCode());
+    connect(m_hedralManager, SIGNAL(ResponseArrived(QByteArray)), this, SLOT(UpdateResponse(QByteArray)));
+    auto endpoint = BuildEndpoint();
+
+    m_hedralManager->SetEndPoint(endpoint);
+    m_hedralManager->Post();
 }
 
 bool LoginViewModel::VerifyData()
@@ -85,5 +95,6 @@ void LoginViewModel::StatusCode(const int &statusCode)
 
 void LoginViewModel::UpdateResponse(QByteArray response)
 {
+    StatusCode(m_hedralManager->GetStatusCode());
     Response(response);
 }

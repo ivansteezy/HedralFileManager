@@ -48,6 +48,7 @@ namespace Hedral
 
         private:
             void InitializeManager();
+            QString BuildEndpoint();
 
         signals:
             void EmailChanged();

@@ -77,7 +77,7 @@ QString VerifyAccountViewModel::BuildEndpoint()
 {
     QString user = User().mid(0, User().indexOf("@"));
     QString code = VerificationCode();
-    QString endpoint = QString("https://q3pc77iipi.execute-api.us-east-2.amazonaws.com/dev/SignUp/VerifyAccount?code=%1&user=%2")
+    auto endpoint = QString("https://q3pc77iipi.execute-api.us-east-2.amazonaws.com/dev/SignUp/VerifyAccount?code=%1&user=%2")
             .arg(code)
             .arg(user);
 
