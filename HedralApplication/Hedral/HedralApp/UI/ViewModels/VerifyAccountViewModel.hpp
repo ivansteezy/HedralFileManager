@@ -5,6 +5,8 @@
 #include <QString>
 #include <qDebug>
 
+#include "../../Services/HFMNetworking/NetworkManager.hpp"
+
 namespace Hedral
 {
     namespace UI
@@ -56,6 +58,7 @@ namespace Hedral
         private:
             QString m_verificationCode;
             QString m_user;
+            Network::NetworkManagerImpl* m_hedralManager;
             QByteArray m_response;
             int m_statusCode;
         };

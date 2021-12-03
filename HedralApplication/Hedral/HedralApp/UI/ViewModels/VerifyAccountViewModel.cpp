@@ -3,12 +3,17 @@ using namespace Hedral::UI;
 
 VerifyAccountViewModel::VerifyAccountViewModel(QObject* parent)
 {
-
+    m_hedralManager = new Network::NetworkManagerImpl();
 }
 
 void VerifyAccountViewModel::VerifyAccount()
 {
+    connect(m_hedralManager, SIGNAL(ResponseArrived(QByteArray)), this, SLOT(UpdateResponse(QByteArray)));
+
     auto endpoint = BuildEndpoint();
+    m_hedralManager->SetEndPoint(endpoint);
+
+    m_hedralManager->Post();
 }
 
 [[nodiscard]]
@@ -82,5 +87,6 @@ QString VerifyAccountViewModel::BuildEndpoint()
 
 void VerifyAccountViewModel::UpdateResponse(QByteArray response)
 {
-
+    StatusCode(m_hedralManager->GetStatusCode());
+    Response(response);
 }

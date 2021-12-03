@@ -55,7 +55,6 @@ Page {
             TextField {
                 width: 320
                 height: 40
-                echoMode: TextInput.Password
 
                 background: Rectangle {
                     color: "#EDEFF2"
@@ -78,7 +77,6 @@ Page {
             HdrlButton {
                 text: "Verificar"
                 mouseField.onClicked: {
-                    // hedarlStackView.push("HdrlHomePage.qml")
                     verifyAccountViewModel.VerifyAccount()
                 }
             }
@@ -113,5 +111,14 @@ Page {
 
     Connections {
         target: verifyAccountViewModel
+
+        onStatusCodeChanged: {
+            if(verifyAccountViewModel.statusCode === 200) {
+                hedarlStackView.push("HdrlHomePage.qml")
+            }
+            else {
+                console.log("Error with the code!!!")
+            }
+        }
     }
 }
