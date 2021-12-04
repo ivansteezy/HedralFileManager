@@ -12,6 +12,7 @@ Page {
     property string name: ""
     property string level: ""
     property var levels: []
+    property var files: []
 
     FontLoader {
         id: hdrlFontRegular
@@ -377,15 +378,17 @@ Page {
                 var jsonString = JSON.stringify(JSON.parse(homePageViewModel.response)); //json as string
                 var jsonObject = JSON.parse(jsonString);
 
-                var fileName = jsonObject.Contents[0].Key
-                var date = jsonObject.Contents[0].LastModified
-                var fileType = jsonObject.Contents[0].Key.split('.')[1];
-                var size = jsonObject.Contents[0].Size;
+                for(var i = 0; i < jsonObject.Contents.length; i++) {
+                    var fileName = jsonObject.Contents[i].Key
+                    var date = jsonObject.Contents[i].LastModified
+                    var fileType = jsonObject.Contents[i].Key.split('.')[1];
+                    var size = jsonObject.Contents[i].Size;
 
-                console.log("File name: ", fileName)
-                console.log("Fecha: ", date)
-                console.log("Tamanio: ", size)
-                console.log("Tipo: ", fileType)
+                    console.log("File name: ", fileName)
+                    console.log("Fecha: ", date)
+                    console.log("Tamanio: ", size)
+                    console.log("Tipo: ", fileType)
+                }
             }
             else {
                 console.log("Error requesting files");
