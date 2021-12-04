@@ -367,7 +367,7 @@ Page {
 
                 for(var i = 0; i < jsonObject.Contents.length; i++) {
                     var fileName = jsonObject.Contents[i].Key
-                    var date = jsonObject.Contents[i].LastModified
+                    var date = jsonObject.Contents[i].LastModified.split('T')[0];
                     var fileType = jsonObject.Contents[i].Key.split('.')[1];
                     var size = jsonObject.Contents[i].Size;
 
