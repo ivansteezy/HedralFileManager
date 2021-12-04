@@ -58,6 +58,9 @@ namespace Hedral
             void ResponseChanged();
             void StatusCodeChanged();
 
+        public slots:
+            void UpdateResponse(QByteArray response);
+
         private:
             QString BuildQueryAllEndpoint();
             QString BuildDeleteFileEndpoint();

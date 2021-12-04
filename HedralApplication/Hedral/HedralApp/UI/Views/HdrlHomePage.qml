@@ -149,7 +149,7 @@ Page {
                     model: levels
                     checkedColor: "#727CF5"
                     onCurrentIndexChanged: {
-                        console.log("Se selecciono el nivel" + model[currentIndex])
+                        homePageViewModel.level = model[currentIndex];
                     }
                 }
             }
@@ -372,5 +372,24 @@ Page {
     Connections {
         target: homePageViewModel
 
+        onResponseChanged: {
+            if(homePageViewModel.statusCode === 200) {
+                var jsonString = JSON.stringify(JSON.parse(homePageViewModel.response)); //json as string
+                var jsonObject = JSON.parse(jsonString);
+
+                var fileName = jsonObject.Contents[0].Key
+                var date = jsonObject.Contents[0].LastModified
+                var fileType = jsonObject.Contents[0].Key.split('.')[1];
+                var size = jsonObject.Contents[0].Size;
+
+                console.log("File name: ", fileName)
+                console.log("Fecha: ", date)
+                console.log("Tamanio: ", size)
+                console.log("Tipo: ", fileType)
+            }
+            else {
+                console.log("Error requesting files");
+            }
+        }
     }
 }

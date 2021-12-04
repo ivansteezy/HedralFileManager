@@ -10,6 +10,10 @@ HomePageViewModel::HomePageViewModel(QObject *parent)
 void HomePageViewModel::SearchFiles()
 {
     qDebug() << "About to search files";
+    connect(m_hedralManager, SIGNAL(ResponseArrived(QByteArray)), this, SLOT(UpdateResponse(QByteArray)));
+    auto endpoint = BuildQueryAllEndpoint();
+    m_hedralManager->SetEndPoint(endpoint);
+    m_hedralManager->Get();
 }
 
 void HomePageViewModel::DeleteFile()
@@ -92,6 +96,12 @@ void HomePageViewModel::StatusCode(const int &statusCode)
     }
 }
 
+void HomePageViewModel::UpdateResponse(QByteArray response)
+{
+    StatusCode(m_hedralManager->GetStatusCode());
+    Response(response);
+}
+
 QString HomePageViewModel::BuildQueryAllEndpoint()
 {
     auto levelCode = GetLevelCode();
@@ -113,5 +123,8 @@ QString HomePageViewModel::BuildUploadFileEndpoint()
 
 QString HomePageViewModel::GetLevelCode()
 {
-    return QString();
+    if(Level() == "Nivel 1") return "hedral-level1";
+    if(Level() == "Nivel 2") return "hedral-level2";
+    if(Level() == "Nivel 3") return "hedral-level3";
+    return "";
 }
