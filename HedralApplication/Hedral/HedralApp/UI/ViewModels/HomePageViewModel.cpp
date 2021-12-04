@@ -12,6 +12,16 @@ void HomePageViewModel::SearchFiles()
     qDebug() << "About to search files";
 }
 
+void HomePageViewModel::DeleteFile()
+{
+    qDebug() << "Deleting file";
+}
+
+void HomePageViewModel::UploadFile()
+{
+    qDebug() << "Uploading file";
+}
+
 QString HomePageViewModel::FileToUpload() const
 {
     return m_fileToUpload;
@@ -82,7 +92,26 @@ void HomePageViewModel::StatusCode(const int &statusCode)
     }
 }
 
-void HomePageViewModel::BuildEndpoint()
+QString HomePageViewModel::BuildQueryAllEndpoint()
 {
+    auto levelCode = GetLevelCode();
+    auto endpoint = QString("https://q3pc77iipi.execute-api.us-east-2.amazonaws.com/dev/Files/%1")
+            .arg(levelCode);
 
+    return endpoint;
+}
+
+QString HomePageViewModel::BuildDeleteFileEndpoint()
+{
+    return QString();
+}
+
+QString HomePageViewModel::BuildUploadFileEndpoint()
+{
+    return QString();
+}
+
+QString HomePageViewModel::GetLevelCode()
+{
+    return QString();
 }

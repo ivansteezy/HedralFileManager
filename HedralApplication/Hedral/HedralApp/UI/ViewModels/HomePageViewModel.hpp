@@ -27,6 +27,8 @@ namespace Hedral
 
         public:
             Q_INVOKABLE void SearchFiles();
+            Q_INVOKABLE void DeleteFile();
+            Q_INVOKABLE void UploadFile();
 
         public:
             [[nodiscard]]
@@ -57,7 +59,10 @@ namespace Hedral
             void StatusCodeChanged();
 
         private:
-            void BuildEndpoint();
+            QString BuildQueryAllEndpoint();
+            QString BuildDeleteFileEndpoint();
+            QString BuildUploadFileEndpoint();
+            QString GetLevelCode();
 
         private:
             QString m_fileToUpload;
