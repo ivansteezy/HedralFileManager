@@ -65,9 +65,16 @@ bool NetworkManagerImpl::Get()
     return true;
 }
 
-bool NetworkManagerImpl::Put()
+bool NetworkManagerImpl::Delete()
 {
-    return false;
+    connect(m_networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(ReplyFinished(QNetworkReply*)));
+
+    QNetworkRequest request;
+    request.setUrl(QUrl(m_endpoint));
+
+    QNetworkReply *reply = m_networkAccessManager->deleteResource(request);
+
+    return true;
 }
 
 bool NetworkManagerImpl::Post()

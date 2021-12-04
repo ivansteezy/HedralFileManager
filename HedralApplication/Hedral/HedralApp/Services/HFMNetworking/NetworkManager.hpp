@@ -32,7 +32,7 @@ namespace Hedral
 
             virtual void SetEndPoint(const QString& endpoint) override;
             virtual bool Get() override;
-            virtual bool Put() override;
+            virtual bool Delete() override;
             virtual bool Post() override;
 
             virtual QObject* AsQtObject() override;

@@ -85,6 +85,7 @@ Page {
                 width: parent.width / 7
                 text: "Buscar"
                 mouseField.onClicked: {
+                    myListModel.clear()
                     homePageViewModel.SearchFiles()
                 }
             }
@@ -201,6 +202,12 @@ Page {
                     font.bold: Font.Bold
                     font.pointSize: 16
                 }
+                Text {
+                    width: parent.width / 5
+                    text: "Eliminar"
+                    font.bold: Font.Bold
+                    font.pointSize: 16
+                }
             }
 
             model: ListModel {
@@ -228,6 +235,24 @@ Page {
                     width: parent.width / 5
                     font.pointSize: 16
                     text: model.size
+                }
+                Text {
+                    id: deleteLink
+                    text: 'Eliminar'
+                    linkColor: mainTextCOlor
+                    Layout.alignment: Qt.AlignHCenter
+                    font.pointSize: 10
+                    font.underline: true
+                    color: "#000000"
+                    Layout.margins: 10
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            console.log("Se eliminara: " + model.fileName)
+                            homePageViewModel.fileToDelete = model.fileName
+                            deleteFilePopUp.open();
+                        }
+                    }
                 }
             }
 
@@ -343,6 +368,66 @@ Page {
             }
         }
 
+        Popup {
+            id: deleteFilePopUp
+            x: hedralWindow.width / 4
+            y: hedralWindow.height / 4
+            width: hedralWindow.width / 2
+            height: hedralWindow.height / 3
+            modal: true
+            focus: true
+            closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
+
+            Column {
+                anchors.fill: parent
+
+                Column {
+                    topPadding: 30
+                    width: parent.width - 50
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    bottomPadding: 30
+                    Label {
+                        text: "¿Estas seguro de eliminar este archivo?"
+                        font.pointSize: 18
+                        font.letterSpacing: -1
+                        font.family: hdrlFontBold.name
+                        font.bold: Font.Bold
+                    }
+                }
+
+
+                Item {
+                    width: parent.width - 50
+                    anchors.horizontalCenter: parent.horizontalCenter
+
+                    height: 100
+                }
+
+                RowLayout {
+                    width: parent.width - 50
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    HdrlButton {
+                        text: "Si"
+                        width: 220
+                        Layout.alignment: Qt.AlignLeft
+                        mouseField.onClicked: {
+                            console.log("Eliminando")
+                            homePageViewModel.DeleteFile()
+                        }
+                    }
+
+                    HdrlButton {
+                        text: "No"
+                        width: 220
+                        Layout.alignment: Qt.AlignRight
+                        mouseField.onClicked: {
+                            deleteFilePopUp.close()
+                        }
+                    }
+                }
+            }
+        }
+
         FileDialog {
             id: fileDialog
             fileMode: FileDialog.OpenFile
@@ -382,6 +467,14 @@ Page {
             else {
                 console.log("Error requesting files");
             }
+
+            homePageViewModel.statusCode = 0;
+        }
+
+        onDeleteResponseChanged: {
+            deleteFilePopUp.close();
+            myListModel.clear()
+            homePageViewModel.SearchFiles()
         }
     }
 }

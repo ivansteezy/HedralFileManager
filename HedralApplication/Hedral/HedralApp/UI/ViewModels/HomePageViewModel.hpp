@@ -20,6 +20,7 @@ namespace Hedral
             Q_PROPERTY(QString fileToDelete READ FileToDelete WRITE FileToDelete NOTIFY FileToDeleteChanged);
             Q_PROPERTY(QString level READ Level WRITE Level NOTIFY LevelChanged);
             Q_PROPERTY(QByteArray response READ Response WRITE Response NOTIFY ResponseChanged);
+            Q_PROPERTY(QByteArray deleteResponse READ DeleteResponse WRITE DeleteResponse NOTIFY DeleteResponseChanged);
             Q_PROPERTY(int statusCode READ StatusCode WRITE StatusCode NOTIFY StatusCodeChanged);
 
         public:
@@ -48,6 +49,10 @@ namespace Hedral
             void Response(const QByteArray& response);
 
             [[nodiscard]]
+            QByteArray DeleteResponse() const;
+            void DeleteResponse(const QByteArray& deleteResponse);
+
+            [[nodiscard]]
             int StatusCode() const;
             void StatusCode(const int& statusCode);
 
@@ -57,9 +62,11 @@ namespace Hedral
             void LevelChanged();
             void ResponseChanged();
             void StatusCodeChanged();
+            void DeleteResponseChanged();
 
         public slots:
             void UpdateResponse(QByteArray response);
+            void UpdateDeleteResponse(QByteArray response);
 
         private:
             QString BuildQueryAllEndpoint();
@@ -72,6 +79,7 @@ namespace Hedral
             QString m_fileToDelete;
             QString m_level;
             QByteArray m_response;
+            QByteArray m_deleteResponse;
             int m_statusCode;
 
             Network::NetworkManagerImpl* m_hedralManager;

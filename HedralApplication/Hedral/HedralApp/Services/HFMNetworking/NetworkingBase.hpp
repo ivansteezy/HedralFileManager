@@ -27,7 +27,7 @@ namespace Hedral
             virtual void SetEndPoint(const QString& endpoint) = 0;
             virtual bool Post() = 0;
             virtual bool Get() = 0;
-            virtual bool Put() = 0;
+            virtual bool Delete() = 0;
         };
         HEDRAL_DECLARE_CLASSFACTORY(NetworkManager, INetworkManager);
 

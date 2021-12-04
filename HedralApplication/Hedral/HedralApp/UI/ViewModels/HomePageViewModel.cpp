@@ -18,7 +18,12 @@ void HomePageViewModel::SearchFiles()
 
 void HomePageViewModel::DeleteFile()
 {
-    qDebug() << "Deleting file";
+    connect(m_hedralManager, SIGNAL(ResponseArrived(QByteArray)), this, SLOT(UpdateDeleteResponse(QByteArray)));
+    auto endpoint = BuildDeleteFileEndpoint();
+    qDebug() << "El endpoint es: ";
+    qDebug() << endpoint;
+    m_hedralManager->SetEndPoint(endpoint);
+    m_hedralManager->Delete();
 }
 
 void HomePageViewModel::UploadFile()
@@ -82,6 +87,20 @@ void HomePageViewModel::Response(const QByteArray &response)
     }
 }
 
+QByteArray HomePageViewModel::DeleteResponse() const
+{
+    return m_deleteResponse;
+}
+
+void HomePageViewModel::DeleteResponse(const QByteArray &deleteResponse)
+{
+    if(deleteResponse != m_deleteResponse)
+    {
+        m_deleteResponse = deleteResponse;
+        emit DeleteResponseChanged();
+    }
+}
+
 int HomePageViewModel::StatusCode() const
 {
     return m_statusCode;
@@ -102,6 +121,12 @@ void HomePageViewModel::UpdateResponse(QByteArray response)
     Response(response);
 }
 
+void HomePageViewModel::UpdateDeleteResponse(QByteArray response)
+{
+    StatusCode(m_hedralManager->GetStatusCode());
+    DeleteResponse(response);
+}
+
 QString HomePageViewModel::BuildQueryAllEndpoint()
 {
     auto levelCode = GetLevelCode();
@@ -113,7 +138,12 @@ QString HomePageViewModel::BuildQueryAllEndpoint()
 
 QString HomePageViewModel::BuildDeleteFileEndpoint()
 {
-    return QString();
+    auto levelCode = GetLevelCode();
+    auto endpoint = QString("https://q3pc77iipi.execute-api.us-east-2.amazonaws.com/dev/Files/%1?fileName=%2")
+            .arg(levelCode)
+            .arg(FileToDelete());
+
+    return endpoint;
 }
 
 QString HomePageViewModel::BuildUploadFileEndpoint()
