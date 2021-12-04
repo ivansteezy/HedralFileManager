@@ -78,7 +78,7 @@ Page {
                 width: parent.width / 7
                 text: "Buscar"
                 mouseField.onClicked: {
-                    console.log("Buscar el archivo!");
+                    homePageViewModel.SearchFiles()
                 }
             }
         }
@@ -370,7 +370,7 @@ Page {
     }
 
     Connections {
-        // target: homeViewModel
+        target: homePageViewModel
 
     }
 }
