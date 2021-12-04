@@ -12,7 +12,13 @@ Page {
     property string name: ""
     property string level: ""
     property var levels: []
-    property var files: []
+
+    property var files: [{
+        fileName: "test",
+        fileType: "txt",
+        date: "today",
+        size: "11"
+    }]
 
     FontLoader {
         id: hdrlFontRegular
@@ -198,26 +204,7 @@ Page {
             }
 
             model: ListModel {
-                ListElement {
-                    fileName: "Reporte de inventario"
-                    date: "12-10-2021"
-                    type: "Texto"
-                    size: "10mb"
-                }
-
-                ListElement {
-                    fileName: "Reporte de inventario"
-                    date: "12-10-2021"
-                    type: "Texto"
-                    size: "10mb"
-                }
-
-                ListElement {
-                    fileName: "Reporte de inventario"
-                    date: "12-10-2021"
-                    type: "Texto"
-                    size: "10mb"
-                }
+                id: myListModel
             }
 
             delegate: Row {
@@ -235,7 +222,7 @@ Page {
                 Text {
                     width: parent.width / 5
                     font.pointSize: 16
-                    text: model.type
+                    text: model.fileType
                 }
                 Text {
                     width: parent.width / 5
@@ -375,7 +362,7 @@ Page {
 
         onResponseChanged: {
             if(homePageViewModel.statusCode === 200) {
-                var jsonString = JSON.stringify(JSON.parse(homePageViewModel.response)); //json as string
+                var jsonString = JSON.stringify(JSON.parse(homePageViewModel.response));
                 var jsonObject = JSON.parse(jsonString);
 
                 for(var i = 0; i < jsonObject.Contents.length; i++) {
@@ -384,10 +371,12 @@ Page {
                     var fileType = jsonObject.Contents[i].Key.split('.')[1];
                     var size = jsonObject.Contents[i].Size;
 
-                    console.log("File name: ", fileName)
-                    console.log("Fecha: ", date)
-                    console.log("Tamanio: ", size)
-                    console.log("Tipo: ", fileType)
+                    myListModel.append({
+                        "fileName": fileName,
+                        "date": date,
+                        "fileType": fileType,
+                        "size": size
+                    });
                 }
             }
             else {
