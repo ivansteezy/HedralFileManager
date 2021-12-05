@@ -83,6 +83,7 @@ Page {
 
             HdrlButton {
                 width: parent.width / 7
+                id: searchFileButton
                 text: "Buscar"
                 mouseField.onClicked: {
                     myListModel.clear()
@@ -462,6 +463,7 @@ Page {
                         "fileType": fileType,
                         "size": size
                     });
+                    console.log("appending data");
                 }
             }
             else {
@@ -473,8 +475,9 @@ Page {
 
         onDeleteResponseChanged: {
             deleteFilePopUp.close();
-            myListModel.clear()
-            homePageViewModel.SearchFiles()
+            //myListModel.clear()
+            //searchFileButton.mouseField.clicked()
+            //homePageViewModel.SearchFiles()
         }
     }
 }
