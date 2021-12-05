@@ -31,9 +31,12 @@ void NetworkManagerImpl::ReplyFinished(QNetworkReply* reply)
     QVariant statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
     qDebug() << "Status code: " << statusCode.toInt();
 
+    // reply->abort();
     SetStatusCode(statusCode.toInt());
     SetResponse(responseData);
     emit ResponseArrived(m_response);
+
+    m_networkAccessManager->disconnect();
 }
 
 void NetworkManagerImpl::SlotError(QNetworkReply::NetworkError error)
@@ -54,6 +57,7 @@ void NetworkManagerImpl::TimeOut()
 
 bool NetworkManagerImpl::Get()
 {
+    qDebug() << "Making get...";
     connect(m_networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(ReplyFinished(QNetworkReply*)));
 
     QNetworkRequest request;
@@ -65,9 +69,16 @@ bool NetworkManagerImpl::Get()
     return true;
 }
 
-bool NetworkManagerImpl::Put()
+bool NetworkManagerImpl::Delete()
 {
-    return false;
+    qDebug() << "Making delete...";
+    connect(m_networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(ReplyFinished(QNetworkReply*)));
+    QNetworkRequest request;
+    request.setUrl(QUrl(m_endpoint));
+
+    QNetworkReply *reply = m_networkAccessManager->deleteResource(request);
+
+    return true;
 }
 
 bool NetworkManagerImpl::Post()

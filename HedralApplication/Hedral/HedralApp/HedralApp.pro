@@ -19,6 +19,7 @@ SOURCES += \
         Services/HFMStatistics/StatisticsBase.cpp \
         Services/HFMStatistics/StatisticsManager.cpp \
         UI/ViewModels/AdminLoginViewModel.cpp \
+        UI/ViewModels/HomePageViewModel.cpp \
         UI/ViewModels/LoginViewModel.cpp \
         UI/ViewModels/RestorePasswordViewModel.cpp \
         UI/ViewModels/SignUpViewModel.cpp \
@@ -70,6 +71,7 @@ HEADERS += \
     Services/HFMStatistics/StatisticsManager.hpp \
     UI/ViewModels/AdminLoginViewModel.hpp \
     UI/ViewModels/Foundation.hpp \
+    UI/ViewModels/HomePageViewModel.hpp \
     UI/ViewModels/LoginViewModel.hpp \
     UI/ViewModels/RestorePasswordViewModel.hpp \
     UI/ViewModels/SignUpViewModel.hpp \

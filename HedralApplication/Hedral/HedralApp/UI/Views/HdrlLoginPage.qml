@@ -105,7 +105,7 @@ Page {
             HdrlButton {
                 text: "Iniciar Sesion"
                 mouseField.onClicked: {
-                    // hedarlStackView.push("HdrlHomePage.qml")
+                    //hedarlStackView.push("HdrlHomePage.qml", {name: "Ivan Ayala", email: "network.9961@gmail.com", level: "3"})
                     loginViewModel.LogIn();
                 }
             }
@@ -167,22 +167,16 @@ Page {
     Connections {
         target: loginViewModel
 
-        onStatusCodeChanged: {
+        onResponseChanged: {
             if(loginViewModel.statusCode === 200) {
-                hedarlStackView.push("HdrlHomePage.qml")
+                var jsonString = JSON.stringify(JSON.parse(loginViewModel.response));
+                var sessionObject = JSON.parse(jsonString);
+
+                hedarlStackView.push("HdrlHomePage.qml", {name: sessionObject.idToken.payload["name"] + " " +sessionObject.idToken.payload["family_name"], email: loginViewModel.email, level: sessionObject.idToken.payload["custom:level"]})
             }
             else {
                 console.log("Error with the code!!!")
             }
         }
-
-//        onResponseChanged: {
-//            code working on collections (for displaying files)
-//            var jsonString = JSON.stringify(JSON.parse(loginViewModel.response)); //json as string
-//            var jsonObject = JSON.parse(jsonString);
-
-//            var size = jsonObject.Contents[0].Key
-//            console.log(size)
-//        }
     }
 }

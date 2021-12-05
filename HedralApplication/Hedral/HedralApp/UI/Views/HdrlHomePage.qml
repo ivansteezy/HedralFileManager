@@ -8,6 +8,18 @@ import "../Components"
 
 Page {
 
+    property string email: ""
+    property string name: ""
+    property string level: ""
+    property var levels: []
+
+    property var files: [{
+        fileName: "test",
+        fileType: "txt",
+        date: "today",
+        size: "11"
+    }]
+
     FontLoader {
         id: hdrlFontRegular
         source: "../../Resources/fonts/Inter-Regular.ttf"
@@ -24,15 +36,31 @@ Page {
     }
 
     anchors.fill: parent
+
+
+    function generateLevels() {
+        switch(level) {
+            case "1": levels = ["Nivel 1"];                       break;
+            case "2": levels = ["Nivel 1", "Nivel 2"];            break;
+            case "3": levels = ["Nivel 1", "Nivel 2", "Nivel 3"]; break;
+        }
+    }
+
     Component.onCompleted: {
         hedralWindow.width = 1200
         hedralWindow.height = 800
 
         hedralWindow.x = Screen.width / 2 - hedralWindow.width / 2
         hedralWindow.y = Screen.height / 2 - hedralWindow.height / 2
+
+        this.generateLevels()
     }
 
-    HdrlSideMenu { }
+    HdrlSideMenu {
+        displayEmail: email
+        displayName:  name
+        displayLevel:  level
+    }
 
     Column {
         anchors.fill: parent
@@ -55,9 +83,11 @@ Page {
 
             HdrlButton {
                 width: parent.width / 7
+                id: searchFileButton
                 text: "Buscar"
                 mouseField.onClicked: {
-                    console.log("Buscar el archivo!");
+                    myListModel.clear()
+                    homePageViewModel.SearchFiles()
                 }
             }
         }
@@ -87,6 +117,7 @@ Page {
                     }
                 }
             }
+
             Column {
                 width: parent.width / 3
                 Layout.alignment: Qt.AlignHCenter
@@ -109,6 +140,7 @@ Page {
                     }
                 }
             }
+
             Column {
                 width: parent.width / 3
                 Layout.alignment: Qt.AlignHCenter
@@ -123,10 +155,10 @@ Page {
                 HdrlDropDown {
                     width: parent.width - 20
                     height: 40
-                    model: ["Nivel 1", "Nivel 2", "Nivel 3"]
+                    model: levels
                     checkedColor: "#727CF5"
                     onCurrentIndexChanged: {
-                        console.log("Se selecciono el nivel" + model[currentIndex])
+                        homePageViewModel.level = model[currentIndex];
                     }
                 }
             }
@@ -171,29 +203,16 @@ Page {
                     font.bold: Font.Bold
                     font.pointSize: 16
                 }
+                Text {
+                    width: parent.width / 5
+                    text: "Eliminar"
+                    font.bold: Font.Bold
+                    font.pointSize: 16
+                }
             }
 
             model: ListModel {
-                ListElement {
-                    fileName: "Reporte de inventario"
-                    date: "12-10-2021"
-                    type: "Texto"
-                    size: "10mb"
-                }
-
-                ListElement {
-                    fileName: "Reporte de inventario"
-                    date: "12-10-2021"
-                    type: "Texto"
-                    size: "10mb"
-                }
-
-                ListElement {
-                    fileName: "Reporte de inventario"
-                    date: "12-10-2021"
-                    type: "Texto"
-                    size: "10mb"
-                }
+                id: myListModel
             }
 
             delegate: Row {
@@ -211,12 +230,30 @@ Page {
                 Text {
                     width: parent.width / 5
                     font.pointSize: 16
-                    text: model.type
+                    text: model.fileType
                 }
                 Text {
                     width: parent.width / 5
                     font.pointSize: 16
                     text: model.size
+                }
+                Text {
+                    id: deleteLink
+                    text: 'Eliminar'
+                    linkColor: mainTextCOlor
+                    Layout.alignment: Qt.AlignHCenter
+                    font.pointSize: 10
+                    font.underline: true
+                    color: "#000000"
+                    Layout.margins: 10
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            console.log("Se eliminara: " + model.fileName)
+                            homePageViewModel.fileToDelete = model.fileName
+                            deleteFilePopUp.open();
+                        }
+                    }
                 }
             }
 
@@ -332,6 +369,66 @@ Page {
             }
         }
 
+        Popup {
+            id: deleteFilePopUp
+            x: hedralWindow.width / 4
+            y: hedralWindow.height / 4
+            width: hedralWindow.width / 2
+            height: hedralWindow.height / 3
+            modal: true
+            focus: true
+            closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
+
+            Column {
+                anchors.fill: parent
+
+                Column {
+                    topPadding: 30
+                    width: parent.width - 50
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    bottomPadding: 30
+                    Label {
+                        text: "¿Estas seguro de eliminar este archivo?"
+                        font.pointSize: 18
+                        font.letterSpacing: -1
+                        font.family: hdrlFontBold.name
+                        font.bold: Font.Bold
+                    }
+                }
+
+
+                Item {
+                    width: parent.width - 50
+                    anchors.horizontalCenter: parent.horizontalCenter
+
+                    height: 100
+                }
+
+                RowLayout {
+                    width: parent.width - 50
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    HdrlButton {
+                        text: "Si"
+                        width: 220
+                        Layout.alignment: Qt.AlignLeft
+                        mouseField.onClicked: {
+                            console.log("Eliminando")
+                            homePageViewModel.DeleteFile()
+                        }
+                    }
+
+                    HdrlButton {
+                        text: "No"
+                        width: 220
+                        Layout.alignment: Qt.AlignRight
+                        mouseField.onClicked: {
+                            deleteFilePopUp.close()
+                        }
+                    }
+                }
+            }
+        }
+
         FileDialog {
             id: fileDialog
             fileMode: FileDialog.OpenFile
@@ -343,6 +440,44 @@ Page {
             onRejected: {
                 console.log("Cancelado");
             }
+        }
+    }
+
+    Connections {
+        target: homePageViewModel
+
+        onResponseChanged: {
+            if(homePageViewModel.statusCode === 200) {
+                var jsonString = JSON.stringify(JSON.parse(homePageViewModel.response));
+                var jsonObject = JSON.parse(jsonString);
+
+                for(var i = 0; i < jsonObject.Contents.length; i++) {
+                    var fileName = jsonObject.Contents[i].Key
+                    var date = jsonObject.Contents[i].LastModified.split('T')[0];
+                    var fileType = jsonObject.Contents[i].Key.split('.')[1];
+                    var size = jsonObject.Contents[i].Size;
+
+                    myListModel.append({
+                        "fileName": fileName,
+                        "date": date,
+                        "fileType": fileType,
+                        "size": size
+                    });
+                    console.log("appending data");
+                }
+            }
+            else {
+                console.log("Error requesting files");
+            }
+
+            homePageViewModel.statusCode = 0;
+        }
+
+        onDeleteResponseChanged: {
+            deleteFilePopUp.close();
+            //myListModel.clear()
+            //searchFileButton.mouseField.clicked()
+            //homePageViewModel.SearchFiles()
         }
     }
 }
