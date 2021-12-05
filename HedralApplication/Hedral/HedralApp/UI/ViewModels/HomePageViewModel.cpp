@@ -38,8 +38,8 @@ void HomePageViewModel::UploadFile()
     qDebug() << "El endpoint es: ";
     qDebug() << endpoint;
 
-    //m_hedralManager->SetEndPoint(endpoint);
-    //m_hedralManager->Put(file);
+    m_hedralManager->SetEndPoint(endpoint);
+    m_hedralManager->Put(file);
 }
 
 QString HomePageViewModel::FileNameToUpload() const
