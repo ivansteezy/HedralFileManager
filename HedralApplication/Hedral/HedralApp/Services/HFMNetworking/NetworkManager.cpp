@@ -92,6 +92,17 @@ bool NetworkManagerImpl::Post()
     return true;
 }
 
+bool NetworkManagerImpl::Put()
+{
+    QNetworkRequest request;
+    request.setUrl(QUrl(m_endpoint));
+    qDebug() << "Making put...";
+
+    return true;
+}
+
+
+
 void NetworkManagerImpl::SetResponse(const QByteArray& response)
 {
     m_response = response;

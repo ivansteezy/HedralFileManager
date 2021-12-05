@@ -34,6 +34,7 @@ namespace Hedral
             virtual bool Get() override;
             virtual bool Delete() override;
             virtual bool Post() override;
+            virtual bool Put() override;
 
             virtual QObject* AsQtObject() override;
             virtual const QMetaObject* MetaObject() override;

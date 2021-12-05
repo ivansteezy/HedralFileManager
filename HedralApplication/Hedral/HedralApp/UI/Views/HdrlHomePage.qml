@@ -291,12 +291,10 @@ Page {
                 anchors.fill: parent
 
                 Column {
-                    topPadding: 30
                     width: parent.width - 50
                     anchors.horizontalCenter: parent.horizontalCenter
-                    bottomPadding: 30
                     Label {
-                        text: "Nombre del archivo"
+                        text: "Ruta del archivo"
                         font.pointSize: 18
                         font.letterSpacing: -1
                         font.family: hdrlFontBold.name
@@ -306,7 +304,7 @@ Page {
                     TextField {
                         width: parent.width
                         height: 40
-
+                        id: fileToUploadPath
                         background: Rectangle {
                             color: "#e3e3e3"
                             radius: 10
@@ -315,12 +313,13 @@ Page {
                     }
                 }
 
-
                 Column {
+                    topPadding: 30
                     width: parent.width - 50
                     anchors.horizontalCenter: parent.horizontalCenter
+                    bottomPadding: 30
                     Label {
-                        text: "Ruta del archivo"
+                        text: "Nombre del archivo"
                         font.pointSize: 18
                         font.letterSpacing: -1
                         font.family: hdrlFontBold.name
@@ -436,6 +435,7 @@ Page {
             nameFilters: ["Text files (*.txt)", "Pdf files(*.pdf)" ,"Docx files (*.docx)"]
             onAccepted: {
                 console.log("You choose: " + fileDialog.currentFile);
+                fileToUploadPath.text = fileDialog.currentFile;
             }
             onRejected: {
                 console.log("Cancelado");

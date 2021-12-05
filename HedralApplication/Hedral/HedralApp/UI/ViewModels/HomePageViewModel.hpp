@@ -15,7 +15,6 @@ namespace Hedral
         {
             Q_OBJECT;
 
-
             Q_PROPERTY(QString fileToUpload READ FileToUpload WRITE FileToUpload NOTIFY FileToUploadChanged);
             Q_PROPERTY(QString fileToDelete READ FileToDelete WRITE FileToDelete NOTIFY FileToDeleteChanged);
             Q_PROPERTY(QString level READ Level WRITE Level NOTIFY LevelChanged);
