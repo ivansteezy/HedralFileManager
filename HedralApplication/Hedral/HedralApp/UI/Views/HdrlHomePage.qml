@@ -309,6 +309,10 @@ Page {
                             color: "#e3e3e3"
                             radius: 10
                         }
+                        onTextChanged: {
+                            homePageViewModel.filePathToUpload = text;
+                        }
+
                         verticalAlignment: TextInput.AlignVCenter
                     }
                 }
@@ -333,6 +337,9 @@ Page {
                         background: Rectangle {
                             color: "#e3e3e3"
                             radius: 10
+                        }
+                        onTextChanged: {
+                            homePageViewModel.fileNameToUpload = text;
                         }
                         verticalAlignment: TextInput.AlignVCenter
                     }
@@ -362,6 +369,7 @@ Page {
                         Layout.alignment: Qt.AlignRight
                         mouseField.onClicked: {
                             console.log("Subiendo archivo")
+                            homePageViewModel.UploadFile();
                         }
                     }
                 }

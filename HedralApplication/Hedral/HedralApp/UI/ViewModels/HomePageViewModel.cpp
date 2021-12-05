@@ -28,20 +28,35 @@ void HomePageViewModel::DeleteFile()
 
 void HomePageViewModel::UploadFile()
 {
-    qDebug() << "Uploading file";
+    qDebug() << "Uploading file: " << FileNameToUpload();
+    qDebug() << "with path: " << FilePathToUpload();
 }
 
-QString HomePageViewModel::FileToUpload() const
+QString HomePageViewModel::FileNameToUpload() const
 {
-    return m_fileToUpload;
+    return m_fileNameToUpload;
 }
 
-void HomePageViewModel::FileToUpload(const QString &fileToUpload)
+void HomePageViewModel::FileNameToUpload(const QString &fileNameToUpload)
 {
-    if(fileToUpload != m_fileToUpload)
+    if(fileNameToUpload != m_fileNameToUpload)
     {
-        m_fileToUpload = fileToUpload;
-        emit FileToUploadChanged();
+        m_fileNameToUpload = fileNameToUpload;
+        emit FileNameToUploadChanged();
+    }
+}
+
+QString HomePageViewModel::FilePathToUpload() const
+{
+    return m_filePathToUpload;
+}
+
+void HomePageViewModel::FilePathToUpload(const QString &filePathToUpload)
+{
+    if(filePathToUpload != m_filePathToUpload)
+    {
+        m_filePathToUpload = filePathToUpload;
+        emit FilePathToUploadChanged();
     }
 }
 
