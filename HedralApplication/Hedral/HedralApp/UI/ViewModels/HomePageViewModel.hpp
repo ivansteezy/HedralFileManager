@@ -78,6 +78,7 @@ namespace Hedral
             QString BuildDeleteFileEndpoint();
             QString BuildUploadFileEndpoint();
             QString GetLevelCode();
+            QByteArray FileIntoByteArray();
 
         private:
             QString m_fileNameToUpload;

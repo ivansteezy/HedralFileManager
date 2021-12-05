@@ -92,12 +92,15 @@ bool NetworkManagerImpl::Post()
     return true;
 }
 
-bool NetworkManagerImpl::Put()
+bool NetworkManagerImpl::Put(QByteArray data)
 {
     QNetworkRequest request;
     request.setUrl(QUrl(m_endpoint));
     qDebug() << "Making put...";
+    qDebug() << m_endpoint;
+    connect(m_networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(ReplyFinished(QNetworkReply*)));
 
+    QNetworkReply *reply = m_networkAccessManager->put(request, data);
     return true;
 }
 

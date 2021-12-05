@@ -28,8 +28,18 @@ void HomePageViewModel::DeleteFile()
 
 void HomePageViewModel::UploadFile()
 {
+    connect(m_hedralManager, SIGNAL(ResponseArrived(QByteArray)), this, SLOT(UpdateDeleteResponse(QByteArray)));
     qDebug() << "Uploading file: " << FileNameToUpload();
     qDebug() << "with path: " << FilePathToUpload();
+
+    auto file = FileIntoByteArray();
+    auto endpoint = BuildUploadFileEndpoint();
+
+    qDebug() << "El endpoint es: ";
+    qDebug() << endpoint;
+
+    //m_hedralManager->SetEndPoint(endpoint);
+    //m_hedralManager->Put(file);
 }
 
 QString HomePageViewModel::FileNameToUpload() const
@@ -163,7 +173,12 @@ QString HomePageViewModel::BuildDeleteFileEndpoint()
 
 QString HomePageViewModel::BuildUploadFileEndpoint()
 {
-    return QString();
+    auto levelCode = GetLevelCode();
+    auto endpoint = QString("https://xm2tijowg9.execute-api.us-east-2.amazonaws.com/dev/%1/%2")
+            .arg(GetLevelCode())
+            .arg(FileNameToUpload());
+
+    return endpoint;
 }
 
 QString HomePageViewModel::GetLevelCode()
@@ -172,4 +187,15 @@ QString HomePageViewModel::GetLevelCode()
     if(Level() == "Nivel 2") return "hedral-level2";
     if(Level() == "Nivel 3") return "hedral-level3";
     return "";
+}
+
+QByteArray HomePageViewModel::FileIntoByteArray()
+{
+    QFile file(m_filePathToUpload);
+    if(!file.open(QIODevice::ReadOnly))
+        qDebug() << "Error reading file: " << m_filePathToUpload;
+
+    auto data = file.readAll();
+    return data;
+
 }
