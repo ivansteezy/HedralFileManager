@@ -569,8 +569,7 @@ Page {
 
         onDeleteResponseChanged: {
             deleteFilePopUp.close();
-            //myListModel.clear()
-            //searchFileButton.mouseField.clicked()
+            homePageViewModel.SearchFiles()
         }
     }
 }
