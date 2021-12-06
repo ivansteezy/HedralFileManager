@@ -278,7 +278,7 @@ Page {
                         onClicked: {
                             console.log("Se descargara: " + model.fileName)
                             homePageViewModel.fileNameToDownload = model.fileName
-                            uploadFilePopUp.open();
+                            downLoadFilePopUp.open();
                         }
                     }
                 }
@@ -465,7 +465,7 @@ Page {
         }
 
         Popup {
-            id: uploadFilePopUp
+            id: downLoadFilePopUp
             x: hedralWindow.width / 4
             y: hedralWindow.height / 4
             width: hedralWindow.width / 2
@@ -509,6 +509,7 @@ Page {
                         mouseField.onClicked: {
                             console.log("Descargando")
                             homePageViewModel.DownloadFile()
+                            downLoadFilePopUp.close()
                         }
                     }
 
@@ -517,7 +518,7 @@ Page {
                         width: 220
                         Layout.alignment: Qt.AlignRight
                         mouseField.onClicked: {
-                            uploadFilePopUp.close()
+                            downLoadFilePopUp.close()
                         }
                     }
                 }
