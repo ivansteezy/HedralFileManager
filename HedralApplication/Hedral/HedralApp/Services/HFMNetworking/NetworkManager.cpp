@@ -60,7 +60,7 @@ void NetworkManagerImpl::DownloadFinished(QNetworkReply* reply)
     qDebug() << "RESPONMSE";
     auto res = reply->readAll();
 
-    QFile file("Myfile.docx");
+    QFile file("../../Hedral/DownloadedFiles/Myfile.docx");
     if (!file.open(QFile::WriteOnly))
     {
         qDebug() << "Error trying to open to write";
