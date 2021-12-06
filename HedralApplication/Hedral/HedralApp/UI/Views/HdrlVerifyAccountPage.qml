@@ -22,6 +22,11 @@ Page {
         source: "../../Resources/fonts/Inter-Bold.ttf"
     }
 
+    Spinner{
+        id: spinner
+        visible: false
+    }
+
     Component.onCompleted: {
         verifyAccountViewModel.user = user;
     }
@@ -78,6 +83,7 @@ Page {
                 text: "Verificar"
                 mouseField.onClicked: {
                     verifyAccountViewModel.VerifyAccount()
+                    spinner.visible = true
                 }
             }
         }
@@ -113,6 +119,7 @@ Page {
         target: verifyAccountViewModel
 
         onStatusCodeChanged: {
+            spinner.visible = false;
             if(verifyAccountViewModel.statusCode === 200) {
                 hedarlStackView.push("HdrlLoginPage.qml")
             }

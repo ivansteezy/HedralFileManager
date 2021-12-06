@@ -20,6 +20,11 @@ Page {
         source: "../../Resources/fonts/Inter-Bold.ttf"
     }
 
+    Spinner{
+        id: spinner
+        visible: false
+    }
+
     property var dataJson;
 
     //    Rectangle {
@@ -106,6 +111,8 @@ Page {
                 text: "Iniciar Sesion"
                 mouseField.onClicked: {
                     //hedarlStackView.push("HdrlHomePage.qml", {name: "Ivan Ayala", email: "network.9961@gmail.com", level: "3"})
+                    loginPage.opacity = 0.5
+                    spinner.visible = true
                     loginViewModel.LogIn();
                 }
             }
@@ -156,8 +163,9 @@ Page {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        hedarlStackView.push("HdrlAdminLoginPage.qml")
+                        //hedarlStackView.push("HdrlAdminLoginPage.qml")
                         console.log("Adios mundo")
+                        spinner.visible = true
                     }
                 }
             }
@@ -169,6 +177,7 @@ Page {
 
         onResponseChanged: {
             if(loginViewModel.statusCode === 200) {
+                spinner.visible = false
                 var jsonString = JSON.stringify(JSON.parse(loginViewModel.response));
                 var sessionObject = JSON.parse(jsonString);
 

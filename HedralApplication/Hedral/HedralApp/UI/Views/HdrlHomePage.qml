@@ -30,6 +30,12 @@ Page {
         source: "../../Resources/fonts/Inter-Bold.ttf"
     }
 
+    Spinner{
+        id: spinner
+        z: 100
+        visible: false
+    }
+
     id: loginPage
     background: Rectangle {
         color: backGroundColor
@@ -88,6 +94,7 @@ Page {
                 mouseField.onClicked: {
                     myListModel.clear()
                     homePageViewModel.SearchFiles()
+                    spinner.visible = true
                 }
             }
         }
@@ -535,7 +542,7 @@ Page {
             id: fileDialog
             fileMode: FileDialog.OpenFile
             folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
-            nameFilters: ["Text files (*.txt)", "Pdf files(*.pdf)" ,"Docx files (*.docx)"]
+            nameFilters: ["Text files (*.txt)", "Pdf files(*.pdf)" ,"Docx files (*.docx), Excel files (*.xlsx), Images (*.png)"]
             onAccepted: {
                 console.log("You choose: " + fileDialog.currentFile);
                 fileToUploadPath.text = fileDialog.currentFile;
@@ -550,6 +557,7 @@ Page {
         target: homePageViewModel
 
         onResponseChanged: {
+            spinner.visible = false;
             if(homePageViewModel.statusCode === 200) {
                 myListModel.clear()
                 var jsonString = JSON.stringify(JSON.parse(homePageViewModel.response));
