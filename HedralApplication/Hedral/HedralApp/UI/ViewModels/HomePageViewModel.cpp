@@ -42,6 +42,11 @@ void HomePageViewModel::UploadFile()
     m_hedralManager->Put(file);
 }
 
+void HomePageViewModel::DownloadFile()
+{
+    qDebug() << "Downloading...";
+}
+
 QString HomePageViewModel::FileNameToUpload() const
 {
     return m_fileNameToUpload;

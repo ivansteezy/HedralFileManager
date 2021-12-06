@@ -30,6 +30,7 @@ namespace Hedral
             Q_INVOKABLE void SearchFiles();
             Q_INVOKABLE void DeleteFile();
             Q_INVOKABLE void UploadFile();
+            Q_INVOKABLE void DownloadFile();
 
         public:
             [[nodiscard]]
