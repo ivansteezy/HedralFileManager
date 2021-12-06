@@ -542,7 +542,7 @@ Page {
             id: fileDialog
             fileMode: FileDialog.OpenFile
             folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
-            nameFilters: ["Text files (*.txt)", "Pdf files(*.pdf)" ,"Docx files (*.docx)"]
+            nameFilters: ["Text files (*.txt)", "Pdf files(*.pdf)" ,"Docx files (*.docx), Excel files (*.xlsx), Images (*.png)"]
             onAccepted: {
                 console.log("You choose: " + fileDialog.currentFile);
                 fileToUploadPath.text = fileDialog.currentFile;
