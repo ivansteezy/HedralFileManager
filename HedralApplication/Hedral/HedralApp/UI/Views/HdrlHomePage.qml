@@ -59,7 +59,7 @@ Page {
     HdrlSideMenu {
         displayEmail: email
         displayName:  name
-        displayLevel:  level
+        displayLevel: "Nivel: " + level
     }
 
     Column {
@@ -296,13 +296,19 @@ Page {
 //            }
 //        }
 
-        HdrlButton {
-            text: "Open Modal"
-            mouseField.onClicked: {
-                // fileDialog.open()
-                popup.open()
+        RowLayout {
+            width: parent.width
+            HdrlButton {
+                Layout.alignment: Qt.AlignRight
+                Layout.rightMargin: 10
+                text: "Subir un archivo"
+                mouseField.onClicked: {
+                    // fileDialog.open()
+                    popup.open()
+                }
             }
         }
+
 
         Popup {
             id: popup
