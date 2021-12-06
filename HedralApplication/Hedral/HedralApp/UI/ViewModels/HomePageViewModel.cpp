@@ -191,9 +191,10 @@ QString HomePageViewModel::GetLevelCode()
 
 QByteArray HomePageViewModel::FileIntoByteArray()
 {
-    QFile file(m_filePathToUpload);
+    auto filepath = FilePathToUpload().mid(8, FilePathToUpload().size());
+    QFile file(filepath);
     if(!file.open(QIODevice::ReadOnly))
-        qDebug() << "Error reading file: " << m_filePathToUpload;
+        qDebug() << "Error reading file: " << filepath;
 
     auto data = file.readAll();
     return data;
