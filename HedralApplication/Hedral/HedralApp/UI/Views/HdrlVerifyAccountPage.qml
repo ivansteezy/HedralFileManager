@@ -114,7 +114,7 @@ Page {
 
         onStatusCodeChanged: {
             if(verifyAccountViewModel.statusCode === 200) {
-                hedarlStackView.push("HdrlHomePage.qml")
+                hedarlStackView.push("HdrlLoginPage.qml")
             }
             else {
                 console.log("Error with the code!!!")
