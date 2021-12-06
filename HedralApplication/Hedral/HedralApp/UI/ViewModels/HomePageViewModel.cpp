@@ -28,7 +28,7 @@ void HomePageViewModel::DeleteFile()
 
 void HomePageViewModel::UploadFile()
 {
-    connect(m_hedralManager, SIGNAL(ResponseArrived(QByteArray)), this, SLOT(UpdateResponse(QByteArray)));
+    connect(m_hedralManager, SIGNAL(ResponseArrived(QByteArray)), this, SLOT(ImageWasUploaded()));
     qDebug() << "Uploading file: " << FileNameToUpload();
     qDebug() << "with path: " << FilePathToUpload();
 
@@ -190,6 +190,11 @@ void HomePageViewModel::UpdateDeleteResponse(QByteArray response)
 {
     StatusCode(m_hedralManager->GetStatusCode());
     DeleteResponse(response);
+}
+
+void HomePageViewModel::ImageWasUploaded()
+{
+    UploadFinished(true);
 }
 
 void HomePageViewModel::ImageDownload()

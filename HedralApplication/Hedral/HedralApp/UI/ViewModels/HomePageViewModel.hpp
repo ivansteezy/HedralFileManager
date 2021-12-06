@@ -86,6 +86,7 @@ namespace Hedral
         public slots:
             void UpdateResponse(QByteArray response);
             void UpdateDeleteResponse(QByteArray response);
+            void ImageWasUploaded();
             void ImageDownload();
 
         private:

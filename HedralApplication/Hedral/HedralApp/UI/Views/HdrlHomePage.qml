@@ -397,7 +397,6 @@ Page {
                         mouseField.onClicked: {
                             console.log("Subiendo archivo")
                             homePageViewModel.UploadFile();
-                            //uploadFilePopUp.close()
                             //homePageViewModel.SearchFiles()
                         }
                     }
@@ -529,7 +528,7 @@ Page {
             id: fileDialog
             fileMode: FileDialog.OpenFile
             folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
-            nameFilters: ["Text files (*.txt)", "Pdf files(*.pdf)" ,"Docx files (*.docx)", "Images (*.png)"]
+            nameFilters: ["Text files (*.txt)", "Pdf files(*.pdf)" ,"Docx files (*.docx)"]
             onAccepted: {
                 console.log("You choose: " + fileDialog.currentFile);
                 fileToUploadPath.text = fileDialog.currentFile;
@@ -572,6 +571,11 @@ Page {
         onDeleteResponseChanged: {
             deleteFilePopUp.close();
             homePageViewModel.SearchFiles()
+        }
+
+        onUploadFinishedChanged: {
+            popup.close()
+            // homePageViewModel.SearchFiles()
         }
     }
 }
