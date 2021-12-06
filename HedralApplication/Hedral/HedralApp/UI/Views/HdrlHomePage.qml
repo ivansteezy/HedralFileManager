@@ -277,7 +277,7 @@ Page {
                         anchors.fill: parent
                         onClicked: {
                             console.log("Se descargara: " + model.fileName)
-                            //homePageViewModel.fileToDelete = model.fileName
+                            homePageViewModel.fileNameToDownload = model.fileName
                             uploadFilePopUp.open();
                         }
                     }

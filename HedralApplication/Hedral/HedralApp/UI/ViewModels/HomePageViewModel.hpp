@@ -18,6 +18,7 @@ namespace Hedral
 
             Q_PROPERTY(QString fileNameToUpload READ FileNameToUpload WRITE FileNameToUpload NOTIFY FileNameToUploadChanged);
             Q_PROPERTY(QString filePathToUpload READ FilePathToUpload WRITE FilePathToUpload NOTIFY FilePathToUploadChanged);
+            Q_PROPERTY(QString fileNameToDownload READ FileNameToDownload WRITE FileNameToDownload NOTIFY FileNameToDownloadChanged);
             Q_PROPERTY(QString fileToDelete READ FileToDelete WRITE FileToDelete NOTIFY FileToDeleteChanged);
             Q_PROPERTY(QString level READ Level WRITE Level NOTIFY LevelChanged);
             Q_PROPERTY(QByteArray response READ Response WRITE Response NOTIFY ResponseChanged);
@@ -37,6 +38,10 @@ namespace Hedral
             [[nodiscard]]
             QString FileNameToUpload() const;
             void FileNameToUpload(const QString& fileToUpload);
+
+            [[nodiscard]]
+            QString FileNameToDownload() const;
+            void FileNameToDownload(const QString& fileNameToDownload);
 
             [[nodiscard]]
             QString FilePathToUpload() const;
@@ -64,6 +69,7 @@ namespace Hedral
 
         signals:
             void FileNameToUploadChanged();
+            void FileNameToDownloadChanged();
             void FileToDeleteChanged();
             void FilePathToUploadChanged();
             void LevelChanged();
@@ -85,6 +91,7 @@ namespace Hedral
 
         private:
             QString m_fileNameToUpload;
+            QString m_fileNameToDownload;
             QString m_fileToDelete;
             QString m_filePathToUpload;
             QString m_level;

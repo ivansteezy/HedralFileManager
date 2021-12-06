@@ -57,18 +57,20 @@ void NetworkManagerImpl::TimeOut()
 
 void NetworkManagerImpl::DownloadFinished(QNetworkReply* reply)
 {
-    qDebug() << "RESPONMSE";
     auto res = reply->readAll();
+    auto fileName = m_endpoint.mid(m_endpoint.indexOf(".com/") + 5, m_endpoint.size());
 
-    QFile file("../../Hedral/DownloadedFiles/Myfile.docx");
+    QFile file("../../Hedral/DownloadedFiles/" + fileName);
     if (!file.open(QFile::WriteOnly))
     {
         qDebug() << "Error trying to open to write";
     }
-
-    file.write(res);
-    qDebug() << "file written";
-    file.close();
+    else
+    {
+        file.write(res);
+        qDebug() << "File correctly written";
+        file.close();
+    }
 }
 
 bool NetworkManagerImpl::Get()

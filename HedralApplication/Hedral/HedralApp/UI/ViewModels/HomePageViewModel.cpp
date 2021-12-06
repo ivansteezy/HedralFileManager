@@ -46,7 +46,10 @@ void HomePageViewModel::DownloadFile()
 {
     qDebug() << "Downloading...";
     connect(m_hedralManager, SIGNAL(ResponseArrived(QByteArray)), this, SLOT(UpdateResponse(QByteArray)));
-    auto endpoint = "https://hedral-level1.s3.us-east-2.amazonaws.com/analisis.docx";
+    auto endpoint = QString("https://%1.s3.us-east-2.amazonaws.com/%2")
+            .arg(GetLevelCode())
+            .arg(FileNameToDownload());
+
     m_hedralManager->SetEndPoint(endpoint);
     m_hedralManager->DownloadFile();
 }
@@ -62,6 +65,20 @@ void HomePageViewModel::FileNameToUpload(const QString &fileNameToUpload)
     {
         m_fileNameToUpload = fileNameToUpload;
         emit FileNameToUploadChanged();
+    }
+}
+
+QString HomePageViewModel::FileNameToDownload() const
+{
+    return m_fileNameToDownload;
+}
+
+void HomePageViewModel::FileNameToDownload(const QString &fileNameToDownload)
+{
+    if(fileNameToDownload != m_fileNameToDownload)
+    {
+        m_fileNameToDownload = fileNameToDownload;
+        emit FileNameToDownloadChanged();
     }
 }
 
