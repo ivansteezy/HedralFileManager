@@ -71,6 +71,8 @@ void NetworkManagerImpl::DownloadFinished(QNetworkReply* reply)
         qDebug() << "File correctly written";
         file.close();
     }
+
+    disconnect(m_networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(DownloadFinished(QNetworkReply*)));
 }
 
 bool NetworkManagerImpl::Get()
