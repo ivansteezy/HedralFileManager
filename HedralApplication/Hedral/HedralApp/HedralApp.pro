@@ -46,6 +46,7 @@ DISTFILES += \
     UI/Components/HdrlPopUp.qml \
     UI/Components/HdrlTextField.qml \
     UI/Components/SideMenu.qml \
+    UI/Components/Spinner.qml \
     UI/Views/CButton.qml \
     UI/Views/HdrlAdminLoginPage.qml \
     UI/Views/HdrlHomePage.qml \

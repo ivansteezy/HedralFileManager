@@ -4,6 +4,7 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.12
 import QtQuick.Window 2.1
 
+
 Window {
     property color backGroundColor : "#ffffff"
     property color mainAppColor: "#9c6af7"
