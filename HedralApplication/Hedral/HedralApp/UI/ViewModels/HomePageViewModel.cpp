@@ -197,6 +197,7 @@ QByteArray HomePageViewModel::FileIntoByteArray()
         qDebug() << "Error reading file: " << filepath;
 
     auto data = file.readAll();
+    file.close();
     return data;
 
 }
