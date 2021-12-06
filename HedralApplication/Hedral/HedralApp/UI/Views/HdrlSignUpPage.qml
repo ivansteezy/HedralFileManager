@@ -15,6 +15,11 @@ Page {
         source: "../../Resources/fonts/Inter-Bold.ttf"
     }
 
+    Spinner{
+        id: spinner
+        visible: false
+    }
+
     id: registerPage
     background: Rectangle {
         color: backGroundColor
@@ -182,6 +187,7 @@ Page {
             text: "Registrarse"
             mouseField.onClicked: {
                 signUpViewModel.SignUp();
+                spinner.visible = true
             }
         }
 
@@ -210,6 +216,7 @@ Page {
         target: signUpViewModel
 
         onStatusCodeChanged: {
+            spinner.visible = false;
             if(signUpViewModel.statusCode === 200) {
                 hedarlStackView.push("HdrlVerifyAccountPage.qml", {user: signUpViewModel.email})
             }

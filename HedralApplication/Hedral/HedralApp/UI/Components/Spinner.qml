@@ -2,14 +2,19 @@ import QtQuick 2.7
 
 Row
 {
-    anchors.right: parent.right
+    id: root
+    //anchors.right: parent.right
     spacing: 8
-    anchors.rightMargin: 10
+    //anchors.rightMargin: 10
+    z: 100
+    width: parent.width
+    height: parent.height
+    anchors.verticalCenter: parent.Center
+    anchors.horizontalCenter: parent.horizontalCenter
     // Rotating icon
     Text
     {
         id: loadingSpinner
-
         font.family: fontAwesome.name
         text: "\uf021"
         font.pixelSize: 18

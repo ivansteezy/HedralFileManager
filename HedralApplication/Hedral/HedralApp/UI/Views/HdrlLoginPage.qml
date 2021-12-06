@@ -111,6 +111,7 @@ Page {
                 text: "Iniciar Sesion"
                 mouseField.onClicked: {
                     //hedarlStackView.push("HdrlHomePage.qml", {name: "Ivan Ayala", email: "network.9961@gmail.com", level: "3"})
+                    loginPage.opacity = 0.5
                     spinner.visible = true
                     loginViewModel.LogIn();
                 }
