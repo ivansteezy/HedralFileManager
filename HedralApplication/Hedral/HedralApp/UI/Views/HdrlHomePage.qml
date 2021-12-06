@@ -397,6 +397,8 @@ Page {
                         mouseField.onClicked: {
                             console.log("Subiendo archivo")
                             homePageViewModel.UploadFile();
+                            //uploadFilePopUp.close()
+                            //homePageViewModel.SearchFiles()
                         }
                     }
                 }

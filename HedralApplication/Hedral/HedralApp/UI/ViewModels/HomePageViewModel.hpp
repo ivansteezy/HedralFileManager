@@ -24,6 +24,7 @@ namespace Hedral
             Q_PROPERTY(QByteArray response READ Response WRITE Response NOTIFY ResponseChanged);
             Q_PROPERTY(QByteArray deleteResponse READ DeleteResponse WRITE DeleteResponse NOTIFY DeleteResponseChanged);
             Q_PROPERTY(int statusCode READ StatusCode WRITE StatusCode NOTIFY StatusCodeChanged);
+            Q_PROPERTY(bool uploadFinished READ UploadFinished WRITE UploadFinished NOTIFY UploadFinishedChanged);
 
         public:
             explicit HomePageViewModel(QObject* parent = nullptr);
@@ -67,6 +68,10 @@ namespace Hedral
             int StatusCode() const;
             void StatusCode(const int& statusCode);
 
+            [[nodiscard]]
+            bool UploadFinished() const;
+            void UploadFinished(const bool& uploadFinished);
+
         signals:
             void FileNameToUploadChanged();
             void FileNameToDownloadChanged();
@@ -76,6 +81,7 @@ namespace Hedral
             void ResponseChanged();
             void StatusCodeChanged();
             void DeleteResponseChanged();
+            void UploadFinishedChanged();
 
         public slots:
             void UpdateResponse(QByteArray response);
@@ -95,6 +101,7 @@ namespace Hedral
             QString m_fileToDelete;
             QString m_filePathToUpload;
             QString m_level;
+            bool m_uploadFinished;
             QByteArray m_response;
             QByteArray m_deleteResponse;
             int m_statusCode;

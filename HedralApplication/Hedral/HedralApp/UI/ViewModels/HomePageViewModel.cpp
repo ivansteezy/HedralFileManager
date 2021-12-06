@@ -28,7 +28,7 @@ void HomePageViewModel::DeleteFile()
 
 void HomePageViewModel::UploadFile()
 {
-    connect(m_hedralManager, SIGNAL(ResponseArrived(QByteArray)), this, SLOT(UpdateDeleteResponse(QByteArray)));
+    connect(m_hedralManager, SIGNAL(ResponseArrived(QByteArray)), this, SLOT(UpdateResponse(QByteArray)));
     qDebug() << "Uploading file: " << FileNameToUpload();
     qDebug() << "with path: " << FilePathToUpload();
 
@@ -136,7 +136,6 @@ void HomePageViewModel::Response(const QByteArray &response)
         m_response = response;
         emit ResponseChanged();
     }
-    // emit ResponseChanged();
 }
 
 QByteArray HomePageViewModel::DeleteResponse() const
@@ -165,6 +164,20 @@ void HomePageViewModel::StatusCode(const int &statusCode)
         m_statusCode = statusCode;
         emit StatusCodeChanged();
     }
+}
+
+bool HomePageViewModel::UploadFinished() const
+{
+    return m_uploadFinished;
+}
+
+void HomePageViewModel::UploadFinished(const bool &uploadFinished)
+{
+    if(uploadFinished)
+    {
+        emit UploadFinishedChanged();
+    }
+    m_uploadFinished = false;
 }
 
 void HomePageViewModel::UpdateResponse(QByteArray response)
