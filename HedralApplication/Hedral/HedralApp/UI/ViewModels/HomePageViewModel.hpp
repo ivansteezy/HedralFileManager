@@ -6,6 +6,7 @@
 #include <qDebug>
 
 #include "../../Services/HFMNetworking/NetworkManager.hpp"
+#include "../../Services/HFMNetworking/Downloader.hpp"
 
 namespace Hedral
 {
@@ -73,6 +74,7 @@ namespace Hedral
         public slots:
             void UpdateResponse(QByteArray response);
             void UpdateDeleteResponse(QByteArray response);
+            void ImageDownload();
 
         private:
             QString BuildQueryAllEndpoint();

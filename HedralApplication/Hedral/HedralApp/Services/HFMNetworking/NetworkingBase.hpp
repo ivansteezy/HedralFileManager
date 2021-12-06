@@ -29,6 +29,7 @@ namespace Hedral
             virtual bool Put(QByteArray data) = 0;
             virtual bool Get() = 0;
             virtual bool Delete() = 0;
+            virtual bool DownloadFile() = 0;
 
         };
         HEDRAL_DECLARE_CLASSFACTORY(NetworkManager, INetworkManager);

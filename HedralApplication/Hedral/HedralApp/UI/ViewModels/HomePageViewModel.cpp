@@ -45,6 +45,10 @@ void HomePageViewModel::UploadFile()
 void HomePageViewModel::DownloadFile()
 {
     qDebug() << "Downloading...";
+    connect(m_hedralManager, SIGNAL(ResponseArrived(QByteArray)), this, SLOT(UpdateResponse(QByteArray)));
+    auto endpoint = "https://hedral-level1.s3.us-east-2.amazonaws.com/analisis.docx";
+    m_hedralManager->SetEndPoint(endpoint);
+    m_hedralManager->DownloadFile();
 }
 
 QString HomePageViewModel::FileNameToUpload() const
@@ -155,6 +159,11 @@ void HomePageViewModel::UpdateDeleteResponse(QByteArray response)
 {
     StatusCode(m_hedralManager->GetStatusCode());
     DeleteResponse(response);
+}
+
+void HomePageViewModel::ImageDownload()
+{
+    qDebug() << "IMAGE FINISHED DOWNLOADING";
 }
 
 QString HomePageViewModel::BuildQueryAllEndpoint()

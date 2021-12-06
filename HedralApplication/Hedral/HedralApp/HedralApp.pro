@@ -13,6 +13,7 @@ SOURCES += \
         Services/HFMCore/HedralCore.cpp \
         Services/HFMLogger/Logger.cpp \
         Services/HFMLogger/LoggerBase.cpp \
+        Services/HFMNetworking/Downloader.cpp \
         Services/HFMNetworking/JsonSerializer.cpp \
         Services/HFMNetworking/NetworkManager.cpp \
         Services/HFMNetworking/NetworkingBase.cpp \
@@ -63,6 +64,7 @@ HEADERS += \
     Services/HFMCore/HedralCoreMacros.hpp \
     Services/HFMLogger/Logger.hpp \
     Services/HFMLogger/LoggerBase.hpp \
+    Services/HFMNetworking/Downloader.hpp \
     Services/HFMNetworking/JsonSerializer.hpp \
     Services/HFMNetworking/NetworkManager.hpp \
     Services/HFMNetworking/NetworkingBase.hpp \

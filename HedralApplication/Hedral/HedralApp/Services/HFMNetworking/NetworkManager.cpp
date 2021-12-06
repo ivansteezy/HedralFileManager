@@ -55,6 +55,22 @@ void NetworkManagerImpl::TimeOut()
     qDebug() << "Timer finishes";
 }
 
+void NetworkManagerImpl::DownloadFinished(QNetworkReply* reply)
+{
+    qDebug() << "RESPONMSE";
+    auto res = reply->readAll();
+
+    QFile file("Myfile.docx");
+    if (!file.open(QFile::WriteOnly))
+    {
+        qDebug() << "Error trying to open to write";
+    }
+
+    file.write(res);
+    qDebug() << "file written";
+    file.close();
+}
+
 bool NetworkManagerImpl::Get()
 {
     qDebug() << "Making get...";
@@ -101,6 +117,19 @@ bool NetworkManagerImpl::Put(QByteArray data)
     connect(m_networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(ReplyFinished(QNetworkReply*)));
 
     QNetworkReply *reply = m_networkAccessManager->put(request, data);
+    return true;
+}
+
+bool NetworkManagerImpl::DownloadFile()
+{
+    QNetworkRequest request;
+    request.setUrl(QUrl(m_endpoint));
+    qDebug() << "Downloading file...";
+    qDebug() << m_endpoint;
+    connect(m_networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(DownloadFinished(QNetworkReply*)));
+
+    QNetworkReply *reply = m_networkAccessManager->get(request);
+
     return true;
 }
 
