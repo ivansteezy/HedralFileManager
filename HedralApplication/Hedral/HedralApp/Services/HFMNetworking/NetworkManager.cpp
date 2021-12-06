@@ -32,11 +32,12 @@ void NetworkManagerImpl::ReplyFinished(QNetworkReply* reply)
     qDebug() << "Status code: " << statusCode.toInt();
 
     // reply->abort();
+    disconnect(m_networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(ReplyFinished(QNetworkReply*)));
     SetStatusCode(statusCode.toInt());
     SetResponse(responseData);
     emit ResponseArrived(m_response);
 
-    m_networkAccessManager->disconnect();
+    // m_networkAccessManager->disconnect();
 }
 
 void NetworkManagerImpl::SlotError(QNetworkReply::NetworkError error)

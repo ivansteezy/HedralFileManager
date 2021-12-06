@@ -543,6 +543,7 @@ Page {
 
         onResponseChanged: {
             if(homePageViewModel.statusCode === 200) {
+                myListModel.clear()
                 var jsonString = JSON.stringify(JSON.parse(homePageViewModel.response));
                 var jsonObject = JSON.parse(jsonString);
 
@@ -564,15 +565,12 @@ Page {
             else {
                 console.log("Error requesting files");
             }
-
-            homePageViewModel.statusCode = 0;
         }
 
         onDeleteResponseChanged: {
             deleteFilePopUp.close();
             //myListModel.clear()
             //searchFileButton.mouseField.clicked()
-            //homePageViewModel.SearchFiles()
         }
     }
 }

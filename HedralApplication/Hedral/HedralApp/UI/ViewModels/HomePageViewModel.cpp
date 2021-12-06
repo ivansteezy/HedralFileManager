@@ -136,6 +136,7 @@ void HomePageViewModel::Response(const QByteArray &response)
         m_response = response;
         emit ResponseChanged();
     }
+    // emit ResponseChanged();
 }
 
 QByteArray HomePageViewModel::DeleteResponse() const
