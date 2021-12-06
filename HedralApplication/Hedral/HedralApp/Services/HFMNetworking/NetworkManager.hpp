@@ -34,6 +34,8 @@ namespace Hedral
             virtual bool Get() override;
             virtual bool Delete() override;
             virtual bool Post() override;
+            virtual bool Put(QByteArray data) override;
+            virtual bool DownloadFile() override;
 
             virtual QObject* AsQtObject() override;
             virtual const QMetaObject* MetaObject() override;
@@ -51,6 +53,7 @@ namespace Hedral
             void SlotError(QNetworkReply::NetworkError error);
             void Progress(qint64 sent, qint64 total);
             void TimeOut();
+            void DownloadFinished(QNetworkReply* reply);
 
         signals:
             void ResponseArrived(QByteArray response);

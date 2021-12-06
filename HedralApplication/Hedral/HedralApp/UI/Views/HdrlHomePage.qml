@@ -177,35 +177,41 @@ Page {
                 bottomPadding: 20
 
                 Text {
-                    width: parent.width / 5
+                    width: parent.width / 6
                     text: "Nombre"
                     font.bold: Font.Bold
                     font.pointSize: 16
                 }
 
                 Text {
-                    width: parent.width / 5
+                    width: parent.width / 6
                     text: "Fecha"
                     font.bold: Font.Bold
                     font.pointSize: 16
                 }
 
                 Text {
-                    width: parent.width / 5
+                    width: parent.width / 6
                     text: "Tipo"
                     font.bold: Font.Bold
                     font.pointSize: 16
                 }
 
                 Text {
-                    width: parent.width / 5
+                    width: parent.width / 6
                     text: "Tamaño"
                     font.bold: Font.Bold
                     font.pointSize: 16
                 }
                 Text {
-                    width: parent.width / 5
+                    width: parent.width / 6
                     text: "Eliminar"
+                    font.bold: Font.Bold
+                    font.pointSize: 16
+                }
+                Text {
+                    width: parent.width / 6
+                    text: "Descargar"
                     font.bold: Font.Bold
                     font.pointSize: 16
                 }
@@ -218,26 +224,27 @@ Page {
             delegate: Row {
                 width: parent.width
                 Text {
-                    width: parent.width / 5
+                    width: parent.width / 6
                     font.pointSize: 16
                     text: model.fileName
                 }
                 Text {
-                    width: parent.width / 5
+                    width: parent.width / 6
                     font.pointSize: 16
                     text: model.date
                 }
                 Text {
-                    width: parent.width / 5
+                    width: parent.width / 6
                     font.pointSize: 16
                     text: model.fileType
                 }
                 Text {
-                    width: parent.width / 5
+                    width: parent.width / 6
                     font.pointSize: 16
                     text: model.size
                 }
                 Text {
+                    width: parent.width / 6
                     id: deleteLink
                     text: 'Eliminar'
                     linkColor: mainTextCOlor
@@ -252,6 +259,26 @@ Page {
                             console.log("Se eliminara: " + model.fileName)
                             homePageViewModel.fileToDelete = model.fileName
                             deleteFilePopUp.open();
+                        }
+                    }
+                }
+
+                Text {
+                    width: parent.width / 6
+                    id: downloadLink
+                    text: 'Descargar'
+                    linkColor: mainTextCOlor
+                    Layout.alignment: Qt.AlignHCenter
+                    font.pointSize: 10
+                    font.underline: true
+                    color: "#000000"
+                    Layout.margins: 10
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            console.log("Se descargara: " + model.fileName)
+                            homePageViewModel.fileNameToDownload = model.fileName
+                            uploadFilePopUp.open();
                         }
                     }
                 }
@@ -291,6 +318,33 @@ Page {
                 anchors.fill: parent
 
                 Column {
+                    width: parent.width - 50
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    Label {
+                        text: "Ruta del archivo"
+                        font.pointSize: 18
+                        font.letterSpacing: -1
+                        font.family: hdrlFontBold.name
+                        font.bold: Font.Bold
+                    }
+
+                    TextField {
+                        width: parent.width
+                        height: 40
+                        id: fileToUploadPath
+                        background: Rectangle {
+                            color: "#e3e3e3"
+                            radius: 10
+                        }
+                        onTextChanged: {
+                            homePageViewModel.filePathToUpload = text;
+                        }
+
+                        verticalAlignment: TextInput.AlignVCenter
+                    }
+                }
+
+                Column {
                     topPadding: 30
                     width: parent.width - 50
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -311,29 +365,8 @@ Page {
                             color: "#e3e3e3"
                             radius: 10
                         }
-                        verticalAlignment: TextInput.AlignVCenter
-                    }
-                }
-
-
-                Column {
-                    width: parent.width - 50
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    Label {
-                        text: "Ruta del archivo"
-                        font.pointSize: 18
-                        font.letterSpacing: -1
-                        font.family: hdrlFontBold.name
-                        font.bold: Font.Bold
-                    }
-
-                    TextField {
-                        width: parent.width
-                        height: 40
-
-                        background: Rectangle {
-                            color: "#e3e3e3"
-                            radius: 10
+                        onTextChanged: {
+                            homePageViewModel.fileNameToUpload = text;
                         }
                         verticalAlignment: TextInput.AlignVCenter
                     }
@@ -363,6 +396,7 @@ Page {
                         Layout.alignment: Qt.AlignRight
                         mouseField.onClicked: {
                             console.log("Subiendo archivo")
+                            homePageViewModel.UploadFile();
                         }
                     }
                 }
@@ -429,13 +463,74 @@ Page {
             }
         }
 
+        Popup {
+            id: uploadFilePopUp
+            x: hedralWindow.width / 4
+            y: hedralWindow.height / 4
+            width: hedralWindow.width / 2
+            height: hedralWindow.height / 3
+            modal: true
+            focus: true
+            closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
+
+            Column {
+                anchors.fill: parent
+
+                Column {
+                    topPadding: 30
+                    width: parent.width - 50
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    bottomPadding: 30
+                    Label {
+                        text: "¿Estas seguro de descargar este archivo?"
+                        font.pointSize: 18
+                        font.letterSpacing: -1
+                        font.family: hdrlFontBold.name
+                        font.bold: Font.Bold
+                    }
+                }
+
+
+                Item {
+                    width: parent.width - 50
+                    anchors.horizontalCenter: parent.horizontalCenter
+
+                    height: 100
+                }
+
+                RowLayout {
+                    width: parent.width - 50
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    HdrlButton {
+                        text: "Si"
+                        width: 220
+                        Layout.alignment: Qt.AlignLeft
+                        mouseField.onClicked: {
+                            console.log("Descargando")
+                            homePageViewModel.DownloadFile()
+                        }
+                    }
+
+                    HdrlButton {
+                        text: "No"
+                        width: 220
+                        Layout.alignment: Qt.AlignRight
+                        mouseField.onClicked: {
+                            uploadFilePopUp.close()
+                        }
+                    }
+                }
+            }
+        }
+
         FileDialog {
             id: fileDialog
             fileMode: FileDialog.OpenFile
             folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
-            nameFilters: ["Text files (*.txt)", "Pdf files(*.pdf)" ,"Docx files (*.docx)"]
+            nameFilters: ["Text files (*.txt)", "Pdf files(*.pdf)" ,"Docx files (*.docx)", "Images (*.png)"]
             onAccepted: {
                 console.log("You choose: " + fileDialog.currentFile);
+                fileToUploadPath.text = fileDialog.currentFile;
             }
             onRejected: {
                 console.log("Cancelado");
@@ -448,6 +543,7 @@ Page {
 
         onResponseChanged: {
             if(homePageViewModel.statusCode === 200) {
+                myListModel.clear()
                 var jsonString = JSON.stringify(JSON.parse(homePageViewModel.response));
                 var jsonObject = JSON.parse(jsonString);
 
@@ -469,15 +565,11 @@ Page {
             else {
                 console.log("Error requesting files");
             }
-
-            homePageViewModel.statusCode = 0;
         }
 
         onDeleteResponseChanged: {
             deleteFilePopUp.close();
-            //myListModel.clear()
-            //searchFileButton.mouseField.clicked()
-            //homePageViewModel.SearchFiles()
+            homePageViewModel.SearchFiles()
         }
     }
 }

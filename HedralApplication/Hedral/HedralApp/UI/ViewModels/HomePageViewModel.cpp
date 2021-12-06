@@ -28,20 +28,71 @@ void HomePageViewModel::DeleteFile()
 
 void HomePageViewModel::UploadFile()
 {
-    qDebug() << "Uploading file";
+    connect(m_hedralManager, SIGNAL(ResponseArrived(QByteArray)), this, SLOT(UpdateDeleteResponse(QByteArray)));
+    qDebug() << "Uploading file: " << FileNameToUpload();
+    qDebug() << "with path: " << FilePathToUpload();
+
+    auto file = FileIntoByteArray();
+    auto endpoint = BuildUploadFileEndpoint();
+
+    qDebug() << "El endpoint es: ";
+    qDebug() << endpoint;
+
+    m_hedralManager->SetEndPoint(endpoint);
+    m_hedralManager->Put(file);
 }
 
-QString HomePageViewModel::FileToUpload() const
+void HomePageViewModel::DownloadFile()
 {
-    return m_fileToUpload;
+    qDebug() << "Downloading...";
+    connect(m_hedralManager, SIGNAL(ResponseArrived(QByteArray)), this, SLOT(UpdateResponse(QByteArray)));
+    auto endpoint = QString("https://%1.s3.us-east-2.amazonaws.com/%2")
+            .arg(GetLevelCode())
+            .arg(FileNameToDownload());
+
+    m_hedralManager->SetEndPoint(endpoint);
+    m_hedralManager->DownloadFile();
 }
 
-void HomePageViewModel::FileToUpload(const QString &fileToUpload)
+QString HomePageViewModel::FileNameToUpload() const
 {
-    if(fileToUpload != m_fileToUpload)
+    return m_fileNameToUpload;
+}
+
+void HomePageViewModel::FileNameToUpload(const QString &fileNameToUpload)
+{
+    if(fileNameToUpload != m_fileNameToUpload)
     {
-        m_fileToUpload = fileToUpload;
-        emit FileToUploadChanged();
+        m_fileNameToUpload = fileNameToUpload;
+        emit FileNameToUploadChanged();
+    }
+}
+
+QString HomePageViewModel::FileNameToDownload() const
+{
+    return m_fileNameToDownload;
+}
+
+void HomePageViewModel::FileNameToDownload(const QString &fileNameToDownload)
+{
+    if(fileNameToDownload != m_fileNameToDownload)
+    {
+        m_fileNameToDownload = fileNameToDownload;
+        emit FileNameToDownloadChanged();
+    }
+}
+
+QString HomePageViewModel::FilePathToUpload() const
+{
+    return m_filePathToUpload;
+}
+
+void HomePageViewModel::FilePathToUpload(const QString &filePathToUpload)
+{
+    if(filePathToUpload != m_filePathToUpload)
+    {
+        m_filePathToUpload = filePathToUpload;
+        emit FilePathToUploadChanged();
     }
 }
 
@@ -85,6 +136,7 @@ void HomePageViewModel::Response(const QByteArray &response)
         m_response = response;
         emit ResponseChanged();
     }
+    // emit ResponseChanged();
 }
 
 QByteArray HomePageViewModel::DeleteResponse() const
@@ -127,6 +179,11 @@ void HomePageViewModel::UpdateDeleteResponse(QByteArray response)
     DeleteResponse(response);
 }
 
+void HomePageViewModel::ImageDownload()
+{
+    qDebug() << "IMAGE FINISHED DOWNLOADING";
+}
+
 QString HomePageViewModel::BuildQueryAllEndpoint()
 {
     auto levelCode = GetLevelCode();
@@ -148,7 +205,12 @@ QString HomePageViewModel::BuildDeleteFileEndpoint()
 
 QString HomePageViewModel::BuildUploadFileEndpoint()
 {
-    return QString();
+    auto levelCode = GetLevelCode();
+    auto endpoint = QString("https://xm2tijowg9.execute-api.us-east-2.amazonaws.com/dev/%1/%2")
+            .arg(GetLevelCode())
+            .arg(FileNameToUpload());
+
+    return endpoint;
 }
 
 QString HomePageViewModel::GetLevelCode()
@@ -157,4 +219,17 @@ QString HomePageViewModel::GetLevelCode()
     if(Level() == "Nivel 2") return "hedral-level2";
     if(Level() == "Nivel 3") return "hedral-level3";
     return "";
+}
+
+QByteArray HomePageViewModel::FileIntoByteArray()
+{
+    auto filepath = FilePathToUpload().mid(8, FilePathToUpload().size());
+    QFile file(filepath);
+    if(!file.open(QIODevice::ReadOnly))
+        qDebug() << "Error reading file: " << filepath;
+
+    auto data = file.readAll();
+    file.close();
+    return data;
+
 }

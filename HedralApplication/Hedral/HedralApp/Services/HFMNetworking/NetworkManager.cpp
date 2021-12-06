@@ -32,11 +32,12 @@ void NetworkManagerImpl::ReplyFinished(QNetworkReply* reply)
     qDebug() << "Status code: " << statusCode.toInt();
 
     // reply->abort();
+    disconnect(m_networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(ReplyFinished(QNetworkReply*)));
     SetStatusCode(statusCode.toInt());
     SetResponse(responseData);
     emit ResponseArrived(m_response);
 
-    m_networkAccessManager->disconnect();
+    // m_networkAccessManager->disconnect();
 }
 
 void NetworkManagerImpl::SlotError(QNetworkReply::NetworkError error)
@@ -53,6 +54,26 @@ void NetworkManagerImpl::Progress(qint64 sent, qint64 total)
 void NetworkManagerImpl::TimeOut()
 {
     qDebug() << "Timer finishes";
+}
+
+void NetworkManagerImpl::DownloadFinished(QNetworkReply* reply)
+{
+    auto res = reply->readAll();
+    auto fileName = m_endpoint.mid(m_endpoint.indexOf(".com/") + 5, m_endpoint.size());
+
+    QFile file("../../Hedral/DownloadedFiles/" + fileName);
+    if (!file.open(QFile::WriteOnly))
+    {
+        qDebug() << "Error trying to open to write";
+    }
+    else
+    {
+        file.write(res);
+        qDebug() << "File correctly written";
+        file.close();
+    }
+
+    disconnect(m_networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(DownloadFinished(QNetworkReply*)));
 }
 
 bool NetworkManagerImpl::Get()
@@ -91,6 +112,33 @@ bool NetworkManagerImpl::Post()
     QNetworkReply *reply = m_networkAccessManager->post(request, QByteArray());
     return true;
 }
+
+bool NetworkManagerImpl::Put(QByteArray data)
+{
+    QNetworkRequest request;
+    request.setUrl(QUrl(m_endpoint));
+    qDebug() << "Making put...";
+    qDebug() << m_endpoint;
+    connect(m_networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(ReplyFinished(QNetworkReply*)));
+
+    QNetworkReply *reply = m_networkAccessManager->put(request, data);
+    return true;
+}
+
+bool NetworkManagerImpl::DownloadFile()
+{
+    QNetworkRequest request;
+    request.setUrl(QUrl(m_endpoint));
+    qDebug() << "Downloading file...";
+    qDebug() << m_endpoint;
+    connect(m_networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(DownloadFinished(QNetworkReply*)));
+
+    QNetworkReply *reply = m_networkAccessManager->get(request);
+
+    return true;
+}
+
+
 
 void NetworkManagerImpl::SetResponse(const QByteArray& response)
 {
